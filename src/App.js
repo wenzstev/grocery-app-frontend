@@ -2,14 +2,12 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import ButtonTemplate from "./components/Buttons/ButtonTemplate"
-import {PanelButton} from "./components/Buttons/PanelButtons"
+import ListPage from "./components/Pages/ListPage"
 
 function App() {
   return (
     <div className="App">
-      <ButtonTemplate />
-      <PanelButton />
+      <ListPage />
     </div>
   );
 }

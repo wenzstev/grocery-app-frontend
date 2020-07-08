@@ -1,20 +1,36 @@
 import React from "react"
+import {useState} from "react"
+import clsx from "clsx"
 import {ButtonBase, makeStyles} from "@material-ui/core"
+import arrow from "../../assets/arrow.svg"
 
 const useStyles = makeStyles({
-  leftPanel: {
-    background: "gray",
-    borderRadius: "0px 10px 10px 0px",
+  root: {
     fontFamily: "Verdana",
-    padding: "20px 10px"
+    padding: "15px 10px",
+    background: "whitesmoke",
+    borderRadius: "0px 15px 15px 0px"
+  },
+  right: {
+    transform: "scaleX(-1)"
   }
 })
 
-export const PanelButton = () =>{
+
+export const LeftPanelButton = () =>{
   const classes = useStyles()
   return (
-    <ButtonBase className={classes.leftPanel}>
-      →
+    <ButtonBase className={classes.root}>
+      <img src={arrow} height="25px"/>
+    </ButtonBase>
+  )
+}
+
+export const RightPanelButton = () => {
+  const classes = useStyles()
+  return (
+    <ButtonBase className={clsx(classes.root, classes.right)}>
+      <img src={arrow} height="25px"/>
     </ButtonBase>
   )
 }
