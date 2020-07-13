@@ -1,19 +1,33 @@
 import React from "react"
-import topSquiggle from "../../assets/top squiggle.svg"
+import topSquiggle from "../../assets/top squiggle.png"
 import bottomSquiggle from "../../assets/bottom squiggle.svg"
 
-import {makeStyles} from "@material-ui/core"
+import {
+  makeStyles,
+  Typography} from "@material-ui/core"
 
 const useStyles = makeStyles({
-  root: {
-    fill: "#2B2B33"
+  title: {
+    color: "white",
+    position: "absolute",
+    top: "15px",
+    left: "30px"
+  },
+  image: {
+    width: "100%",
+    height: "10vh"
   }
 })
 
-export const TopSquiggle = () => {
+export const TopSquiggle = (props) => {
   const classes = useStyles()
   return(
-    <img src={topSquiggle} className={classes.root}/>
+    <div>
+      <img src={topSquiggle} className={classes.image}/>
+      <Typography variant="h4" className = {classes.title}>
+        {props.children}
+      </Typography>
+    </div>
   )
 }
 

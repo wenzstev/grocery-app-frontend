@@ -1,16 +1,18 @@
 import React from "react"
 
 import IngredientButton from "./IngredientButton"
+import {PlusButton} from "../Buttons/ListModificationButtons"
 
 import {
   Paper,
   Grid,
+  Box,
   makeStyles
 } from "@material-ui/core"
 
 const useStyles = makeStyles({
   root: {
-    backgroundColor: "#B5E4E8"
+    backgroundColor: "#B5E4E8E6"
   }
 })
 
@@ -38,11 +40,19 @@ const ListPanel = (props) => {
     }
   }
 
+  console.log(chunkedAr)
+  chunkedAr[chunkedAr.length-1].push(
+    <Box mx={1}>
+      <PlusButton />
+    </Box>
+  )
+
   const columns = chunkedAr.map((ingredients, i)=>(
     <Grid item key={i}>
       {ingredients}
     </Grid>)
   )
+
 
   console.log(columns)
 

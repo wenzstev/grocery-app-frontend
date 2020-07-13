@@ -7,6 +7,7 @@ import {
 const useStyles = makeStyles({
   button: {
     background: "#2B2B33",
+    fontWeight: "bold",
     color: "#FFFFFF",
     borderRadius: "25px",
     padding: "10px 25px",
@@ -18,7 +19,7 @@ const ButtonTemplate = (props) => {
   const classes = useStyles()
   return (
     <ButtonBase className={classes.button}>
-      ButtonTemplate
+      {props.children}
     </ButtonBase>
   )
 }

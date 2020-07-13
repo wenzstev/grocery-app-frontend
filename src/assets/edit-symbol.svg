@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="edit-symbol.svg"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   id="svg159"
+   version="1.1"
+   viewBox="0 0 4.2333336 4.2333336"
+   height="4.2333336mm"
+   width="4.2333336mm">
+  <defs
+     id="defs153" />
+  <sodipodi:namedview
+     inkscape:window-maximized="0"
+     inkscape:window-y="0"
+     inkscape:window-x="32"
+     inkscape:window-height="1030"
+     inkscape:window-width="1424"
+     showgrid="false"
+     inkscape:document-rotation="0"
+     inkscape:current-layer="layer1"
+     inkscape:document-units="mm"
+     inkscape:cy="70.24568"
+     inkscape:cx="0.40878651"
+     inkscape:zoom="1.4"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base" />
+  <metadata
+     id="metadata156">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(-93.188144,-52.36671)"
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1">
+    <g
+       transform="matrix(0.26101143,0,0,0.26101143,68.864973,38.6984)"
+       id="g174">
+      <circle
+         class="cls-15"
+         cx="101.29762"
+         cy="60.476189"
+         r="8.109479"
+         id="circle297"
+         style="fill:#527394;stroke-width:0.264583" />
+      <path
+         class="cls-3"
+         d="m 105.34575,59.235302 v 0 a 1.0583333,1.0583333 0 0 0 0,-1.510771 l -0.58473,-0.584729 a 1.0583333,1.0583333 0 0 0 -1.51077,0 v 0 z"
+         id="path299"
+         style="fill:#ffffff;stroke-width:0.264583" />
+      <polygon
+         class="cls-3"
+         points="743.07,663.62 761.03,645.66 753.11,637.75 735.15,655.7 735.23,663.82 "
+         id="polygon301"
+         style="fill:#ffffff"
+         transform="matrix(0.26458333,0,0,0.26458333,-96.78798,-110.8177)" />
+    </g>
+  </g>
+</svg>
