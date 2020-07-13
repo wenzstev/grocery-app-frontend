@@ -2,9 +2,13 @@ import React from "react"
 import copyIcon from "../../assets/copy-icon.png"
 import listIcon from "../../assets/list-icon.png"
 import shareIcon from "../../assets/share-icon.png"
-import altPlusIcon from "../../assets/alt-plus-icon.png"
+
+
 
 import {ButtonBase, makeStyles} from "@material-ui/core"
+
+import AddCircleIcon from "@material-ui/icons/AddCircle"
+
 
 const useStyles = makeStyles({
   root: {
@@ -45,7 +49,7 @@ export const PlusButton = () => {
   const classes = useStyles()
   return (
     <ButtonBase className={classes.root}>
-      <img src={altPlusIcon} height={30} />
+      <AddCircleIcon style={{color: "white"}}/>
     </ButtonBase>
   )
 }

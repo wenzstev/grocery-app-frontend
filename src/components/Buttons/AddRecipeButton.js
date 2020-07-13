@@ -1,12 +1,12 @@
 import React from "react"
 import ButtonTemplate from "./ButtonTemplate"
-import altArrowIcon from "../../assets/alt-arrow.png"
+import ArrowBackIcon from "@material-ui/icons/ArrowBack"
 
 
 const AddRecipeButton = () => {
   return (
     <ButtonTemplate>
-      <img src={altArrowIcon} height={30} />
+      <ArrowBackIcon style={{paddingRight: "10px"}}/>
       Add Recipe
     </ButtonTemplate>
   )
