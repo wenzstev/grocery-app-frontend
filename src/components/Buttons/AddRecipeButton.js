@@ -2,10 +2,12 @@ import React from "react"
 import ButtonTemplate from "./ButtonTemplate"
 import ArrowBackIcon from "@material-ui/icons/ArrowBack"
 
+import {useTheme} from "@material-ui/core/styles"
 
 const AddRecipeButton = () => {
+  const theme = useTheme()
   return (
-    <ButtonTemplate>
+    <ButtonTemplate color="primary">
       <ArrowBackIcon style={{paddingRight: "10px"}}/>
       Add Recipe
     </ButtonTemplate>

@@ -1,4 +1,5 @@
 import React from "react"
+import {useState, useEffect} from "react"
 import {TopSquiggle} from "../Backgrounds/Squiggles"
 import ListPanel from "../UI/ListPanel"
 import ListModificationPanel from "../UI/ListModificationPanel"
@@ -22,22 +23,50 @@ const useStyles = makeStyles({
     backgroundBlendMode: "multiply",
     height: "100vh",
     width: "100vw",
+  },
+  rightFloat: {
+    float: "right"
   }
 })
 
+
+
 const ListPage = (props) => {
+  const[listItems, setListItems] = useState([])
+  const[listName, setListName] = useState("")
+
+  useEffect(()=>{
+    fetch("http://localhost:5000/ingredients?list=1")
+      .then(response=>response.json())
+      .then(data => {
+        console.log(data)
+        setListItems(data)
+      })
+
+    fetch("http://localhost:5000/lists/1")
+      .then(response=>response.json())
+      .then(data => {
+        console.log(data)
+        setListName(data.name)
+      })
+  }, [])
+
+
+
   const classes = useStyles()
   return (
     <div className={classes.root}>
       <TopSquiggle>
-        Your List
+        {listName}
       </TopSquiggle>
       <Container>
         <ListModificationPanel />
-        <ListPanel />
+        <ListPanel listItems={listItems.map(item=>item.name)}/>
         <Box my={3}>
           <AddRecipeButton />
-          <ListInfoButton />
+          <Box display="inline-block" className={classes.rightFloat}>
+            <ListInfoButton/>
+          </Box>
         </Box>
 
       </Container>

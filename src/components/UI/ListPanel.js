@@ -1,6 +1,7 @@
 import React from "react"
+import {useState, useEffect} from "react"
 
-import IngredientButton from "./IngredientButton"
+import IngredientButton from "../Buttons/IngredientButton"
 import {PlusButton} from "../Buttons/ListModificationButtons"
 
 import {
@@ -18,34 +19,35 @@ const useStyles = makeStyles({
 
 const ListPanel = (props) => {
 
+  const {listItems} = props
+
+  console.log(listItems)
+
   const size = 5
   const classes = useStyles()
 
-  const testIngredients = [
-    "milk",
-    "eggs",
-    "flour",
-    "blueberries",
-    "coffee beans",
-    "steak"
-  ]
 
   const chunkedAr = []
-  for (let i = 0; i < testIngredients.length; i++){
+  for (let i = 0; i < listItems.length; i++){
     const last = chunkedAr[chunkedAr.length-1]
     if(!last || last.length === size){
-      chunkedAr.push([<IngredientButton key={i}>{testIngredients[i]}</IngredientButton>])
+      chunkedAr.push([<IngredientButton key={i}>{listItems[i]}</IngredientButton>])
     } else {
-      last.push(<IngredientButton key={i}>{testIngredients[i]}</IngredientButton>)
+      last.push(<IngredientButton key={i}>{listItems[i]}</IngredientButton>)
     }
   }
 
   console.log(chunkedAr)
-  chunkedAr[chunkedAr.length-1].push(
-    <Box mx={1}>
-      <PlusButton />
-    </Box>
-  )
+  console.log(chunkedAr[chunkedAr.length-1])
+
+  if (chunkedAr.length > 0){
+    chunkedAr[chunkedAr.length-1].push(
+      <Box mx={1}>
+        <PlusButton />
+      </Box>
+    )
+  }
+
 
   const columns = chunkedAr.map((ingredients, i)=>(
     <Grid item key={i}>

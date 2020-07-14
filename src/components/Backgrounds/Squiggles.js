@@ -4,7 +4,8 @@ import bottomSquiggle from "../../assets/bottom squiggle.svg"
 
 import {
   makeStyles,
-  Typography} from "@material-ui/core"
+  Typography,
+  Paper} from "@material-ui/core"
 
 const useStyles = makeStyles({
   title: {
@@ -15,7 +16,7 @@ const useStyles = makeStyles({
   },
   image: {
     width: "100%",
-    height: "10vh"
+    height: "12vh",
   }
 })
 

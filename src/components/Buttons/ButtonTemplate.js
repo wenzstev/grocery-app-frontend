@@ -2,38 +2,38 @@ import React from "react"
 
 import {
   ButtonBase,
-  makeStyles} from "@material-ui/core"
+  Button,
+  makeStyles
+} from "@material-ui/core"
 
-const useStyles = makeStyles({
-  primary: {
-    background: "#2B2B33",
+import {useTheme} from "@material-ui/core/styles"
+
+const useStyles = makeStyles((theme) => ({
+  root: {
     fontWeight: "bold",
-    color: "#FFFFFF",
     borderRadius: "25px",
     padding: "10px 15px",
-    fontFamily: "Verdana"
-  },
-  secondary : {
-    background: "#FFFFFF",
-    fontWeight: "bold",
-    color: "#2B2B33",
-    borderRadius: "25px",
-    padding: "10px 15px",
-    fontFamily: "Verdana"
+    fontFamily: "Verdana",
+    textTransform: "capitalize"
   }
-})
+}))
 
 const ButtonTemplate = (props) => {
-  const classes = useStyles()
+  const theme = useTheme()
+  console.log(theme)
+  console.log(theme.palette.primary)
+  const classes = useStyles(theme)
   const {primary, secondary} = classes
 
 
-  console.log(buttonStyle)
 
   return (
-    <ButtonBase className={primary}>
+    <Button
+      variant="contained"
+      color={props.color}
+      className={classes.root}>
       {props.children}
-    </ButtonBase>
+    </Button>
   )
 }
 

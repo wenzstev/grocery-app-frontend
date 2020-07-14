@@ -1,11 +1,17 @@
 import React from "react"
 import ButtonTemplate from "./ButtonTemplate"
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward"
+
+import {Box} from "@material-ui/core"
 
 const ListInfoButton = () => {
   return (
-    <ButtonTemplate variant="secondary">
-      List Info
-    </ButtonTemplate>
+      <ButtonTemplate color="secondary">
+        List Info
+        <ArrowForwardIcon style={{paddingLeft: "10px"}}/>
+      </ButtonTemplate>
+
+
   )
 }
 
