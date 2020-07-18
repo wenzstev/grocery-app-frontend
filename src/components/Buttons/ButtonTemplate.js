@@ -19,13 +19,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const ButtonTemplate = (props) => {
-  const theme = useTheme()
-  console.log(theme)
-  console.log(theme.palette.primary)
-  const classes = useStyles(theme)
-  const {primary, secondary} = classes
-
-
+  const classes = useStyles()
 
   return (
     <Button

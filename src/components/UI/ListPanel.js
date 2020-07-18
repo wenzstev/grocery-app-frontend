@@ -14,6 +14,9 @@ import {
 const useStyles = makeStyles({
   root: {
     backgroundColor: "#B5E4E8E6"
+  },
+  gridItem: {
+    padding: "0px"
   }
 })
 
@@ -37,8 +40,6 @@ const ListPanel = (props) => {
     }
   }
 
-  console.log(chunkedAr)
-  console.log(chunkedAr[chunkedAr.length-1])
 
   if (chunkedAr.length > 0){
     chunkedAr[chunkedAr.length-1].push(
@@ -50,7 +51,7 @@ const ListPanel = (props) => {
 
 
   const columns = chunkedAr.map((ingredients, i)=>(
-    <Grid item key={i}>
+    <Grid item key={i} className={classes.gridItem}>
       {ingredients}
     </Grid>)
   )

@@ -19,20 +19,24 @@ const useStyles = makeStyles({
     color: "white",
     padding: "5px",
     borderRadius: "25px",
+    textAlign: "left",
+    width: "100%"
   },
   textBox: {
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
     overflow: "hidden",
-    width: "200px"
+    maxWidth: "100%",
+    display: "inline-block"
   },
   hover: {
       backgroundColor: "white",
       color: "black",
       position: "absolute",
-      whiteSpace: "nowrap",
       zIndex: "5",
-      left: "5px"
+      left: "0px",
+      top: "0px",
+      width: "auto"
   }
 })
 
@@ -51,28 +55,18 @@ const IngredientButton = (props) =>{
   : null
 
 
-
   return(
-    <Box px={1} position="relative">
-    <ButtonBase
-      onMouseEnter={()=>setHovering(true)}
-      className={classes.root}>
-      <Box component="span" className={classes.textBox}>
-        {props.children}
-      </Box>
-    </ButtonBase>
-    {display}
+    <Box px={1} position="relative" className={classes.root}>
+        <Box
+          component="span"
+          className={classes.textBox}
+          onMouseEnter={()=>setHovering(true)}>
+          {props.children}
+        </Box>
+      {display}
     </Box>
   )
 }
 
-const EditSymbol = () => {
-  return (
-    <Box pl={1}>
-      <img src={editSymbol} size="32px"/>
-    </Box>
-
-  )
-}
 
 export default IngredientButton
