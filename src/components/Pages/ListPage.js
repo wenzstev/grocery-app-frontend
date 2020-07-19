@@ -6,7 +6,7 @@ import ListModificationPanel from "../UI/ListModificationPanel"
 import AddRecipeButton from "../Buttons/AddRecipeButton"
 import ListInfoButton from "../Buttons/ListInfoButton"
 
-import woodBackground from "../../assets/brown-wooden-floor-172292.jpg"
+import woodBackground from "../../assets/wood-background.jpg"
 
 import {
   Container,
