@@ -23,7 +23,8 @@ const useStyles = makeStyles({
     width: "100%"
   },
   login: {
-    height: "80vh"
+    height: "80vh",
+    position: "absolute"
   }
 })
 

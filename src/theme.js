@@ -9,7 +9,7 @@ const theme = createMuiTheme({
     },
     secondary: {
       main: brown[100]
-    }
+    },
   }
 })
 

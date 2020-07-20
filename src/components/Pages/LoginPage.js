@@ -1,9 +1,14 @@
 import React from "react"
 
-import {makeStyles} from "@material-ui/core"
+import {
+  Container,
+  Typography,
+  makeStyles
+} from "@material-ui/core"
 
 import {LoginSquiggle} from "../Backgrounds/Squiggles"
 import woodBackground from "../../assets/wood-background.jpg"
+import RegisterPanel from "../UI/RegisterPanel"
 
 const useStyles = makeStyles({
   root: {
@@ -14,7 +19,11 @@ const useStyles = makeStyles({
     backgroundBlendMode: "multiply",
     height: "100vh",
     width: "100vw",
-
+  },
+  panel: {
+    zIndex: "5",
+    position: "relative",
+    color: "white"
   }
 })
 
@@ -23,6 +32,13 @@ const LoginPage = () => {
   return (
     <div className={classes.root}>
       <LoginSquiggle />
+      <Container className={classes.panel}>
+        <Typography variant="h4">
+          Register
+        </Typography>
+        <RegisterPanel />
+      </Container>
+
     </div>
   )
 }
