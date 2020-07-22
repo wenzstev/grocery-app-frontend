@@ -10,8 +10,7 @@ import {useTheme} from "@material-ui/core/styles"
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    fontWeight: "bold",
-    borderRadius: "25px",
+    borderRadius: "15px",
     padding: "10px 15px",
     fontFamily: "Verdana",
     textTransform: "capitalize"
@@ -25,6 +24,7 @@ const ButtonTemplate = (props) => {
     <Button
       variant="contained"
       color={props.color}
+      type={props.type}
       className={classes.root}>
       {props.children}
     </Button>

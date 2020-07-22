@@ -3,29 +3,42 @@ import {Formik, useField} from "formik"
 import {
   TextField,
   Box,
-  makeStyles,
-  createStyles,
+  makeStyles
 } from "@material-ui/core"
 
-import {useTheme} from "@material-ui/core/styles"
-
-
-const useStyles = makeStyles((theme: Theme) => createStyles({
-  error: {
-    color: theme.palette.error.main
+const useStyles = makeStyles({
+  root: {
+  "& fieldset": {
+    borderRadius: 15,
+  },
+  "& input": {
+    backgroundColor: "#B3B3B3",
+    borderRadius: 15,
+  },
+  "& label": {
+    backgroundColor: "#B3B3B3",
+    padding: "0px 5px",
+    borderRadius: "10px",
+    }
   }
-}))
+})
 
 export const FormikTextField = ({label, ...props}) => {
   const [field, meta] = useField(props)
   const classes = useStyles()
-  console.log(classes)
   return(
-    <Box mb={2}>
-      <TextField label={label} variant="outlined" {...field} {...props} />
-      {meta.touched && meta.error ? (
-        <div className={classes.error}>{meta.error}</div>
-      ) : null}
+    <Box my={2}>
+      <TextField
+        className={classes.root}
+        label={label}
+        variant="outlined"
+        fullWidth
+        {...field}
+        {...props}
+        {...meta.touched && meta.error ?
+          ({error: true, helperText: meta.error})
+          : null}
+      />
     </Box>
   )
 }
