@@ -1,4 +1,5 @@
 import React from "react"
+import {useState} from "react"
 import {Formik, Form} from "formik"
 import * as Yup from "yup"
 import {
@@ -6,6 +7,7 @@ import {
   Paper,
   Typography,
   Button,
+  Snackbar,
   makeStyles,
   createStyles
 } from "@material-ui/core"
@@ -28,8 +30,32 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
 }))
 
-const LoginPanel = () => {
+
+
+const LoginPanel = (props) => {
   const classes = useStyles()
+  const [open, setOpen] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("")
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return
+    }
+    setOpen(false)
+  }
+
+  const snackBar = (
+    <Snackbar
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'left'
+      }}
+      open={open}
+      autoHideDuration={6000}
+      message={errorMessage}
+      onClose={handleClose}/>
+  )
+
   return (
     <Box>
       <Typography variant="h5" className={classes.header}>Sign In</Typography>
@@ -46,10 +72,21 @@ const LoginPanel = () => {
             .required("Required")
         })}
         onSubmit={(values, actions) => {
-          setTimeout(()=>{
-            alert(JSON.stringify(values, null, 2))
-            actions.setSubmitting(false)
-          }, 400)
+          let headers = new Headers()
+          headers.append('Authorization', 'Basic ' + btoa(values.email + ":" + values.password))
+
+          fetch("http://localhost:5000/users/token",{
+            method: 'GET',
+            headers: headers,
+          })
+          .then(response=>{
+            if (response.status==401){
+              setErrorMessage("Invalid username or password")
+              setOpen(true)
+            }
+          })
+          .then(json=>console.log(json))
+
         }}
       >
       <Form>
@@ -64,6 +101,7 @@ const LoginPanel = () => {
         </Box>
       </Form>
       </Formik>
+      {snackBar}
     </Box>
   )
 }

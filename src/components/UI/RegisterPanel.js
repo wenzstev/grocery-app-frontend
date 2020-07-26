@@ -7,6 +7,7 @@ import {
   Button,
   Box,
   Typography,
+  Snackbar,
   makeStyles,
   createStyles
 } from "@material-ui/core"
@@ -58,10 +59,20 @@ const RegisterPanel = () => {
             .required('Required')
         })}
         onSubmit={(values, actions) => {
-          setTimeout(()=>{
-            alert(JSON.stringify(values, null, 2))
-            actions.setSubmitting(false)
-          }, 400)
+          let url = "http://localhost:5000/users"
+          let body = {
+              email: values.email,
+              password: values.password,
+          }
+
+          fetch(url , {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+          }).then(response=>response.json())
+            .then(json=>console.log(json))
         }}
       >
         <Form>

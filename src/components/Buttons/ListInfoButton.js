@@ -10,8 +10,6 @@ const ListInfoButton = () => {
         List Info
         <ArrowForwardIcon style={{paddingLeft: "10px"}}/>
       </ButtonTemplate>
-
-
   )
 }
 

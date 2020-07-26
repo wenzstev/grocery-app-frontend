@@ -32,6 +32,27 @@ const useStyles = makeStyles({
 
 const LoginPage = () => {
   const classes = useStyles()
+
+  const fetchRequest = (path, fetchBody, fetchMethod, fetchHeaders) => {
+    let url = "http://localhost:5000/" + path
+
+    console.log(url)
+    console.log(fetchBody)
+    console.log(fetchMethod)
+    console.log(fetchHeaders)
+
+    fetch(url, {
+      method: 'GET',
+      body: JSON.stringify(fetchBody)
+    })
+    .then(request => {
+      request.json()
+    })
+    .then(json => {
+      console.log(json)
+    })
+  }
+
   return (
     <div className={classes.root}>
       <LoginSquiggle />
@@ -39,7 +60,7 @@ const LoginPage = () => {
         <Grid container>
         <Grid item xs={12} md={6}>
           <Box mx={5}>
-            <LoginPanel />
+            <LoginPanel fetchRequest={fetchRequest}/>
           </Box>
         </Grid>
           <Grid item xs={12} md={6}>
