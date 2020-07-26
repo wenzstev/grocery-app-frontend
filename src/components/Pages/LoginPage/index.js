@@ -8,10 +8,10 @@ import {
   makeStyles
 } from "@material-ui/core"
 
-import {LoginSquiggle} from "../Backgrounds/Squiggles"
-import woodBackground from "../../assets/wood-background.jpg"
-import RegisterPanel from "../UI/RegisterPanel"
-import LoginPanel from "../UI/LoginPanel"
+import {LoginSquiggle} from "../../Backgrounds/Squiggles"
+import woodBackground from "../../../assets/wood-background.jpg"
+import RegisterPanel from "./RegisterPanel"
+import LoginPanel from "./LoginPanel"
 
 const useStyles = makeStyles({
   root: {
@@ -60,7 +60,7 @@ const LoginPage = () => {
         <Grid container>
         <Grid item xs={12} md={6}>
           <Box mx={5}>
-            <LoginPanel fetchRequest={fetchRequest}/>
+            <LoginPanel />
           </Box>
         </Grid>
           <Grid item xs={12} md={6}>

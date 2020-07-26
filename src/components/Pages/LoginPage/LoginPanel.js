@@ -12,8 +12,8 @@ import {
   createStyles
 } from "@material-ui/core"
 
-import {FormikTextField} from "./FormikComponents"
-import ButtonTemplate from "../Buttons/ButtonTemplate"
+import {FormikTextField} from "../../Templates/FormikComponents"
+import ButtonTemplate from "../../Templates/ButtonTemplate"
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -97,7 +97,7 @@ const LoginPanel = (props) => {
           </Box>
         </Paper>
         <Box m={2}>
-          <ButtonTemplate type="sumbit" color="secondary">Log In</ButtonTemplate>
+          <ButtonTemplate type="submit" color="secondary">Log In</ButtonTemplate>
         </Box>
       </Form>
       </Formik>

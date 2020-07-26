@@ -1,5 +1,5 @@
 import React from "react"
-import ButtonTemplate from "./ButtonTemplate"
+import ButtonTemplate from "../../Templates/ButtonTemplate"
 import ArrowBackIcon from "@material-ui/icons/ArrowBack"
 
 import {useTheme} from "@material-ui/core/styles"

@@ -1,7 +1,7 @@
 import React from "react"
-import copyIcon from "../../assets/copy-icon.png"
-import listIcon from "../../assets/list-icon.png"
-import shareIcon from "../../assets/share-icon.png"
+import copyIcon from "../../../assets/copy-icon.png"
+import listIcon from "../../../assets/list-icon.png"
+import shareIcon from "../../../assets/share-icon.png"
 
 
 

@@ -5,7 +5,7 @@ import {
   ShareButton,
   CopyButton,
   ListButton
-} from "../Buttons/ListModificationButtons"
+} from "./ListModificationButtons"
 
 
 

@@ -1,5 +1,5 @@
 import React from "react"
-import {FormikTextField} from "./FormikComponents"
+import {FormikTextField} from "../../Templates/FormikComponents"
 import {Formik, Form} from "formik"
 import * as Yup from "yup"
 import {
@@ -11,7 +11,7 @@ import {
   makeStyles,
   createStyles
 } from "@material-ui/core"
-import ButtonTemplate from "../Buttons/ButtonTemplate"
+import ButtonTemplate from "../../Templates/ButtonTemplate"
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({

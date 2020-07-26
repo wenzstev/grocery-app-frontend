@@ -1,5 +1,5 @@
 import React from "react"
-import ButtonTemplate from "./ButtonTemplate"
+import ButtonTemplate from "../../Templates/ButtonTemplate"
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward"
 
 import {Box} from "@material-ui/core"

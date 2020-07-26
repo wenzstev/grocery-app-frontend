@@ -1,12 +1,12 @@
 import React from "react"
 import {useState, useEffect} from "react"
-import {TopSquiggle} from "../Backgrounds/Squiggles"
-import ListPanel from "../UI/ListPanel"
-import ListModificationPanel from "../UI/ListModificationPanel"
-import AddRecipeButton from "../Buttons/AddRecipeButton"
-import ListInfoButton from "../Buttons/ListInfoButton"
+import {TopSquiggle} from "../../Backgrounds/Squiggles"
+import ListPanel from "./ListPanel"
+import ListModificationPanel from "./ListModificationPanel"
+import AddRecipeButton from "./AddRecipeButton"
+import ListInfoButton from "./ListInfoButton"
 
-import woodBackground from "../../assets/wood-background.jpg"
+import woodBackground from "../../../assets/wood-background.jpg"
 
 import {
   Container,

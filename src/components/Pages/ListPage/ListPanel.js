@@ -1,8 +1,8 @@
 import React from "react"
 import {useState, useEffect} from "react"
 
-import IngredientButton from "../Buttons/IngredientButton"
-import {PlusButton} from "../Buttons/ListModificationButtons"
+import IngredientButton from "./IngredientButton"
+import {PlusButton} from "./ListModificationButtons"
 
 import {
   Paper,

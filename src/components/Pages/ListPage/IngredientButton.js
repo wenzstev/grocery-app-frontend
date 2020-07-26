@@ -4,7 +4,7 @@ import {useState} from "react"
 import EditIcon from "@material-ui/icons/Edit"
 
 
-import editSymbol from "../../assets/edit-symbol.svg"
+import editSymbol from "../../../assets/edit-symbol.svg"
 
 import {
   ButtonBase,
