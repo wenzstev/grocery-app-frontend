@@ -10,6 +10,10 @@ import {
   Paper} from "@material-ui/core"
 
 const useStyles = makeStyles({
+  root: {
+    zIndex: 5,
+    position: "fixed"
+  },
   title: {
     color: "white",
     position: "absolute",
@@ -31,7 +35,7 @@ const useStyles = makeStyles({
 export const TopSquiggle = (props) => {
   const classes = useStyles()
   return(
-    <div>
+    <div className={classes.root}>
       <img src={topSquiggle} className={clsx(classes.top, classes.squiggle)}/>
       <Typography variant="h4" className = {classes.title}>
         {props.children}
