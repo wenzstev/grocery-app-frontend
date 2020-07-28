@@ -1,4 +1,5 @@
 import React from "react"
+import {useState} from "react"
 
 import {
   AppBar,
@@ -6,12 +7,29 @@ import {
   Tab
 } from "@material-ui/core"
 
-const NavBar = () => {
+import {
+  Link
+} from "react-router-dom"
+
+const LinkTab = (props) => {
   return (
-      <Tabs value={0} centered>
-        <Tab label="Recipes" value={0}/>
-        <Tab label="Lists" value={1}/>
-        <Tab label="Ingredients" value={2}/>
+    <Tab
+      component="a"
+      {...props}
+    />
+  )
+}
+
+const NavBar = () => {
+  const [value, setValue] = useState(0)
+
+  const handleChange = (event, newValue) => setValue(newValue)
+
+  return (
+      <Tabs value={value} onChange={handleChange} centered>
+        <LinkTab label="Recipes" href="/home" />
+        <LinkTab label="Lists" href="/lists" />
+        <LinkTab label="Ingredients" href="/ingredients" />
       </Tabs>
   )
 }

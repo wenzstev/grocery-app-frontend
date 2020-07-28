@@ -9,9 +9,10 @@ import {
   Link
 } from "react-router-dom"
 
-import ListPage from "./components/Pages/ListPage/"
+import ListInfoPage from "./components/Pages/ListInfoPage/"
 import LoginPage from "./components/Pages/LoginPage/"
-import HomePage from "./components/Pages/HomePage/"
+import RecipePage from "./components/Pages/RecipePage/"
+import ListPage from "./components/Pages/ListPage/"
 
 function App() {
   return (
@@ -21,11 +22,14 @@ function App() {
           <Route path="/login">
             <LoginPage />
           </Route>
-          <Route path="/lists">
-            <ListPage />
+          <Route path="/list">
+            <ListInfoPage />
           </Route>
           <Route path="/home">
-            <HomePage />
+            <RecipePage />
+          </Route>
+          <Route path="/lists">
+            <ListPage />
           </Route>
         </Switch>
 
