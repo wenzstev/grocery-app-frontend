@@ -9,6 +9,8 @@ import {
 import {TopSquiggle} from "../../Backgrounds/Squiggles"
 import woodBackground from "../../../assets/wood-background.jpg"
 
+import NavMenu from "../../SharedComponents/NavMenu"
+
 import SearchBar from "./SearchBar"
 import RecipeCard from "./RecipeCard"
 
@@ -38,7 +40,6 @@ const HomePage = () => {
 
   return (
     <div className={classes.root}>
-      <TopSquiggle>Welcome Back!</TopSquiggle>
       <Container>
         <SearchBar />
         <Grid container>

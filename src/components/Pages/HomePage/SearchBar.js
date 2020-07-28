@@ -7,10 +7,18 @@ import {
   Box,
   Grid,
   InputLabel,
+  Button,
   makeStyles
 } from "@material-ui/core"
 
 import SearchIcon from "@material-ui/icons/Search"
+import DehazeIcon from "@material-ui/icons/Dehaze"
+
+import {TopSquiggle} from "../../Backgrounds/Squiggles"
+
+import NavMenu from "../../SharedComponents/NavMenu"
+import NavBar from "../../SharedComponents/NavBar"
+
 
 const useStyles = makeStyles({
   root: {
@@ -18,27 +26,28 @@ const useStyles = makeStyles({
     top: 0,
     left: 0,
     width: "100vw",
-    height: "20vh",
     borderRadius: 15
   },
   searchbar: {
-    position: "relative",
-    top: "14vh",
-    left: "2vw",
     backgroundColor: "lightgray",
     borderRadius: 15,
     width: "95vw",
   },
+  navbar: {
+
+  },
   searchInput: {
     width: "100%",
-    position: "relative",
     top: 3
   },
   searchIcon: {
     padding: 5
   },
+  drawerbutton: {
+    borderRadius: 15
+  },
   placeholderBox: {
-    height: "20vh"
+    height: "25vh"
   }
 })
 
@@ -47,17 +56,24 @@ const SearchBar = () => {
   return (
     <>
     <Paper className={classes.root}>
-      <Box className={classes.searchbar}>
+      <TopSquiggle>Welcome Back!</TopSquiggle>
+      <Box className={classes.navbar} mt={1}>
+      <Box className={classes.searchbar} mx={1}>
         <InputLabel>
           <Grid container>
-            <Grid item xs={1}>
+            <Grid item>
+              <NavMenu buttonLabel={<DehazeIcon />}/>
+            </Grid>
+            <Grid item>
               <SearchIcon className={classes.searchIcon}/>
             </Grid>
-            <Grid item xs={11}>
+            <Grid item xs={8} md={10}>
               <InputBase className={classes.searchInput} placeholder="Search..." />
             </Grid>
           </Grid>
         </InputLabel>
+      </Box>
+      <NavBar />
       </Box>
     </Paper>
     <Box className={classes.placeholderBox}/>

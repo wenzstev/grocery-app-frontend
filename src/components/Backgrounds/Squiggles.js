@@ -12,7 +12,6 @@ import {
 const useStyles = makeStyles({
   root: {
     zIndex: 5,
-    position: "fixed"
   },
   title: {
     color: "white",
