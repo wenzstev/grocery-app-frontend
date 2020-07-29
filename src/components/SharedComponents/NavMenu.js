@@ -5,6 +5,7 @@ import {
   Button,
   Menu,
   MenuItem,
+  Divider,
   makeStyles
 } from "@material-ui/core"
 
@@ -42,8 +43,10 @@ const NavMenu = (props) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
         >
-          <MenuItem>New</MenuItem>
+          <MenuItem>New...</MenuItem>
+          <Divider variant="middle" />
           <MenuItem>Settings</MenuItem>
+          <MenuItem>Log Out</MenuItem>
       </Menu>
     </div>
   )

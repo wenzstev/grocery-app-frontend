@@ -13,6 +13,7 @@ import ListInfoPage from "./components/Pages/ListInfoPage/"
 import LoginPage from "./components/Pages/LoginPage/"
 import RecipePage from "./components/Pages/RecipePage/"
 import ListPage from "./components/Pages/ListPage/"
+import IngredientPage from "./components/Pages/IngredientPage/"
 
 function App() {
   return (
@@ -25,11 +26,14 @@ function App() {
           <Route path="/list">
             <ListInfoPage />
           </Route>
-          <Route path="/home">
+          <Route path="/recipes">
             <RecipePage />
           </Route>
           <Route path="/lists">
             <ListPage />
+          </Route>
+          <Route path="/ingredients">
+            <IngredientPage />
           </Route>
         </Switch>
 

@@ -1,0 +1,41 @@
+import React from "react"
+
+import {
+  Container,
+  Grid,
+  makeStyles
+} from "@material-ui/core"
+
+import {withRouter} from "react-router-dom"
+
+import woodBackground from "../../../assets/wood-background.jpg"
+
+import SearchBar from "./SearchBar"
+
+const useStyles = makeStyles({
+  root: {
+    backgroundImage: 'url('+ woodBackground + ')',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundColor: "#a8d4ff",
+    backgroundBlendMode: "multiply",
+    height: "100vh",
+    width: "100vw",
+  },
+})
+
+const MainTemplatePage = (props) => {
+  const classes = useStyles()
+  return (
+    <div className={classes.root}>
+      <SearchBar />
+      <Container>
+        <Grid container>
+          {props.children}
+        </Grid>
+      </Container>
+    </div>
+  )
+}
+
+export default withRouter(MainTemplatePage)

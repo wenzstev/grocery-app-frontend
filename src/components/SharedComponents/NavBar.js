@@ -8,30 +8,23 @@ import {
 } from "@material-ui/core"
 
 import {
-  Link
+  Link,
+  withRouter
 } from "react-router-dom"
 
-const LinkTab = (props) => {
-  return (
-    <Tab
-      component="a"
-      {...props}
-    />
-  )
-}
 
-const NavBar = () => {
+const NavBar = (props) => {
   const [value, setValue] = useState(0)
 
   const handleChange = (event, newValue) => setValue(newValue)
 
   return (
-      <Tabs value={value} onChange={handleChange} centered>
-        <LinkTab label="Recipes" href="/home" />
-        <LinkTab label="Lists" href="/lists" />
-        <LinkTab label="Ingredients" href="/ingredients" />
+      <Tabs value={props.history.location.pathname} onChange={handleChange} centered>
+        <Tab component={Link} label="Recipes" to="/recipes" value="/recipes"/>
+        <Tab component={Link} label="Lists" to="/lists" value="/lists"/>
+        <Tab component={Link} label="Ingredients" to="/ingredients" value="/ingredients" />
       </Tabs>
   )
 }
 
-export default NavBar
+export default withRouter(NavBar)

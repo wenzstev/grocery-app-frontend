@@ -5,13 +5,24 @@ import {
   Box
 } from "@material-ui/core"
 
-import SearchBar from "../RecipePage/SearchBar"
+import MainTemplatePage from "../MainTemplatePage/"
+
+import BaseCard from "../../SharedComponents/BaseCard"
 
 const ListPage = () => {
+  const testList = {
+    name: "test",
+    ingredients: [
+      "sugar",
+      "flour",
+      "flaxseed oil"
+    ]
+  }
   return (
-    <Box>
-      <SearchBar />
-    </Box>
+    <MainTemplatePage>
+      <BaseCard contents={testList} />
+
+    </MainTemplatePage>
   )
 }
 
