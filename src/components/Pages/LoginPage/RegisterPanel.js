@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   }
 }))
 
-const RegisterPanel = () => {
+const RegisterPanel = (props) => {
   const classes = useStyles()
   return (
     <Box>
@@ -59,7 +59,7 @@ const RegisterPanel = () => {
             .required('Required')
         })}
         onSubmit={(values, actions) => {
-          let url = "http://localhost:5000/users"
+          let url = "/users"
           let body = {
               email: values.email,
               password: values.password,
@@ -72,14 +72,18 @@ const RegisterPanel = () => {
             },
             body: JSON.stringify(body)
           }).then(response=>response.json())
-            .then(json=>console.log(json))
+            .then(json=>{
+              console.log(json)
+              props.setEmail(values.email)
+              props.setPassword(values.password)
+              props.setHasRegistered(true)
+            })
         }}
       >
         <Form>
 
       <Paper className={classes.root}>
         <Box p={2}>
-
               <FormikTextField label="Email" name="email" type="text" />
               <FormikTextField label="Password" name="password" type="password" />
               <FormikTextField label="Confirm Password" name="confirmPassword" type="password" />

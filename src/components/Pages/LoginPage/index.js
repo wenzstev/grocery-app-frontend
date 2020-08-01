@@ -12,6 +12,7 @@ import {LoginSquiggle} from "../../Backgrounds/Squiggles"
 import woodBackground from "../../../assets/wood-background.jpg"
 import RegisterPanel from "./RegisterPanel"
 import LoginPanel from "./LoginPanel"
+import RegisteredPanel from "./RegisteredPanel"
 
 const useStyles = makeStyles({
   root: {
@@ -32,6 +33,9 @@ const useStyles = makeStyles({
 
 const LoginPage = (props) => {
   const classes = useStyles()
+  const [hasRegistered, setHasRegistered] = useState(false)
+  const [email, setEmail] = useState(null)
+  const [password, setPassword] = useState(null)
 
   const fetchRequest = (path, fetchBody, fetchMethod, fetchHeaders) => {
     let url = "http://localhost:5000/" + path
@@ -57,21 +61,28 @@ const LoginPage = (props) => {
     <div className={classes.root}>
       <LoginSquiggle />
       <Container className={classes.panel}>
-        <Grid container>
-        <Grid item xs={12} md={6}>
-          <Box mx={5}>
-            <LoginPanel token={props.token} setToken={props.setToken} />
-          </Box>
-        </Grid>
-          <Grid item xs={12} md={6}>
-            <Box mx={5}>
-              <RegisterPanel />
-            </Box>
+        {hasRegistered ? <RegisteredPanel email={email} password={password}/>
+          :
+        (<Grid container>
+            <Grid item xs={12} md={6}>
+              <Box mx={5}>
+                <LoginPanel token={props.token} setToken={props.setToken} />
+              </Box>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Box mx={5}>
+                <RegisterPanel
+                  setHasRegistered={setHasRegistered}
+                  setEmail={setEmail}
+                  setPassword={setPassword}/>
+              </Box>
+            </Grid>
           </Grid>
-        </Grid>
+          )
+        }
       </Container>
-
     </div>
+
   )
 }
 

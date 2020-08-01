@@ -6,14 +6,12 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect,
   Link
 } from "react-router-dom"
 
-import ListInfoPage from "./components/Pages/ListInfoPage/"
-import LoginPage from "./components/Pages/LoginPage/"
-import RecipePage from "./components/Pages/RecipePage/"
-import ListPage from "./components/Pages/ListPage/"
-import IngredientPage from "./components/Pages/IngredientPage/"
+import AuthenticatedApp from "./components/AppVersions/AuthenticatedApp"
+import UnauthenticatedApp from "./components/AppVersions/UnauthenticatedApp"
 
 function App() {
   const [token, setToken] = useState(null)
@@ -23,24 +21,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Switch>
-          <Route path="/">
-            <LoginPage token={token} setToken={setToken}/>
-          </Route>
-          <Route path="/list">
-            <ListInfoPage />
-          </Route>
-          <Route path="/recipes">
-            <RecipePage />
-          </Route>
-          <Route path="/lists">
-            <ListPage />
-          </Route>
-          <Route path="/ingredients">
-            <IngredientPage />
-          </Route>
-        </Switch>
-
+        {token ? <AuthenticatedApp token={token} /> : <UnauthenticatedApp setToken={setToken} />}
       </div>
     </Router>
 

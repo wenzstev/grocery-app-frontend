@@ -28,7 +28,7 @@ const MainTemplatePage = (props) => {
   const classes = useStyles()
   return (
     <div className={classes.root}>
-      <SearchBar />
+      {props.noSearchbar ? null : <SearchBar />}
       <Container>
         <Grid container>
           {props.children}
