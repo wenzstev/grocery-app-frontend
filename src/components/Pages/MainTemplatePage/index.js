@@ -38,4 +38,4 @@ const MainTemplatePage = (props) => {
   )
 }
 
-export default withRouter(MainTemplatePage)
+export default MainTemplatePage

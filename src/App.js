@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
@@ -16,12 +16,16 @@ import ListPage from "./components/Pages/ListPage/"
 import IngredientPage from "./components/Pages/IngredientPage/"
 
 function App() {
+  const [token, setToken] = useState(null)
+
+  console.log(token)
+
   return (
     <Router>
       <div className="App">
         <Switch>
-          <Route path="/login">
-            <LoginPage />
+          <Route path="/">
+            <LoginPage token={token} setToken={setToken}/>
           </Route>
           <Route path="/list">
             <ListInfoPage />

@@ -56,6 +56,22 @@ const LoginPanel = (props) => {
       onClose={handleClose}/>
   )
 
+  const login = (values, actions) => {
+    let headers = new Headers()
+    headers.append('Authorization', 'Basic ' + btoa(values.email + ":" + values.password))
+
+    fetch("/users/token",{
+      method: 'GET',
+      headers: headers,
+    })
+    .then(response=>{
+      console.log(response)
+      return response.json()
+    })
+    .then(json=>props.setToken(json['token']))
+  }
+
+
   return (
     <Box>
       <Typography variant="h5" className={classes.header}>Sign In</Typography>
@@ -71,23 +87,8 @@ const LoginPanel = (props) => {
           password: Yup.string()
             .required("Required")
         })}
-        onSubmit={(values, actions) => {
-          let headers = new Headers()
-          headers.append('Authorization', 'Basic ' + btoa(values.email + ":" + values.password))
+        onSubmit={login}
 
-          fetch("http://localhost:5000/users/token",{
-            method: 'GET',
-            headers: headers,
-          })
-          .then(response=>{
-            if (response.status==401){
-              setErrorMessage("Invalid username or password")
-              setOpen(true)
-            }
-          })
-          .then(json=>console.log(json))
-
-        }}
       >
       <Form>
         <Paper className={classes.root}>

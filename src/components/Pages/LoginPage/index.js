@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState} from "react"
 
 import {
   Container,
@@ -30,7 +30,7 @@ const useStyles = makeStyles({
   }
 })
 
-const LoginPage = () => {
+const LoginPage = (props) => {
   const classes = useStyles()
 
   const fetchRequest = (path, fetchBody, fetchMethod, fetchHeaders) => {
@@ -60,7 +60,7 @@ const LoginPage = () => {
         <Grid container>
         <Grid item xs={12} md={6}>
           <Box mx={5}>
-            <LoginPanel />
+            <LoginPanel token={props.token} setToken={props.setToken} />
           </Box>
         </Grid>
           <Grid item xs={12} md={6}>
