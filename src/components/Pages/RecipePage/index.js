@@ -14,7 +14,7 @@ import MainTemplatePage from "../MainTemplatePage/"
 import BaseCard from "../../SharedComponents/BaseCard"
 
 
-const HomePage = () => {
+const HomePage = (props) => {
   const testRecipe = {
     name: "Test Recipe",
     ingredients: [
@@ -25,7 +25,7 @@ const HomePage = () => {
   }
 
   return (
-    <MainTemplatePage>
+    <MainTemplatePage setToken={props.setToken}>
         <BaseCard contents={testRecipe} />
 
     </MainTemplatePage>

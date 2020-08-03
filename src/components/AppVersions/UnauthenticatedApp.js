@@ -14,7 +14,7 @@ const UnauthenticatedApp = (props) => {
   return (
       <Switch>
         <Route path="/login">
-          <LoginPage setToken = {props.setToken} />
+          <LoginPage setToken = {props.setToken} setHasToken={props.setHasToken} />
         </Route>
         <Route path="/verify" component={VerifyPage} />
         <Redirect to="/login"/>

@@ -66,7 +66,7 @@ const LoginPage = (props) => {
         (<Grid container>
             <Grid item xs={12} md={6}>
               <Box mx={5}>
-                <LoginPanel token={props.token} setToken={props.setToken} />
+                <LoginPanel setToken={props.setToken} setHasToken={props.setHasToken}/>
               </Box>
             </Grid>
             <Grid item xs={12} md={6}>

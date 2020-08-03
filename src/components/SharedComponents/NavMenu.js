@@ -9,6 +9,9 @@ import {
   makeStyles
 } from "@material-ui/core"
 
+import {useCookies} from "react-cookie"
+
+
 const useStyles = makeStyles({
   root: {
     borderRadius: "15px"
@@ -26,6 +29,17 @@ const NavMenu = (props) => {
   const handleClose = () => {
     setAnchorEl(null)
   }
+
+  const logout = () => {
+    fetch('/users/logout')
+    .then(response=>{
+      if (response.status === 204){
+        props.setToken(null)
+      }
+    })
+    .catch(err=>console.log(err))
+  }
+
 
   return (
     <div>
@@ -46,7 +60,7 @@ const NavMenu = (props) => {
           <MenuItem>New...</MenuItem>
           <Divider variant="middle" />
           <MenuItem>Settings</MenuItem>
-          <MenuItem>Log Out</MenuItem>
+          <MenuItem onClick={logout}>Log Out</MenuItem>
       </Menu>
     </div>
   )

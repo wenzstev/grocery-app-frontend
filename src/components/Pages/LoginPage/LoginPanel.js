@@ -60,15 +60,21 @@ const LoginPanel = (props) => {
     let headers = new Headers()
     headers.append('Authorization', 'Basic ' + btoa(values.email + ":" + values.password))
 
-    fetch("/users/token",{
+    fetch("/users/refresh-token",{
       method: 'GET',
       headers: headers,
+      credentials: 'same-origin',
     })
     .then(response=>{
-      console.log(response)
-      return response.json()
+      if (response.status===204){  // we got the refresh token
+        return fetch('/users/token')
+      }
     })
-    .then(json=>props.setToken(json['token']))
+    .then(response=>response.json())
+    .then(json=>{
+      props.setToken(json['token'])
+      props.setHasToken(true)
+    })
   }
 
 

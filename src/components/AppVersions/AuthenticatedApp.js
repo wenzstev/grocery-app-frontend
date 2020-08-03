@@ -15,13 +15,13 @@ const AuthenticatedApp = (props) => {
   return (
       <Switch>
         <Route path="/recipes">
-          <RecipePage />
+          <RecipePage  setToken={props.setToken}/>
         </Route>
         <Route path="/lists">
-          <ListPage />
+          <ListPage  setToken={props.setToken}/>
         </Route>
         <Route path="/ingredients">
-          <IngredientPage />
+          <IngredientPage  setToken={props.setToken}/>
         </Route>
         <Route path="/">
           <Redirect to="/recipes"/>

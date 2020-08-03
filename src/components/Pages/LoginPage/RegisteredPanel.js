@@ -1,13 +1,9 @@
 import React from "react"
 
 const RegisteredPanel = (props) => {
-  console.log(props.email)
-  console.log(props.password)
   const sendVerificationEmail = () => {
     let headers = new Headers()
     headers.append('Authorization', 'Basic ' + btoa(props.email + ":" + props.password))
-
-    console.log(headers)
 
     fetch("/users/verification?url=http://localhost:3000/verify",{
       method: 'GET',

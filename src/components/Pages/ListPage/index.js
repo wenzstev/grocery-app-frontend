@@ -9,7 +9,7 @@ import MainTemplatePage from "../MainTemplatePage/"
 
 import BaseCard from "../../SharedComponents/BaseCard"
 
-const ListPage = () => {
+const ListPage = (props) => {
   const testList = {
     name: "test",
     ingredients: [
@@ -19,7 +19,7 @@ const ListPage = () => {
     ]
   }
   return (
-    <MainTemplatePage>
+    <MainTemplatePage setToken={props.setToken}>
       <BaseCard contents={testList} />
 
     </MainTemplatePage>

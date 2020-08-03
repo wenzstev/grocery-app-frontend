@@ -11,6 +11,7 @@ import {
   makeStyles
 } from "@material-ui/core"
 
+
 import SearchIcon from "@material-ui/icons/Search"
 import DehazeIcon from "@material-ui/icons/Dehaze"
 
@@ -51,7 +52,7 @@ const useStyles = makeStyles({
   }
 })
 
-const SearchBar = () => {
+const SearchBar = (props) => {
   const classes = useStyles()
   return (
     <>
@@ -62,7 +63,7 @@ const SearchBar = () => {
         <InputLabel>
           <Grid container>
             <Grid item>
-              <NavMenu buttonLabel={<DehazeIcon />}/>
+              <NavMenu buttonLabel={<DehazeIcon />} setToken={props.setToken}/>
             </Grid>
             <Grid item>
               <SearchIcon className={classes.searchIcon}/>

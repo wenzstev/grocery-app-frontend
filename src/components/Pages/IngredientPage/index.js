@@ -2,9 +2,9 @@ import React from "react"
 
 import MainTemplatePage from "../MainTemplatePage/"
 
-const IngredientPage = () => {
+const IngredientPage = (props) => {
   return (
-    <MainTemplatePage>
+    <MainTemplatePage setToken={props.setToken}>
       <p>Ingredients</p>
     </MainTemplatePage>
   )
