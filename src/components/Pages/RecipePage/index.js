@@ -15,6 +15,9 @@ import BaseCard from "../../SharedComponents/BaseCard"
 
 
 const HomePage = (props) => {
+
+
+
   const testRecipe = {
     name: "Test Recipe",
     ingredients: [
@@ -25,7 +28,7 @@ const HomePage = (props) => {
   }
 
   return (
-    <MainTemplatePage setToken={props.setToken}>
+    <MainTemplatePage>
         <BaseCard contents={testRecipe} />
 
     </MainTemplatePage>

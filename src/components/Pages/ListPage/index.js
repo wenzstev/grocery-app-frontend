@@ -19,7 +19,7 @@ const ListPage = (props) => {
     ]
   }
   return (
-    <MainTemplatePage setToken={props.setToken}>
+    <MainTemplatePage>
       <BaseCard contents={testList} />
 
     </MainTemplatePage>

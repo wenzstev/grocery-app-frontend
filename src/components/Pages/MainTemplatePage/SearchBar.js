@@ -63,7 +63,7 @@ const SearchBar = (props) => {
         <InputLabel>
           <Grid container>
             <Grid item>
-              <NavMenu buttonLabel={<DehazeIcon />} setToken={props.setToken}/>
+              <NavMenu buttonLabel={<DehazeIcon />} />
             </Grid>
             <Grid item>
               <SearchIcon className={classes.searchIcon}/>

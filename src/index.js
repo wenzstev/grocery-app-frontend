@@ -6,13 +6,23 @@ import * as serviceWorker from './serviceWorker';
 import theme from "./theme"
 import {ThemeProvider} from "@material-ui/core"
 import {CookiesProvider} from 'react-cookie'
+import {Provider} from 'react-redux'
+import {createStore} from 'redux'
+
+import rootReducer from "./reducers/"
+
+const store = createStore(
+  rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 ReactDOM.render(
-  <CookiesProvider>
-    <ThemeProvider theme={theme}>
-        <App />
-    </ThemeProvider>
-  </CookiesProvider>,
+    <CookiesProvider>
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </ThemeProvider>
+    </CookiesProvider>,
   document.getElementById('root')
 );
 

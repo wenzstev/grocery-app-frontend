@@ -10,13 +10,18 @@ import {
   Link
 } from "react-router-dom"
 
+import {useSelector, useDispatch} from 'react-redux'
+
+import {setToken, setUser} from "./actions/"
 
 import AuthenticatedApp from "./components/AppVersions/AuthenticatedApp"
 import UnauthenticatedApp from "./components/AppVersions/UnauthenticatedApp"
 
 function App() {
-  const [token, setToken] = useState(null)
   const [hasToken, setHasToken] = useState(false)
+
+  const dispatch = useDispatch()
+  const token = useSelector(state=>state.token)
 
 
 
@@ -32,7 +37,8 @@ function App() {
       }
     })
     .then(json=>{
-      setToken(json['token'])
+      dispatch(setToken(json['token']))
+      dispatch(setUser(json['user']))
       setHasToken(true)
     })
     .catch(error=>console.log(error))
@@ -55,7 +61,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        {token ? <AuthenticatedApp token={token} setToken={setToken}/> : <UnauthenticatedApp setToken={setToken} setHasToken={setHasToken}/>}
+        {token ? <AuthenticatedApp/> : <UnauthenticatedApp setHasToken={setHasToken}/>}
       </div>
     </Router>
 

@@ -4,7 +4,7 @@ import MainTemplatePage from "../MainTemplatePage/"
 
 const IngredientPage = (props) => {
   return (
-    <MainTemplatePage setToken={props.setToken}>
+    <MainTemplatePage>
       <p>Ingredients</p>
     </MainTemplatePage>
   )

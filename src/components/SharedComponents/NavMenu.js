@@ -11,6 +11,8 @@ import {
 
 import {useCookies} from "react-cookie"
 
+import {useDispatch} from 'react-redux'
+import {setToken, setUser} from '../../actions/'
 
 const useStyles = makeStyles({
   root: {
@@ -21,6 +23,7 @@ const useStyles = makeStyles({
 const NavMenu = (props) => {
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = useState(null)
+  const dispatch = useDispatch()
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
@@ -34,7 +37,8 @@ const NavMenu = (props) => {
     fetch('/users/logout')
     .then(response=>{
       if (response.status === 204){
-        props.setToken(null)
+        dispatch(setToken(null))
+        dispatch(setUser(null))
       }
     })
     .catch(err=>console.log(err))

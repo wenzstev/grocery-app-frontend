@@ -15,6 +15,9 @@ import {
 import {FormikTextField} from "../../Templates/FormikComponents"
 import ButtonTemplate from "../../Templates/ButtonTemplate"
 
+import {useDispatch} from 'react-redux'
+import {setToken, setUser} from '../../../actions/'
+
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
     backgroundColor: theme.palette.secondary.main,
@@ -34,6 +37,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 const LoginPanel = (props) => {
   const classes = useStyles()
+  const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
 
@@ -72,7 +76,8 @@ const LoginPanel = (props) => {
     })
     .then(response=>response.json())
     .then(json=>{
-      props.setToken(json['token'])
+      dispatch(setToken(json['token']))
+      dispatch(setUser(json['user']))
       props.setHasToken(true)
     })
   }
