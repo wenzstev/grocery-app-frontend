@@ -37,25 +37,6 @@ const LoginPage = (props) => {
   const [email, setEmail] = useState(null)
   const [password, setPassword] = useState(null)
 
-  const fetchRequest = (path, fetchBody, fetchMethod, fetchHeaders) => {
-    let url = "http://localhost:5000/" + path
-
-    console.log(url)
-    console.log(fetchBody)
-    console.log(fetchMethod)
-    console.log(fetchHeaders)
-
-    fetch(url, {
-      method: 'GET',
-      body: JSON.stringify(fetchBody)
-    })
-    .then(request => {
-      request.json()
-    })
-    .then(json => {
-      console.log(json)
-    })
-  }
 
   return (
     <div className={classes.root}>

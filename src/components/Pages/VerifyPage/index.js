@@ -18,8 +18,6 @@ const VerifyPage = (props) => {
   const [verified, setVerified] = useState(false)
   const token = qs.parse(props.location.search,{ignoreQueryPrefix:true})
 
-  console.log(token)
-
   fetch(`/users/verification?token=${token.token}`,{
     method: 'PUT'
   })

@@ -76,8 +76,8 @@ const LoginPanel = (props) => {
     })
     .then(response=>response.json())
     .then(json=>{
-      dispatch(setToken(json['token']))
       dispatch(setUser(json['user']))
+      dispatch(setToken(json['token']))
       props.setHasToken(true)
     })
   }

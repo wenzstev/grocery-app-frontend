@@ -22,7 +22,6 @@ const NavBar = (props) => {
       <Tabs value={props.history.location.pathname} onChange={handleChange} centered>
         <Tab component={Link} label="Recipes" to="/recipes" value="/recipes"/>
         <Tab component={Link} label="Lists" to="/lists" value="/lists"/>
-        <Tab component={Link} label="Ingredients" to="/ingredients" value="/ingredients" />
       </Tabs>
   )
 }

@@ -37,8 +37,8 @@ function App() {
       }
     })
     .then(json=>{
-      dispatch(setToken(json['token']))
       dispatch(setUser(json['user']))
+      dispatch(setToken(json['token']))
       setHasToken(true)
     })
     .catch(error=>console.log(error))
