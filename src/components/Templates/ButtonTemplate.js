@@ -25,7 +25,8 @@ const ButtonTemplate = (props) => {
       variant="contained"
       color={props.color}
       type={props.type}
-      className={classes.root}>
+      className={classes.root}
+      {...props.fullWidth}>
       {props.children}
     </Button>
   )

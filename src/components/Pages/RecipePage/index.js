@@ -32,7 +32,7 @@ const HomePage = (props) => {
 
 
   return (
-    <MainTemplatePage>
+    <MainTemplatePage getRecipes={getRecipes}>
         {recipes ? recipes.map((value, index)=> <RecipeCard key={index} recipe={value} />) : null}
 
     </MainTemplatePage>

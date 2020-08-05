@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState} from "react"
 
 import {
   Paper,
@@ -8,6 +8,7 @@ import {
   Grid,
   InputLabel,
   Button,
+  Modal,
   makeStyles
 } from "@material-ui/core"
 
@@ -53,6 +54,9 @@ const useStyles = makeStyles({
 })
 
 const SearchBar = (props) => {
+  const [modal, setModal] = useState(null)
+  const [modalOpen, setModalOpen] = useState(false)
+
   const classes = useStyles()
   return (
     <>
@@ -63,7 +67,7 @@ const SearchBar = (props) => {
         <InputLabel>
           <Grid container>
             <Grid item>
-              <NavMenu buttonLabel={<DehazeIcon />} />
+              <NavMenu buttonLabel={<DehazeIcon />} setModal={setModal} setModalOpen={setModalOpen}/>
             </Grid>
             <Grid item>
               <SearchIcon className={classes.searchIcon}/>
@@ -78,6 +82,9 @@ const SearchBar = (props) => {
       </Box>
     </Paper>
     <Box className={classes.placeholderBox}/>
+    <Modal open={modalOpen} onClose={()=>setModalOpen(false)}>
+      {modal}
+    </Modal>
     </>
   )
 }

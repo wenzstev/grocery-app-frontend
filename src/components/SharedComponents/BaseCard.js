@@ -21,7 +21,8 @@ const useStyles = makeStyles((theme:Theme)=>createStyles({
     }
   },
   title: {
-    textAlign: "center"
+    textAlign: "center",
+    textDecoration: "none",
   }
 }))
 
@@ -33,6 +34,7 @@ const BaseCard = (props) => {
   ))
   return(
     <Grid item xs={12} sm={6} md={4} lg={3}>
+      <Link to={props.route} style={{textDecoration: "none"}}>
       <Box m={2}>
         <Paper className={classes.root}>
           <Typography variant="h6" className={classes.title}>{props.name}</Typography>
@@ -41,6 +43,7 @@ const BaseCard = (props) => {
           </List>
         </Paper>
       </Box>
+    </Link>
     </Grid>
   )
 }
@@ -69,7 +72,11 @@ export const ListCard = (props) => {
   }, [])
 
   return (
-    <BaseCard name={props.list.name} ingredients={ingredients.sort()} />
+      <BaseCard
+        name={props.list.name}
+        ingredients={ingredients.sort()}
+        route={`/list/${props.list.id}`}
+      />
   )
 
 }

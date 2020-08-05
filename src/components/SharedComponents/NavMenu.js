@@ -9,10 +9,14 @@ import {
   makeStyles
 } from "@material-ui/core"
 
+import NestedMenuItem from "material-ui-nested-menu-item"
+
 import {useCookies} from "react-cookie"
 
 import {useDispatch} from 'react-redux'
 import {setToken, setUser} from '../../actions/'
+
+import AddRecipeModal from "../Pages/MainTemplatePage/AddRecipeModal"
 
 const useStyles = makeStyles({
   root: {
@@ -44,6 +48,11 @@ const NavMenu = (props) => {
     .catch(err=>console.log(err))
   }
 
+  const openRecipeModal = () => {
+    props.setModalOpen(true)
+    props.setModal(<AddRecipeModal />)
+  }
+
 
   return (
     <div>
@@ -61,7 +70,12 @@ const NavMenu = (props) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
         >
-          <MenuItem>New...</MenuItem>
+          <NestedMenuItem
+            label="New"
+            parentMenuOpen={!!anchorEl}>
+            <MenuItem onClick={openRecipeModal}>Recipe</MenuItem>
+            <MenuItem>List</MenuItem>
+          </NestedMenuItem>
           <Divider variant="middle" />
           <MenuItem>Settings</MenuItem>
           <MenuItem onClick={logout}>Log Out</MenuItem>

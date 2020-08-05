@@ -14,6 +14,12 @@ import {
   makeStyles
 } from "@material-ui/core"
 
+import {
+  Router,
+  useRouteMatch,
+  useParams
+} from "react-router-dom"
+
 const useStyles = makeStyles({
   root: {
     backgroundImage: 'url('+ woodBackground + ')',
@@ -35,20 +41,17 @@ const ListPage = (props) => {
   const[listItems, setListItems] = useState([])
   const[listName, setListName] = useState("")
 
-  useEffect(()=>{
-    fetch("http://localhost:5000/ingredients?list=1")
-      .then(response=>response.json())
-      .then(data => {
-        console.log(data)
-        setListItems(data)
-      })
+  const {listId} = useParams()
+  console.log(listId)
 
-    fetch("http://localhost:5000/lists/1")
+  useEffect(()=>{
+    fetch(`/ingredients?list=${listId}`)
       .then(response=>response.json())
-      .then(data => {
-        console.log(data)
-        setListName(data.name)
-      })
+      .then(data => setListItems(data))
+
+    fetch(`/lists/${listId}`)
+      .then(response=>response.json())
+      .then(data => setListName(data.name))
   }, [])
 
 
@@ -68,7 +71,6 @@ const ListPage = (props) => {
             <ListInfoButton/>
           </Box>
         </Box>
-
       </Container>
     </div>
   )
