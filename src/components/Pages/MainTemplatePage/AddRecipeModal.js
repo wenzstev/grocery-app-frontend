@@ -2,9 +2,7 @@ import React from "react"
 
 import {
   Paper,
-  Box,
-  makeStyles,
-  createStyles
+  Box
 } from "@material-ui/core"
 
 import {useSelector} from "react-redux"
@@ -14,26 +12,10 @@ import * as Yup from "yup"
 import {FormikTextField} from "../../Templates/FormikComponents"
 import ButtonTemplate from "../../Templates/ButtonTemplate"
 
-const useStyles = makeStyles((theme:Theme)=>createStyles({
-  root: {
-    position: "relative",
-    width: "95vw",
-    top: "30vh",
-    margin: "auto"
-  },
-  paper: {
-    borderRadius: 15,
-    padding: "7px 14px",
-    backgroundColor: theme.palette.secondary.main
-  }
-}))
 
 const AddRecipeModal = () => {
-  const classes = useStyles()
   const token = useSelector(store=>store.token)
   return (
-    <Box className={classes.root}>
-      <Paper className={classes.paper}>
         <Formik
           initialValues = {{
             url: ''
@@ -49,8 +31,17 @@ const AddRecipeModal = () => {
               headers: headers,
               body: body
             })
-            .then(response=>response.json())
-            .then(json=>console.log(json))
+            .then(response=>{
+              if(response.status===200){
+                return response.json()
+              } else {
+                throw new Error("Something went wrong!")
+              }
+            })
+            .then(json=>{
+              console.log(json)
+            })
+            .catch(err=>console.log(err))
           }}
         >
           <Form>
@@ -58,8 +49,6 @@ const AddRecipeModal = () => {
             <ButtonTemplate type="submit" color="primary" fullWidth>Get Recipe</ButtonTemplate>
           </Form>
         </Formik>
-      </Paper>
-    </Box>
   )
 }
 

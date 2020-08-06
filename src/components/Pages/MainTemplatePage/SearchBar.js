@@ -9,7 +9,8 @@ import {
   InputLabel,
   Button,
   Modal,
-  makeStyles
+  makeStyles,
+  createStyles
 } from "@material-ui/core"
 
 
@@ -22,7 +23,7 @@ import NavMenu from "../../SharedComponents/NavMenu"
 import NavBar from "../../SharedComponents/NavBar"
 
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme:Theme)=>createStyles({
   root: {
     position: "fixed",
     top: 0,
@@ -34,9 +35,6 @@ const useStyles = makeStyles({
     backgroundColor: "lightgray",
     borderRadius: 15,
     width: "95vw",
-  },
-  navbar: {
-
   },
   searchInput: {
     width: "100%",
@@ -50,8 +48,22 @@ const useStyles = makeStyles({
   },
   placeholderBox: {
     height: "25vh"
-  }
-})
+  },
+  modal: {
+    position: "relative",
+    width: "95vw",
+    top: "30vh",
+    margin: "auto",
+    "&:focus": {
+      outline: "none"
+    },
+  },
+    modalPaper: {
+      borderRadius: 15,
+      padding: "7px 14px",
+      backgroundColor: theme.palette.secondary.main
+    }
+}))
 
 const SearchBar = (props) => {
   const [modal, setModal] = useState(null)
@@ -83,7 +95,11 @@ const SearchBar = (props) => {
     </Paper>
     <Box className={classes.placeholderBox}/>
     <Modal open={modalOpen} onClose={()=>setModalOpen(false)}>
-      {modal}
+      <Box className={classes.modal}>
+        <Paper className={classes.modalPaper}>
+          {modal}
+        </Paper>
+      </Box>
     </Modal>
     </>
   )

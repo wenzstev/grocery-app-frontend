@@ -17,6 +17,7 @@ import {useDispatch} from 'react-redux'
 import {setToken, setUser} from '../../actions/'
 
 import AddRecipeModal from "../Pages/MainTemplatePage/AddRecipeModal"
+import AddListModal from "../Pages/MainTemplatePage/AddListModal"
 
 const useStyles = makeStyles({
   root: {
@@ -48,10 +49,11 @@ const NavMenu = (props) => {
     .catch(err=>console.log(err))
   }
 
-  const openRecipeModal = () => {
+  const openModal = (modal) => {
     props.setModalOpen(true)
-    props.setModal(<AddRecipeModal />)
+    props.setModal(modal)
   }
+
 
 
   return (
@@ -73,8 +75,8 @@ const NavMenu = (props) => {
           <NestedMenuItem
             label="New"
             parentMenuOpen={!!anchorEl}>
-            <MenuItem onClick={openRecipeModal}>Recipe</MenuItem>
-            <MenuItem>List</MenuItem>
+            <MenuItem onClick={()=>openModal(<AddRecipeModal />)}>Recipe</MenuItem>
+            <MenuItem onClick={()=>openModal(<AddListModal />)}>List</MenuItem>
           </NestedMenuItem>
           <Divider variant="middle" />
           <MenuItem>Settings</MenuItem>
