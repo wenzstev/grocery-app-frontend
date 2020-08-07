@@ -10,7 +10,8 @@ import {
 import ListPage from "../Pages/ListPage/"
 import RecipePage from "../Pages/RecipePage/"
 import IngredientPage from "../Pages/IngredientPage/"
-import ListInfoPage from "../Pages/ListInfoPage"
+import ListInfoPage from "../Pages/ListInfoPage/"
+import EditRecipePage from "../Pages/EditRecipePage/"
 
 const AuthenticatedApp = (props) => {
   return (
@@ -27,8 +28,11 @@ const AuthenticatedApp = (props) => {
         <Route path="/list/:listId">
           <ListInfoPage />
         </Route>
+        <Route path="/recipe/:recipeId">
+          <EditRecipePage />
+        </Route>
         <Route path="/">
-          <Redirect to="/recipes"/>
+          <Redirect to="/recipe/1"/>
         </Route>
       </Switch>
   )

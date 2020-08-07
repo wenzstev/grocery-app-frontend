@@ -46,7 +46,7 @@ const AddRecipeModal = () => {
         >
           <Form>
             <FormikTextField label="URL" name="url"/>
-            <ButtonTemplate type="submit" color="primary" fullWidth>Get Recipe</ButtonTemplate>
+            <ButtonTemplate type="submit" color="primary">Get Recipe</ButtonTemplate>
           </Form>
         </Formik>
   )

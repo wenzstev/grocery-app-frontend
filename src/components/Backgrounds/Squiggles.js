@@ -21,9 +21,12 @@ const useStyles = makeStyles({
   },
   top: {
     height: "12vh",
+    position: "absolute",
+    left: 0,
+    top: 0
   },
   squiggle: {
-    width: "100%"
+    width: "100vw"
   },
   login: {
     height: "80vh",
