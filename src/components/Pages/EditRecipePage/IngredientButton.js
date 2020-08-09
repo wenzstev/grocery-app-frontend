@@ -9,8 +9,8 @@ const IngredientButton = (props) => {
 
   return (
     <Box m={1}>
-      <ButtonBase style={props.ingredient ? {color:"red"} : null}>
-        {props.text}
+      <ButtonBase style={props.color ? {color:props.color} : null}>
+        {props.children}
       </ButtonBase>
     </Box>
   )

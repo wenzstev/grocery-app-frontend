@@ -16,7 +16,6 @@ import {
 
 import RecipePanel from "./RecipePanel"
 
-
 const EditRecipePage = () => {
   const [recipe, setRecipe] = useState({})
   const token = useSelector(store=>store.token)

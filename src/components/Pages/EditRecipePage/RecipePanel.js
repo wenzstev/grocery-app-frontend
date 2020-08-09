@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState, useEffect} from "react"
 
 
 import {
@@ -8,31 +8,70 @@ import {
 } from "@material-ui/core"
 
 import RecipeLine from "./RecipeLine"
+import ColorPicker from "./ColorPicker"
 
 const useStyles = makeStyles({
   root: {
+    top: "20vh",
+    position: "relative",
+  },
+  mainPanel: {
     borderRadius: 15,
     backgroundColor: "rgba(0,0,0,.5)",
     width: "100%",
     margin: "auto",
-    position: "relative",
-    top: "20vh"
   }
 })
 
+const colors = [
+  "teal",
+  "orange",
+  "green",
+  "red",
+  "blue"
+]
+
 const RecipePanel = (props) => {
+  const [curColor, setCurColor] = useState(0)
+  const [numButtons, setNumButtons] = useState(1)
   const classes = useStyles()
 
-  console.log(props.lines)
+  const determineMaxIngredientsInLine = (lines) => {
+    if (lines === undefined) {return}
+    var maxNum = 0
+    for(var i = 0; i < lines.length; i++){
+      const numIngredients = props.lines[i].ingredients.length
+      if (numIngredients > maxNum){
+        maxNum = numIngredients
+      }
+    }
+    console.log("max num is " + maxNum)
+    setNumButtons(maxNum)
+  }
+
+  useEffect(()=>{
+    determineMaxIngredientsInLine(props.lines)
+  })
+
 
   return (
     <Box className={classes.root}>
-      <List>
-        {props.lines ?
-          props.lines.map((line, index)=><RecipeLine key={index} line={line} />)
-          : null}
-      </List>
+      <ColorPicker
+        numButtons={numButtons}
+        colors={colors}
+        curColor={curColor}
+        setCurColor={setCurColor}
+        />
+      <Box className={classes.mainPanel}>
+        <List>
+          {props.lines ?
+            props.lines.map((line, index)=>(
+              <RecipeLine key={index} line={line} curColor={curColor} colors={colors} />
+            )) : null}
+        </List>
+      </Box>
     </Box>
+
   )
 }
 
