@@ -51,13 +51,14 @@ const RecipePanel = (props) => {
 
   useEffect(()=>{
     determineMaxIngredientsInLine(props.lines)
-  })
+  },[props.lines])
 
 
   return (
     <Box className={classes.root}>
       <ColorPicker
         numButtons={numButtons}
+        setNumButtons={setNumButtons}
         colors={colors}
         curColor={curColor}
         setCurColor={setCurColor}
@@ -66,7 +67,14 @@ const RecipePanel = (props) => {
         <List>
           {props.lines ?
             props.lines.map((line, index)=>(
-              <RecipeLine key={index} line={line} curColor={curColor} colors={colors} />
+              <RecipeLine
+                key={index}
+                line={line}
+                curColor={curColor}
+                colors={colors}
+                changeLine = {(newJSON)=>props.changeLine(index, newJSON)}
+                removeLineFromDOM={()=>props.removeLineFromDOM(index)}
+                />
             )) : null}
         </List>
       </Box>

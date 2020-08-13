@@ -30,9 +30,7 @@ const MainTemplatePage = (props) => {
     <div className={classes.root}>
       {props.noSearchbar ? null : <SearchBar getRecipes={props.getRecipes}/>}
       <Container>
-        <Grid container>
           {props.children}
-        </Grid>
       </Container>
     </div>
   )

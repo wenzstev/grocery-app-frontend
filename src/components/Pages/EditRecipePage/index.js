@@ -31,11 +31,32 @@ const EditRecipePage = () => {
     getRecipeFromBackend()
   }, [])
 
+  const changeRecipeLine = (lineId, newLineJSON) => {
+    console.log(newLineJSON)
+    console.log(recipe.recipe_lines)
+    const newLines = [...recipe.recipe_lines]
+    newLines[lineId] = newLineJSON
+    console.log(newLines)
+    setRecipe({...recipe, ...{recipe_lines: newLines}})
+  }
+
+  const removeLineFromDOM = (lineId) => {
+    console.log("removing line")
+    const newLines = [...recipe.recipe_lines]
+    newLines.splice(lineId, 1)
+    console.log(lineId)
+    console.log(newLines)
+    setRecipe({...recipe, ...{recipe_lines: newLines}})
+  }
+
 
   return (
     <MainTemplatePage noSearchbar>
-      <TopSquiggle>{recipe ? recipe.name : null}</TopSquiggle>
-      <RecipePanel lines={recipe.recipe_lines}/>
+        <TopSquiggle>{recipe ? recipe.name : null}</TopSquiggle>
+        <RecipePanel
+          lines={recipe.recipe_lines}
+          removeLineFromDOM={removeLineFromDOM}
+          changeLine={changeRecipeLine}/>
     </MainTemplatePage>
   )
 }
