@@ -34,16 +34,16 @@ const BaseCard = (props) => {
   ))
   return(
     <Grid item xs={12} sm={6} md={4} lg={3}>
-      <Link to={props.route} style={{textDecoration: "none"}}>
       <Box m={2}>
         <Paper className={classes.root}>
+          <Link to={props.route} style={{textDecoration: "none"}}>
           <Typography variant="h6" className={classes.title}>{props.name}</Typography>
           <List>
             {ingredients}
           </List>
+        </Link>
         </Paper>
       </Box>
-    </Link>
     </Grid>
   )
 }
@@ -58,7 +58,11 @@ export const RecipeCard = (props) => {
   },[])
 
   return(
-    <BaseCard name={props.recipe.name} ingredients={ingredients.sort()} />
+    <BaseCard
+      name={props.recipe.name}
+      ingredients={ingredients.sort()}
+      route={`/recipe/${props.recipe.id}`}
+      />
   )
 }
 

@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState} from "react"
 
 import {
   Paper,
@@ -6,6 +6,8 @@ import {
 } from "@material-ui/core"
 
 import {useSelector} from "react-redux"
+
+import {Redirect} from "react-router-dom"
 
 import {Formik, Form} from "formik"
 import * as Yup from "yup"
@@ -15,7 +17,9 @@ import ButtonTemplate from "../../Templates/ButtonTemplate"
 
 const AddRecipeModal = () => {
   const token = useSelector(store=>store.token)
+  const [redirect, setRedirect] = useState()
   return (
+    <>
         <Formik
           initialValues = {{
             url: ''
@@ -40,6 +44,7 @@ const AddRecipeModal = () => {
             })
             .then(json=>{
               console.log(json)
+              setRedirect(<Redirect to={`/recipe/${json.recipe.id}`} />)
             })
             .catch(err=>console.log(err))
           }}
@@ -49,6 +54,8 @@ const AddRecipeModal = () => {
             <ButtonTemplate type="submit" color="primary">Get Recipe</ButtonTemplate>
           </Form>
         </Formik>
+        {redirect}
+        </>
   )
 }
 

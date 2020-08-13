@@ -78,7 +78,6 @@ const RecipeLine = (props) => {
 
     if (ingredients[props.curColor] != null){
       var ingredientToChange = ingredients[props.curColor]
-      console.log(ingredientToChange)
       var [start, end] = ingredientToChange.relevant_tokens
       if (buttonId < start){
         start = buttonId
@@ -88,7 +87,6 @@ const RecipeLine = (props) => {
         // inside ingredient
         let disFromStart = buttonId - start
         let disFromEnd = end - buttonId - 1 // subtract one because end is exclusive
-        console.log(`distance from start: ${disFromStart} and end: ${disFromEnd}`)
         if(disFromStart > disFromEnd){
           end = buttonId
         } else {
@@ -97,42 +95,42 @@ const RecipeLine = (props) => {
       }
     } else {
       // creating new ingredinet
-      start = buttonId
-      end = buttonId + 1
+        start = buttonId
+        end = buttonId + 1
     }
-      console.log(`new ingredient is [${start},${end}]`)
-        // get other ingredients in line
-        const lineWithoutChangedIng = [...ingredients]
-        lineWithoutChangedIng.splice(props.curColor, 1)
-        const oldTextToIngredientArray = mapTextToIngredients(text.length, lineWithoutChangedIng)
-        // overlay new ingredient on old array
-        const newTextToIngredientArray = [...oldTextToIngredientArray]
-
-        if(start != end){
-          for (var i = 0; i < newTextToIngredientArray.length; i++){
-            if(i >= start && i < end){
-              newTextToIngredientArray[i] = props.curColor
-            }
+      // get other ingredients in line
+      const lineWithoutChangedIng = [...ingredients]
+      lineWithoutChangedIng.splice(props.curColor, 1)
+      const oldTextToIngredientArray = mapTextToIngredients(text.length, lineWithoutChangedIng)
+      // overlay new ingredient on old array
+      const newTextToIngredientArray = [...oldTextToIngredientArray]
+      if(start != end){
+        for (var i = 0; i < newTextToIngredientArray.length; i++){
+          if(i >= start && i < end){
+            newTextToIngredientArray[i] = props.curColor
           }
         }
+      }
 
-        const body = {
-          "new_ingredients": newTextToIngredientArray
-        }
-        const headers = new Headers()
-        headers.append('Authorization', 'Basic ' + btoa(token + ":"))
-        headers.append('Content-Type', 'application/json')
-        fetch(`/lines/${props.line.id}/ingredients`,{
-          method:"PUT",
-          body: JSON.stringify(body),
-          headers: headers
-        })
-        .then(response=>response.json())
-        .then(json=>{
-          props.changeLine(json)
-        })
+      const body = {
+        "new_ingredients": newTextToIngredientArray
+      }
+      const headers = new Headers()
+      headers.append('Authorization', 'Basic ' + btoa(token + ":"))
+      headers.append('Content-Type', 'application/json')
+      fetch(`/lines/${props.line.id}/ingredients`,{
+        method:"PUT",
+        body: JSON.stringify(body),
+        headers: headers
+      })
+      .then(response=>response.json())
+      .then(json=>{
+        props.changeLine(json)
+      })
 
-    }
+  }
+
+
   const textToIngredientArray = mapTextToIngredients(text.length, ingredients)
 
 

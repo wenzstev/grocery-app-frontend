@@ -6,7 +6,7 @@ import {
   makeStyles
 } from "@material-ui/core"
 
-import {withRouter} from "react-router-dom"
+import {withRouter, Redirect} from "react-router-dom"
 
 import woodBackground from "../../../assets/wood-background.jpg"
 
@@ -26,9 +26,12 @@ const useStyles = makeStyles({
 
 const MainTemplatePage = (props) => {
   const classes = useStyles()
+
+  
+
   return (
     <div className={classes.root}>
-      {props.noSearchbar ? null : <SearchBar getRecipes={props.getRecipes}/>}
+      {props.noSearchbar ? null : <SearchBar/>}
       <Container>
           {props.children}
       </Container>

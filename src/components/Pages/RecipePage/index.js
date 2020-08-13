@@ -33,8 +33,9 @@ const HomePage = (props) => {
 
   return (
     <MainTemplatePage getRecipes={getRecipes}>
+      <Grid container>
         {recipes ? recipes.map((value, index)=> <RecipeCard key={index} recipe={value} />) : null}
-
+      </Grid>
     </MainTemplatePage>
   )
 }

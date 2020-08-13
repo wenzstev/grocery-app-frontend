@@ -25,6 +25,9 @@ const useStyles = makeStyles({
     left: 0,
     top: 0
   },
+  topPlaceholder: {
+    height: "12vh"
+  },
   squiggle: {
     width: "100vw"
   },
@@ -37,12 +40,15 @@ const useStyles = makeStyles({
 export const TopSquiggle = (props) => {
   const classes = useStyles()
   return(
+    <>
     <div className={classes.root}>
       <img src={topSquiggle} className={clsx(classes.top, classes.squiggle)}/>
       <Typography variant="h4" className = {classes.title}>
         {props.children}
       </Typography>
     </div>
+    <div className={classes.topPlaceholder}/>
+    </>
   )
 }
 
