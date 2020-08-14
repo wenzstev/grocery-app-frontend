@@ -49,25 +49,10 @@ const useStyles = makeStyles((theme:Theme)=>createStyles({
   placeholderBox: {
     height: "25vh"
   },
-  modal: {
-    position: "relative",
-    width: "95vw",
-    top: "30vh",
-    margin: "auto",
-    "&:focus": {
-      outline: "none"
-    },
-  },
-    modalPaper: {
-      borderRadius: 15,
-      padding: "7px 14px",
-      backgroundColor: theme.palette.secondary.main
-    }
+
 }))
 
 const SearchBar = (props) => {
-  const [modal, setModal] = useState(null)
-  const [modalOpen, setModalOpen] = useState(false)
 
   const classes = useStyles()
   return (
@@ -79,7 +64,7 @@ const SearchBar = (props) => {
         <InputLabel>
           <Grid container>
             <Grid item>
-              <NavMenu buttonLabel={<DehazeIcon />} setModal={setModal} setModalOpen={setModalOpen}/>
+              <NavMenu buttonLabel={<DehazeIcon />} openModal={props.openModal}/>
             </Grid>
             <Grid item>
               <SearchIcon className={classes.searchIcon}/>
@@ -90,17 +75,10 @@ const SearchBar = (props) => {
           </Grid>
         </InputLabel>
       </Box>
-      <NavBar />
+      <NavBar openModal={props.openModal} />
       </Box>
     </Paper>
     <Box className={classes.placeholderBox}/>
-    <Modal open={modalOpen} onClose={()=>setModalOpen(false)}>
-      <Box className={classes.modal}>
-        <Paper className={classes.modalPaper}>
-          {modal}
-        </Paper>
-      </Box>
-    </Modal>
     </>
   )
 }

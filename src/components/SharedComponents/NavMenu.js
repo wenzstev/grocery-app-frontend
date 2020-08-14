@@ -49,12 +49,6 @@ const NavMenu = (props) => {
     .catch(err=>console.log(err))
   }
 
-  const openModal = (modal) => {
-    props.setModalOpen(true)
-    props.setModal(modal)
-  }
-
-
 
   return (
     <div>
@@ -75,8 +69,8 @@ const NavMenu = (props) => {
           <NestedMenuItem
             label="New"
             parentMenuOpen={!!anchorEl}>
-            <MenuItem onClick={()=>openModal(<AddRecipeModal />)}>Recipe</MenuItem>
-            <MenuItem onClick={()=>openModal(<AddListModal />)}>List</MenuItem>
+            <MenuItem onClick={()=>props.openModal(<AddRecipeModal />)}>Recipe</MenuItem>
+            <MenuItem onClick={()=>props.openModal(<AddListModal />)}>List</MenuItem>
           </NestedMenuItem>
           <Divider variant="middle" />
           <MenuItem>Settings</MenuItem>

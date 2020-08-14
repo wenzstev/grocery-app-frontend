@@ -14,7 +14,7 @@ import NavMenu from "../../SharedComponents/NavMenu"
 import MainTemplatePage from "../MainTemplatePage/"
 
 import {RecipeCard} from "../../SharedComponents/BaseCard"
-
+import CreateNewCard from "../../SharedComponents/CreateNewCard"
 
 const HomePage = (props) => {
   const user = useSelector(state=>state.user)
@@ -34,6 +34,7 @@ const HomePage = (props) => {
   return (
     <MainTemplatePage getRecipes={getRecipes}>
       <Grid container>
+        <CreateNewCard type="Recipe" />
         {recipes ? recipes.map((value, index)=> <RecipeCard key={index} recipe={value} />) : null}
       </Grid>
     </MainTemplatePage>

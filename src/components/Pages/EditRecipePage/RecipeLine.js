@@ -31,7 +31,6 @@ const RecipeLine = (props) => {
   const [hovering, setHovering] = useState(false)
 
   const deleteLine = () => {
-    console.log("deleting line")
     const headers = new Headers()
     headers.append('Authorization', 'Basic ' + btoa(token + ":"))
 
@@ -127,7 +126,6 @@ const RecipeLine = (props) => {
       .then(json=>{
         props.changeLine(json)
       })
-
   }
 
 

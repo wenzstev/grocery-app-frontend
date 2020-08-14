@@ -16,6 +16,7 @@ import {Link} from "react-router-dom"
 const useStyles = makeStyles((theme:Theme)=>createStyles({
   root: {
     borderRadius: 10,
+    height: "280px",
     "&:hover":{
       backgroundColor: "whitesmoke"
     }
@@ -23,15 +24,31 @@ const useStyles = makeStyles((theme:Theme)=>createStyles({
   title: {
     textAlign: "center",
     textDecoration: "none",
+    textOverflow: "ellipsis",
+    overflow: "hidden",
+    whiteSpace: "nowrap",
+    maxWidth: "90%",
+    margin: "auto"
   }
 }))
 
-const BaseCard = (props) => {
+const SHOWNINGREDIENTS = 5
+
+export const BaseCard = (props) => {
   console.log(props)
   const classes = useStyles()
-  const ingredients = props.ingredients.map((ing, index)=>(
-    <ListItem key={index}>{ing}</ListItem>
-  ))
+  const ingredients = props.ingredients.map((ing, index)=>{
+    if (index < SHOWNINGREDIENTS){
+      return (
+        <ListItem key={index}>{ing}</ListItem>
+      )}
+      else if (index === props.ingredients.length - 1){
+        return(
+          <ListItem style={{fontStyle:"italic"}} key={SHOWNINGREDIENTS}>...and {index-SHOWNINGREDIENTS} more.</ListItem>
+        )
+      }
+    }
+  )
   return(
     <Grid item xs={12} sm={6} md={4} lg={3}>
       <Box m={2}>
