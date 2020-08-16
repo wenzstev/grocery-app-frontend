@@ -15,6 +15,7 @@ import MainTemplatePage from "../MainTemplatePage/"
 
 import {RecipeCard} from "../../SharedComponents/BaseCard"
 import CreateNewCard from "../../SharedComponents/CreateNewCard"
+import AddRecipeModal from "../MainTemplatePage/AddRecipeModal"
 
 const HomePage = (props) => {
   const user = useSelector(state=>state.user)
@@ -32,12 +33,10 @@ const HomePage = (props) => {
 
 
   return (
-    <MainTemplatePage getRecipes={getRecipes}>
-      <Grid container>
-        <CreateNewCard type="Recipe" />
-        {recipes ? recipes.map((value, index)=> <RecipeCard key={index} recipe={value} />) : null}
-      </Grid>
-    </MainTemplatePage>
+    <>
+      <CreateNewCard type="Recipe" clickHandler={()=>props.openModal(<AddRecipeModal />)}/>
+      {recipes ? recipes.map((value, index)=> <RecipeCard key={index} recipe={value} />) : null}
+    </>
   )
 }
 

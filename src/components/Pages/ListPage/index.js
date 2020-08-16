@@ -28,7 +28,7 @@ const ListPage = (props) => {
 
   return (
     <>
-      <CreateNewCard type="List"/>
+      <CreateNewCard type="List" clickHandler={()=>props.openModal(<AddListModal />)}/>
       {lists ? lists.map((value, index) => <ListCard key={index} list={value} />) : null}
     </>
   )

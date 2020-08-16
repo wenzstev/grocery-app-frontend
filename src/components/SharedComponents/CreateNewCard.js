@@ -6,6 +6,7 @@ import {
   Grid,
   Typography,
   Input,
+  ButtonBase,
   makeStyles
 } from "@material-ui/core"
 
@@ -18,9 +19,13 @@ const useStyles = makeStyles({
     height: "280px",
     borderRadius: "15px",
     color: "darkgray",
+    width: "100%",
     "&:hover":{
       backgroundColor: "whitesmoke"
     }
+  },
+  button: {
+    width: "100%"
   },
   titleBox: {
     paddingTop: "80px",
@@ -40,7 +45,10 @@ const CreateNewCard = (props) => {
   return (
     <Grid item xs={12} sm={6} md={4} lg={3}>
       <Box m={2}>
-        <Paper variant="outlined" className={classes.root}>
+        <ButtonBase className={classes.button} onClick={props.clickHandler} disableRipple>
+        <Paper
+          variant="outlined"
+          className={classes.root}>
           <Box className={classes.titleBox}>
             <AddIcon fontSize="large" />
             <Typography textAlign="center" className={classes.title}>
@@ -48,6 +56,7 @@ const CreateNewCard = (props) => {
             </Typography>
           </Box>
         </Paper>
+        </ButtonBase>
       </Box>
     </Grid>
   )

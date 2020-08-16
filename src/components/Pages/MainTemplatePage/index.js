@@ -48,15 +48,26 @@ const MainTemplatePage = (props) => {
     setModal(modal)
   }
 
+  const closeModal = () => {
+    setModalOpen(false)
+    setModal(null)
+  }
 
+  const childrenWithProps = React.Children.map(props.children, child =>{
+    const props = {openModal}
+    if (React.isValidElement(child)){
+      return React.cloneElement(child, props)
+    }
+    return child
+  })
 
   return (
     <div className={classes.root}>
       {props.noSearchbar ? null : <SearchBar openModal={openModal}/>}
       <Container>
-          {props.children}
+          {childrenWithProps}
       </Container>
-      <BaseModal className={classes.modal} open={modalOpen}>
+      <BaseModal className={classes.modal} open={modalOpen} handleClose={closeModal}>
         {modal}
       </BaseModal>
     </div>

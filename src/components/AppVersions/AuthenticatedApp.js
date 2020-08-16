@@ -15,6 +15,7 @@ import EditRecipePage from "../Pages/EditRecipePage/"
 import MainTemplatePage from "../Pages/MainTemplatePage"
 
 const PageRoute = (props) => {
+  console.log("in page route")
   return (
     <Route path={props.path}>
       <MainTemplatePage>
@@ -27,20 +28,15 @@ const PageRoute = (props) => {
 const AuthenticatedApp = (props) => {
   return (
       <Switch>
-        <Route path="/recipes">
+        <PageRoute path="/recipes">
           <RecipePage />
-        </Route>
+        </PageRoute>
         <PageRoute path="/lists">
           <ListPage />
         </PageRoute>
-        <Route path="/ingredients">
-          <IngredientPage />
-        </Route>
         <Route path="/list/:listId">
-          <ListInfoPage />
         </Route>
         <Route path="/recipe/:recipeId">
-          <EditRecipePage />
         </Route>
         <Route path="/">
           <Redirect to="/lists"/>
