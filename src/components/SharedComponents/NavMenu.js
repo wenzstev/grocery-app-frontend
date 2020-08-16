@@ -18,6 +18,8 @@ import {setToken, setUser} from '../../actions/'
 
 import AddRecipeModal from "../Pages/MainTemplatePage/AddRecipeModal"
 import AddListModal from "../Pages/MainTemplatePage/AddListModal"
+import BaseModal from "./BaseModal"
+
 
 const useStyles = makeStyles({
   root: {

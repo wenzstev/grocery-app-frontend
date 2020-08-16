@@ -13,8 +13,7 @@ import AddListModal from "../MainTemplatePage/AddListModal"
 
 const ListPage = (props) => {
   const [lists, setLists] = useState([])
-  const [modal, setModal] = useState(null)
-  const [modalOpen, setModalOpen] = useState(false)
+
   const user = useSelector(store=>store.user)
 
   const getLists = () => {
@@ -23,22 +22,15 @@ const ListPage = (props) => {
     .then(json=>setLists(json))
   }
 
-  const openModal = (modal) => {
-    console.log("opening modal")
-    console.log(modal)
-    setModalOpen(true)
-    setModal(<AddListModal />)
-  }
+
   useEffect(()=>getLists(), [])
 
-  console.log(modalOpen)
-  console.log(modal)
 
   return (
-    <MainTemplatePage openModal={openModal}>
-      <CreateNewCard type="List" onClick={()=>openModal(<AddListModal />)}/>
+    <>
+      <CreateNewCard type="List"/>
       {lists ? lists.map((value, index) => <ListCard key={index} list={value} />) : null}
-    </MainTemplatePage>
+    </>
   )
 }
 

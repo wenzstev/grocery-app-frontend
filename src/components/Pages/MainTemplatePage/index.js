@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState} from "react"
 
 import {
   Container,
@@ -15,6 +15,9 @@ import {withRouter, Redirect} from "react-router-dom"
 import woodBackground from "../../../assets/wood-background.jpg"
 
 import SearchBar from "./SearchBar"
+import AddListModal from "./AddListModal"
+import AddRecipeModal from "./AddRecipeModal"
+import BaseModal from "../../SharedComponents/BaseModal"
 
 const useStyles = makeStyles((theme:Theme)=>createStyles({
   root: {
@@ -29,41 +32,33 @@ const useStyles = makeStyles((theme:Theme)=>createStyles({
     position: "fixed",
     top: "0",
     left: "0"
-  },
-  modal: {
-    position: "relative",
-    width: "95vw",
-    top: "30vh",
-    margin: "auto",
-    "&:focus": {
-      outline: "none"
-    },
-  },
-    modalPaper: {
-      borderRadius: 15,
-      padding: "7px 14px",
-      backgroundColor: theme.palette.secondary.main
-    }
+  }
 }))
 
 const MainTemplatePage = (props) => {
   const classes = useStyles()
+  const [modal, setModal] = useState(null)
+  const [modalOpen, setModalOpen] = useState(false)
+
+
+  const openModal = (modal) => {
+    console.log("opening modal")
+    console.log(modal)
+    setModalOpen(true)
+    setModal(modal)
+  }
 
 
 
   return (
     <div className={classes.root}>
-      {props.noSearchbar ? null : <SearchBar openModal={props.openModal}/>}
+      {props.noSearchbar ? null : <SearchBar openModal={openModal}/>}
       <Container>
           {props.children}
       </Container>
-      <Modal open={props.modalOpen} onClose={()=>props.setModalOpen(false)}>
-        <Box className={classes.modal}>
-          <Paper className={classes.modalPaper}>
-            {props.modal}
-          </Paper>
-        </Box>
-      </Modal>
+      <BaseModal className={classes.modal} open={modalOpen}>
+        {modal}
+      </BaseModal>
     </div>
   )
 }

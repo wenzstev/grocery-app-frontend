@@ -12,6 +12,17 @@ import RecipePage from "../Pages/RecipePage/"
 import IngredientPage from "../Pages/IngredientPage/"
 import ListInfoPage from "../Pages/ListInfoPage/"
 import EditRecipePage from "../Pages/EditRecipePage/"
+import MainTemplatePage from "../Pages/MainTemplatePage"
+
+const PageRoute = (props) => {
+  return (
+    <Route path={props.path}>
+      <MainTemplatePage>
+        {props.children}
+      </MainTemplatePage>
+    </Route>
+  )
+}
 
 const AuthenticatedApp = (props) => {
   return (
@@ -19,9 +30,9 @@ const AuthenticatedApp = (props) => {
         <Route path="/recipes">
           <RecipePage />
         </Route>
-        <Route path="/lists">
+        <PageRoute path="/lists">
           <ListPage />
-        </Route>
+        </PageRoute>
         <Route path="/ingredients">
           <IngredientPage />
         </Route>
