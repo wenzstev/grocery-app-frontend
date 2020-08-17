@@ -3,7 +3,8 @@ import {useSelector} from "react-redux"
 
 import {
   Container,
-  Box
+  Box,
+  Grid
 } from "@material-ui/core"
 
 import MainTemplatePage from "../MainTemplatePage/"
@@ -27,10 +28,10 @@ const ListPage = (props) => {
 
 
   return (
-    <>
+    <Grid container>
       <CreateNewCard type="List" clickHandler={()=>props.openModal(<AddListModal />)}/>
       {lists ? lists.map((value, index) => <ListCard key={index} list={value} />) : null}
-    </>
+    </Grid>
   )
 }
 

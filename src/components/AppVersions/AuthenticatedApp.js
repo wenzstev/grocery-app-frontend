@@ -35,11 +35,13 @@ const AuthenticatedApp = (props) => {
           <ListPage />
         </PageRoute>
         <Route path="/list/:listId">
+          <ListInfoPage />
         </Route>
         <Route path="/recipe/:recipeId">
+          <EditRecipePage />
         </Route>
         <Route path="/">
-          <Redirect to="/lists"/>
+          <Redirect to="/list/2"/>
         </Route>
       </Switch>
   )

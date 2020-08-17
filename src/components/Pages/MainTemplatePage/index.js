@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme:Theme)=>createStyles({
     backgroundAttachment: "fixed",
     height: "100vh",
     width: "100vw",
-    position: "fixed",
+    position: "relative",
     top: "0",
     left: "0"
   }
@@ -42,8 +42,6 @@ const MainTemplatePage = (props) => {
 
 
   const openModal = (modal) => {
-    console.log("opening modal")
-    console.log(modal)
     setModalOpen(true)
     setModal(modal)
   }

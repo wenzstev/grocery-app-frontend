@@ -5,6 +5,7 @@ import ListPanel from "./ListPanel"
 import ListModificationPanel from "./ListModificationPanel"
 import AddRecipeButton from "./AddRecipeButton"
 import ListInfoButton from "./ListInfoButton"
+import QuickRecipeAdd from "./QuickRecipeAdd"
 
 import woodBackground from "../../../assets/wood-background.jpg"
 
@@ -40,6 +41,9 @@ const useStyles = makeStyles({
 const ListPage = (props) => {
   const[listItems, setListItems] = useState([])
   const[listName, setListName] = useState("")
+  const[associations, setAssociations] = useState([])
+
+  const [drawerOpen, setDrawerOpen] = useState(false)
 
   const {listId} = useParams()
   console.log(listId)
@@ -52,6 +56,10 @@ const ListPage = (props) => {
     fetch(`/lists/${listId}`)
       .then(response=>response.json())
       .then(data => setListName(data.name))
+
+    fetch(`/recipe-list-associations?list=${listId}`)
+      .then(response=>response.json())
+      .then(json=> setAssociations(json))
   }, [])
 
 
@@ -66,12 +74,13 @@ const ListPage = (props) => {
         <ListModificationPanel />
         <ListPanel listItems={listItems.map(item=>item.name)}/>
         <Box my={3}>
-          <AddRecipeButton />
+          <AddRecipeButton clickHandler={()=>setDrawerOpen(true)}/>
           <Box display="inline-block" className={classes.rightFloat}>
             <ListInfoButton/>
           </Box>
         </Box>
       </Container>
+      <QuickRecipeAdd open={drawerOpen} onClose={()=>setDrawerOpen(false)}/>
     </div>
   )
 }

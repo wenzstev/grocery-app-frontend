@@ -33,10 +33,10 @@ const HomePage = (props) => {
 
 
   return (
-    <>
+    <Grid container>
       <CreateNewCard type="Recipe" clickHandler={()=>props.openModal(<AddRecipeModal />)}/>
       {recipes ? recipes.map((value, index)=> <RecipeCard key={index} recipe={value} />) : null}
-    </>
+    </Grid>
   )
 }
 

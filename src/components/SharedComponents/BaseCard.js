@@ -35,7 +35,6 @@ const useStyles = makeStyles((theme:Theme)=>createStyles({
 const SHOWNINGREDIENTS = 5
 
 export const BaseCard = (props) => {
-  console.log(props)
   const classes = useStyles()
   const ingredients = props.ingredients.map((ing, index)=>{
     if (index < SHOWNINGREDIENTS){

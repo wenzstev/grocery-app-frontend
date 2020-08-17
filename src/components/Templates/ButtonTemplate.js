@@ -26,6 +26,7 @@ const ButtonTemplate = (props) => {
       color={props.color}
       type={props.type}
       className={classes.root}
+      onClick={props.onClick}
       {...props.fullWidth}>
       {props.children}
     </Button>
