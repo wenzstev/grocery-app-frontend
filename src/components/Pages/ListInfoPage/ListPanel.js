@@ -24,8 +24,6 @@ const ListPanel = (props) => {
 
   const {listItems} = props
 
-  console.log(listItems)
-
   const size = 5
   const classes = useStyles()
 
@@ -56,8 +54,6 @@ const ListPanel = (props) => {
     </Grid>)
   )
 
-
-  console.log(columns)
 
   return (
     <Paper variant="outlined" className={classes.root}>

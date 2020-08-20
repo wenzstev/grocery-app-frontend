@@ -46,7 +46,6 @@ const ListPage = (props) => {
   const [drawerOpen, setDrawerOpen] = useState(false)
 
   const {listId} = useParams()
-  console.log(listId)
 
   useEffect(()=>{
     fetch(`/ingredients?list=${listId}`)
@@ -57,9 +56,14 @@ const ListPage = (props) => {
       .then(response=>response.json())
       .then(data => setListName(data.name))
 
-    fetch(`/recipe-list-associations?list=${listId}`)
-      .then(response=>response.json())
-      .then(json=> setAssociations(json))
+    fetch(`/list-recipe-associations?list=${listId}`)
+      .then(response=>{
+        return response.json()
+      })
+      .then(json=>{
+        setAssociations(json)
+      })
+      .catch(err=>console.log(err))
   }, [])
 
 
@@ -80,7 +84,7 @@ const ListPage = (props) => {
           </Box>
         </Box>
       </Container>
-      <QuickRecipeAdd open={drawerOpen} onClose={()=>setDrawerOpen(false)}/>
+      <QuickRecipeAdd open={drawerOpen} onClose={()=>setDrawerOpen(false)} associations={associations}/>
     </div>
   )
 }

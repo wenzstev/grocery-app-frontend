@@ -21,14 +21,29 @@ const QuickRecipeAdd = (props) => {
     })
   }
 
+  console.log(props.associations)
+
 
 
   useEffect(()=>getRecipes(), [props.open])
 
+  const recipeIsAssociated = (recipe) => {
+    for (var i = 0; i < props.associations.length; i++){
+      if (props.associations[i].recipe_id == recipe.id){
+        return props.associations[i]
+      }
+      return null
+    }
+  }
 
   return (
     <Drawer anchor="left" open={props.open} onClose={props.onClose}>
-      {recipes.map((recipe, index)=><RecipeSideSelector key={index} recipe={recipe} />)}
+      {recipes.map((recipe, index)=>{
+        const assoc = recipeIsAssociated(recipe)
+        return (
+          <RecipeSideSelector key={index} recipe={recipe} inList={recipeIsAssociated(recipe)}/>
+      )}
+    )}
     </Drawer>
   )
 }

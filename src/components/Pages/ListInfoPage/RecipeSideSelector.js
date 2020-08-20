@@ -1,4 +1,7 @@
+
+
 import React from "react"
+
 
 import {
   Box,
@@ -10,8 +13,8 @@ import {
 } from "@material-ui/core"
 
 const RecipeSideSelector = ({recipe, inList}) =>{
-  console.log(recipe)
 
+  // TODO: this would be good to refactor out and reuse
   const getFirstNumIngredients = (finalNum) => {
     var numIngredients = 0
     var curLineNum = 0
@@ -19,10 +22,8 @@ const RecipeSideSelector = ({recipe, inList}) =>{
     const ingredientsToReturn = new Array(finalNum)
     while (numIngredients < finalNum){
       let curLine = recipe.recipe_lines[curLineNum]
-      console.log(curLine)
       if (curLine != undefined){
         let curIngredient = curLine.ingredients[curIngredientInLine]
-        console.log(curIngredient)
         if (curIngredient != undefined){
           ingredientsToReturn[numIngredients] = curIngredient.ingredient
           curIngredientInLine ++
@@ -36,6 +37,16 @@ const RecipeSideSelector = ({recipe, inList}) =>{
       }
     }
     return ingredientsToReturn
+  }
+
+  let res = async () => await axios.get("/lists")
+
+
+  const addRecipeToList = () => {
+
+    fetch(`/list-recipe-associations`,{
+      method: "POST",
+    })
   }
 
   const ingredientsToDisplay = getFirstNumIngredients(5)

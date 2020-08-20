@@ -11,6 +11,13 @@ import {createStore} from 'redux'
 
 import rootReducer from "./reducers/"
 
+const axios = require('axios')
+
+axios.interceptors.request.use(req=>{
+  console.log(`${req.method} ${req.url}`)
+  return req
+})
+
 const store = createStore(
   rootReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())

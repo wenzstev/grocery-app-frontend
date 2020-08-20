@@ -80,6 +80,7 @@ const LoginPanel = (props) => {
       dispatch(setToken(json['token']))
       props.setHasToken(true)
     })
+    .catch(err=>console.log(err))
   }
 
 

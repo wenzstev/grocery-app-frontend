@@ -17,6 +17,10 @@ import {setToken, setUser} from "./actions/"
 import AuthenticatedApp from "./components/AppVersions/AuthenticatedApp"
 import UnauthenticatedApp from "./components/AppVersions/UnauthenticatedApp"
 
+const axios = require('axios')
+
+
+
 function App() {
   const [hasToken, setHasToken] = useState(false)
 
@@ -40,6 +44,7 @@ function App() {
       dispatch(setUser(json['user']))
       dispatch(setToken(json['token']))
       setHasToken(true)
+      window.axios.defaults.headers.post['Authorization'] = 'Basic ' + btoa(json['token']+':')
     })
     .catch(error=>console.log(error))
   }
