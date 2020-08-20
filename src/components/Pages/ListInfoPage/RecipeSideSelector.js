@@ -1,5 +1,4 @@
 
-
 import React from "react"
 
 
@@ -12,8 +11,13 @@ import {
   Button
 } from "@material-ui/core"
 
-const RecipeSideSelector = ({recipe, inList}) =>{
+import axios from "../../../AxiosConfig.js"
 
+
+
+
+const RecipeSideSelector = (props) =>{
+  const {recipe, listId, inList, updateList} = props
   // TODO: this would be good to refactor out and reuse
   const getFirstNumIngredients = (finalNum) => {
     var numIngredients = 0
@@ -39,14 +43,17 @@ const RecipeSideSelector = ({recipe, inList}) =>{
     return ingredientsToReturn
   }
 
-  let res = async () => await axios.get("/lists")
-
-
   const addRecipeToList = () => {
-
-    fetch(`/list-recipe-associations`,{
-      method: "POST",
+    axios.post('/list-recipe-associations', {
+      'grocerylist_id': listId,
+      'recipe_id': recipe.id
     })
+    .then(updateList())
+  }
+
+  const removeRecipeFromList = () => {
+    axios.delete(`/list-recipe-associations/${inList.id}`)
+    .then(updateList())
   }
 
   const ingredientsToDisplay = getFirstNumIngredients(5)
@@ -61,8 +68,8 @@ const RecipeSideSelector = ({recipe, inList}) =>{
           {ingredientsToDisplay.map((ingredient, index)=><ListItem key={index}>{ingredient.name}</ListItem>)}
         </List>
         {inList ?
-          <Button>Remove</Button>
-        : <Button>Add</Button>}
+          <Button onClick={removeRecipeFromList}>Remove</Button>
+        : <Button onClick={addRecipeToList}>Add</Button>}
       </Card>
     </Box>
   )

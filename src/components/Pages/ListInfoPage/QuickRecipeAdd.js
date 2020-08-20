@@ -8,29 +8,40 @@ import {
 
 import RecipeSideSelector from "./RecipeSideSelector"
 
+import axios from "../../../AxiosConfig"
+
 const QuickRecipeAdd = (props) => {
   const user = useSelector(store=>store.user)
   const token = useSelector(store=>store.token)
   const [recipes, setRecipes] = useState([])
+  const [associations, setAssociations] = useState([])
 
   const getRecipes = () => {
-    fetch(`/recipes?user=${user.id}`)
-    .then(response=>response.json())
-    .then(json=>{
-      setRecipes(json)
-    })
+    axios.get(`/recipes?user=${user.id}`)
+    .then(res=>setRecipes(res.data))
   }
 
-  console.log(props.associations)
+  const getAssociations = () => {
+    axios.get(`/list-recipe-associations?list=${props.listId}`)
+    .then(res=>setAssociations(res.data))
+  }
+
+  // THIS ISN'T UPDATING AT THE RIGHT TIME. WHY?
+  const updateList = () => {
+    props.getIngredients()
+    getAssociations()
+  }
 
 
-
-  useEffect(()=>getRecipes(), [props.open])
+  useEffect(()=>{
+    getRecipes()
+    getAssociations()
+  }, [props.open])
 
   const recipeIsAssociated = (recipe) => {
-    for (var i = 0; i < props.associations.length; i++){
-      if (props.associations[i].recipe_id == recipe.id){
-        return props.associations[i]
+    for (var i = 0; i < associations.length; i++){
+      if (associations[i].recipe_id == recipe.id){
+        return associations[i]
       }
       return null
     }
@@ -41,7 +52,12 @@ const QuickRecipeAdd = (props) => {
       {recipes.map((recipe, index)=>{
         const assoc = recipeIsAssociated(recipe)
         return (
-          <RecipeSideSelector key={index} recipe={recipe} inList={recipeIsAssociated(recipe)}/>
+          <RecipeSideSelector
+            key={index}
+            recipe={recipe}
+            listId = {props.listId}
+            inList={recipeIsAssociated(recipe)}
+            updateList={updateList}/>
       )}
     )}
     </Drawer>

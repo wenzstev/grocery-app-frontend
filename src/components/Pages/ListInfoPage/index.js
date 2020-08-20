@@ -9,6 +9,8 @@ import QuickRecipeAdd from "./QuickRecipeAdd"
 
 import woodBackground from "../../../assets/wood-background.jpg"
 
+import axios from "../../../AxiosConfig"
+
 import {
   Container,
   Box,
@@ -46,29 +48,26 @@ const ListPage = (props) => {
   const [drawerOpen, setDrawerOpen] = useState(false)
 
   const {listId} = useParams()
+  const classes = useStyles()
+
+  const getListInfo = () => {
+    axios.get(`/lists/${listId}`)
+    .then(res=>setListName(res.data.name))
+  }
+
+  const getIngredients = () => {
+    console.log("in getIngredients")
+    axios.get(`/ingredients?list=${listId}`)
+    .then(res=>setListItems(res.data))
+  }
+
+
 
   useEffect(()=>{
-    fetch(`/ingredients?list=${listId}`)
-      .then(response=>response.json())
-      .then(data => setListItems(data))
+    getIngredients()
+    getListInfo()
+  },[])
 
-    fetch(`/lists/${listId}`)
-      .then(response=>response.json())
-      .then(data => setListName(data.name))
-
-    fetch(`/list-recipe-associations?list=${listId}`)
-      .then(response=>{
-        return response.json()
-      })
-      .then(json=>{
-        setAssociations(json)
-      })
-      .catch(err=>console.log(err))
-  }, [])
-
-
-
-  const classes = useStyles()
   return (
     <div className={classes.root}>
       <TopSquiggle>
@@ -84,7 +83,12 @@ const ListPage = (props) => {
           </Box>
         </Box>
       </Container>
-      <QuickRecipeAdd open={drawerOpen} onClose={()=>setDrawerOpen(false)} associations={associations}/>
+      <QuickRecipeAdd
+        open={drawerOpen}
+        listId={listId}
+        onClose={()=>setDrawerOpen(false)}
+        getIngredients={getIngredients}
+        />
     </div>
   )
 }
