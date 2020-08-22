@@ -48,12 +48,12 @@ const RecipeSideSelector = (props) =>{
       'grocerylist_id': listId,
       'recipe_id': recipe.id
     })
-    .then(updateList())
+    .then(()=>updateList())
   }
 
   const removeRecipeFromList = () => {
     axios.delete(`/list-recipe-associations/${inList.id}`)
-    .then(updateList())
+    .then(()=>updateList())
   }
 
   const ingredientsToDisplay = getFirstNumIngredients(5)

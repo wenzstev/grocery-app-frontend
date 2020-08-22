@@ -36,7 +36,7 @@ function App() {
       } else if (response.status === 404){
         throw new Error('No refresh token.')
       } else {
-        throw new Error('Something went wrong.')
+        throw new Error(response.status)
       }
     })
     .then(json=>{

@@ -15,7 +15,7 @@ import {
 } from "@material-ui/core"
 
 import RecipePanel from "./RecipePanel"
-import BackButton from "./BackButton"
+import BackButton from "../../SharedComponents/BackButton"
 
 const EditRecipePage = () => {
   const [recipe, setRecipe] = useState({})

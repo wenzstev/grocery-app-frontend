@@ -26,7 +26,6 @@ const QuickRecipeAdd = (props) => {
     .then(res=>setAssociations(res.data))
   }
 
-  // THIS ISN'T UPDATING AT THE RIGHT TIME. WHY?
   const updateList = () => {
     props.getIngredients()
     getAssociations()

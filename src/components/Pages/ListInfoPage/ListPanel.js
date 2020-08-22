@@ -2,7 +2,7 @@ import React from "react"
 import {useState, useEffect} from "react"
 
 import IngredientButton from "./IngredientButton"
-import {PlusButton} from "./ListModificationButtons"
+import AddIngredientButton from "./AddIngredientButton"
 
 import {
   Paper,
@@ -21,6 +21,8 @@ const useStyles = makeStyles({
 })
 
 const ListPanel = (props) => {
+  console.log('rendering list panel')
+  console.log(props.listItems)
 
   const {listItems} = props
 
@@ -42,7 +44,7 @@ const ListPanel = (props) => {
   if (chunkedAr.length > 0){
     chunkedAr[chunkedAr.length-1].push(
       <Box mx={1}>
-        <PlusButton />
+        <AddIngredientButton />
       </Box>
     )
   }

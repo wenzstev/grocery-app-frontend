@@ -6,6 +6,7 @@ import ListModificationPanel from "./ListModificationPanel"
 import AddRecipeButton from "./AddRecipeButton"
 import ListInfoButton from "./ListInfoButton"
 import QuickRecipeAdd from "./QuickRecipeAdd"
+import BackButton from "../../SharedComponents/BackButton"
 
 import woodBackground from "../../../assets/wood-background.jpg"
 
@@ -58,10 +59,12 @@ const ListPage = (props) => {
   const getIngredients = () => {
     console.log("in getIngredients")
     axios.get(`/ingredients?list=${listId}`)
-    .then(res=>setListItems(res.data))
+    .then(res=>{
+      console.log("got response")
+      console.log(res.data)
+      setListItems(res.data)
+    })
   }
-
-
 
   useEffect(()=>{
     getIngredients()
@@ -71,6 +74,7 @@ const ListPage = (props) => {
   return (
     <div className={classes.root}>
       <TopSquiggle>
+        <BackButton />
         {listName}
       </TopSquiggle>
       <Container>
