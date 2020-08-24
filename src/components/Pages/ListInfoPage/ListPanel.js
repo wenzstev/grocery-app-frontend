@@ -8,6 +8,7 @@ import {
   Paper,
   Grid,
   Box,
+  Typography,
   makeStyles
 } from "@material-ui/core"
 
@@ -56,12 +57,23 @@ const ListPanel = (props) => {
     </Grid>)
   )
 
+  const emptyList = (
+    <Box p={2}>
+      <Typography variant = "h4">Looks like your list is empty!</Typography>
+      <Typography component="span">Add Ingredients: </Typography>
+      <AddIngredientButton />
+    </Box>
+  )
+
 
   return (
     <Paper variant="outlined" className={classes.root}>
-      <Grid container spacing={3}>
-        {columns}
-      </Grid>
+      {columns.length > 0 ? (
+        <Grid container spacing={3}>
+          {columns.length > 0 ? columns : emptyList}
+        </Grid>
+      ) : emptyList}
+
     </Paper>
   )
 }
