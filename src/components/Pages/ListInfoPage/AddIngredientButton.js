@@ -27,7 +27,8 @@ const AddIngredientButton = (props) => {
         <OpenAddIngredient
           newIngredient={newIngredient}
           setInputOpen={setInputOpen}
-          setNewIngredient={setNewIngredient} />
+          setNewIngredient={setNewIngredient}
+          getIngredients={props.getIngredients} />
         : <ClosedAddIngredient
           setInputOpen={setInputOpen}/>}
     </div>
@@ -48,18 +49,27 @@ const OpenAddIngredient = (props) => {
   const {listId} = useParams()
 
   useEffect(()=>{
-    axios.get(`/lists/${listId}/additionalIngredients`)
-    .then(resp=>setAdditionalIngredients(resp))
+    axios.get(`/lists/${listId}/additionalingredients`)
+    .then(resp=>{
+      console.log(resp)
+      setAdditionalIngredients(resp.data)
+    })
   },[])
 
-  const addAdditionalIngredient = () => {
-
+  const addAdditionalIngredient = (ing) => {
+    axios.post(`/lines`,{
+      text: ing,
+      recipe_id: additionalIngredients['id'],
+      additional_ingredient: true
+    })
+    .then(()=>{props.getIngredients()})
+    .catch(err=>console.log(err))
   }
 
   return (
     <Box component="span">
       <Input value={props.newIngredient} onChange={(e)=>props.setNewIngredient(e.target.value)}/>
-      <ButtonBase onClick={addAdditionalIngredient}><CheckCircleIcon /></ButtonBase>
+      <ButtonBase onClick={()=>addAdditionalIngredient(props.newIngredient)}><CheckCircleIcon /></ButtonBase>
       <ButtonBase onClick={()=>props.setInputOpen(false)}><RemoveCircleIcon /></ButtonBase>
     </Box>
   )

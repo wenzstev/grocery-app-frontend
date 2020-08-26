@@ -79,7 +79,10 @@ const ListPage = (props) => {
       </TopSquiggle>
       <Container>
         <ListModificationPanel />
-        <ListPanel listItems={listItems.map(item=>item.name)}/>
+        <ListPanel
+          listItems={listItems.map(item=>item.name)}
+          getIngredients={getIngredients}
+          />
         <Box my={3}>
           <AddRecipeButton clickHandler={()=>setDrawerOpen(true)}/>
           <Box display="inline-block" className={classes.rightFloat}>

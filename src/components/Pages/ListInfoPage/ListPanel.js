@@ -45,7 +45,7 @@ const ListPanel = (props) => {
   if (chunkedAr.length > 0){
     chunkedAr[chunkedAr.length-1].push(
       <Box mx={1}>
-        <AddIngredientButton />
+        <AddIngredientButton getIngredients={props.getIngredients}/>
       </Box>
     )
   }
@@ -61,7 +61,7 @@ const ListPanel = (props) => {
     <Box p={2}>
       <Typography variant = "h4">Looks like your list is empty!</Typography>
       <Typography component="span">Add Ingredients: </Typography>
-      <AddIngredientButton />
+      <AddIngredientButton getIngredients={props.getIngredients}/>
     </Box>
   )
 
