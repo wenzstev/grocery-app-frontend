@@ -17,7 +17,8 @@ const useStyles = makeStyles({
     color: "white",
     position: "absolute",
     top: "15px",
-    left: "30px"
+    left: "30px",
+    width: "90%"
   },
   top: {
     height: "12vh",

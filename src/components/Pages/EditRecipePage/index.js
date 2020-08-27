@@ -5,7 +5,8 @@ import {useSelector} from "react-redux"
 import {useParams} from "react-router-dom"
 
 import MainTemplatePage from "../MainTemplatePage"
-import {TopSquiggle} from "../../Backgrounds/Squiggles"
+
+import EditableTitle from "../../SharedComponents/EditableTitle"
 
 import {
   Paper,
@@ -20,10 +21,10 @@ import BackButton from "../../SharedComponents/BackButton"
 const EditRecipePage = () => {
   const [recipe, setRecipe] = useState({})
   const token = useSelector(store=>store.token)
-  const {recipeId} = useParams()
+  const {resourceId} = useParams()
 
   const getRecipeFromBackend = () => {
-    fetch(`/recipes/${recipeId}`)
+    fetch(`/recipes/${resourceId}`)
     .then(response=>response.json())
     .then(json=>setRecipe(json))
   }
@@ -47,10 +48,7 @@ const EditRecipePage = () => {
 
   return (
     <MainTemplatePage noSearchbar>
-        <TopSquiggle>
-          <BackButton />
-          {recipe ? recipe.name : null}
-        </TopSquiggle>
+        <EditableTitle type="recipe" hasBackArrow />
         <RecipePanel
           lines={recipe.recipe_lines}
           removeLineFromDOM={removeLineFromDOM}
