@@ -20,7 +20,6 @@ const AddIngredientButton = (props) => {
   const [newIngredient, setNewIngredient] = useState("")
 
 
-  console.log(newIngredient)
   return (
     <div>
       {inputOpen ?
@@ -51,7 +50,6 @@ const OpenAddIngredient = (props) => {
   useEffect(()=>{
     axios.get(`/lists/${listId}/additionalingredients`)
     .then(resp=>{
-      console.log(resp)
       setAdditionalIngredients(resp.data)
     })
   },[])

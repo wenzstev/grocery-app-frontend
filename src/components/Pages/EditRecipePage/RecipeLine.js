@@ -102,11 +102,15 @@ const RecipeLine = (props) => {
       lineWithoutChangedIng.splice(props.curColor, 1)
       const oldTextToIngredientArray = mapTextToIngredients(text.length, lineWithoutChangedIng)
       // overlay new ingredient on old array
+      console.log(lineWithoutChangedIng)
+      console.log(oldTextToIngredientArray)
       const newTextToIngredientArray = [...oldTextToIngredientArray]
       if(start != end){
         for (var i = 0; i < newTextToIngredientArray.length; i++){
           if(i >= start && i < end){
             newTextToIngredientArray[i] = props.curColor
+          } else if (newTextToIngredientArray[i] !== undefined){
+            newTextToIngredientArray[i] = newTextToIngredientArray[i][0] // remove the list and make it just the values
           }
         }
       }
@@ -114,6 +118,7 @@ const RecipeLine = (props) => {
       const body = {
         "new_ingredients": newTextToIngredientArray
       }
+      console.log("sending " + JSON.stringify(body))
       const headers = new Headers()
       headers.append('Authorization', 'Basic ' + btoa(token + ":"))
       headers.append('Content-Type', 'application/json')
