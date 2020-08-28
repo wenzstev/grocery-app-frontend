@@ -27,7 +27,6 @@ const RecipeLine = (props) => {
   const token = useSelector(store=>store.token)
   const {ingredients, text} = props.line
 
-
   const [hovering, setHovering] = useState(false)
 
   const deleteLine = () => {
@@ -48,30 +47,37 @@ const RecipeLine = (props) => {
   }
 
 
+  // function which takes an array of ingredients with start and end tokens
+  // and returns an array noting the annotation status of each word in the line
   const mapTextToIngredients = (arrayLength, ingredientArray) => {
+    console.log(ingredientArray)
     const emptyArray = new Array(arrayLength)
     if (ingredientArray.length == 0) {return emptyArray}
-    var curIngredient = 0
-    for (var i = 0; i < arrayLength; i++){
-      if(ingredientArray[curIngredient] != null){
-        const [tokenStart, tokenEnd] = ingredientArray[curIngredient].relevant_tokens
-        if (i === tokenStart) {
-          if (i === tokenEnd-1){
-            emptyArray[i] = [curIngredient, "single"]
+    var curIngredientIndex = 0
+    for (var pos = 0; pos < arrayLength; pos++){
+      if(ingredientArray[curIngredientIndex] != null){
+        const [tokenStart, tokenEnd] = ingredientArray[curIngredientIndex].relevant_tokens
+        if (pos === tokenStart) {
+          if (pos === tokenEnd-1){
+            emptyArray[pos] = [curIngredientIndex, "single"]
           } else {
-            emptyArray[i] = [curIngredient, "start"]
+            emptyArray[pos] = [curIngredientIndex, "start"]
           }
-        } else if (i > tokenStart && i < tokenEnd - 1){
-          emptyArray[i] = [curIngredient, "inside"]
-        } else if (i === tokenEnd -  1){
-          emptyArray[i] = [curIngredient, "end"]
-        } else if (i === tokenEnd){
-          curIngredient ++
+        } else if (pos > tokenStart && pos < tokenEnd - 1){
+          emptyArray[pos] = [curIngredientIndex, "inside"]
+        } else if (pos === tokenEnd -  1){
+          emptyArray[pos] = [curIngredientIndex, "end"]
+        } else if (pos === tokenEnd){
+          curIngredientIndex ++
         }
       }
     }
+    console.log("returning")
+    console.log(emptyArray)
     return emptyArray
   }
+
+
 
   const setNewIngredientTokens = (buttonId) => {
 
