@@ -41,7 +41,7 @@ const AuthenticatedApp = (props) => {
           <EditRecipePage />
         </Route>
         <Route path="/">
-          <Redirect to="/recipe/2"/>
+          <Redirect to="/list/1"/>
         </Route>
       </Switch>
   )

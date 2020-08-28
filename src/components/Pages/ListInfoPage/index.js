@@ -6,7 +6,8 @@ import ListModificationPanel from "./ListModificationPanel"
 import AddRecipeButton from "./AddRecipeButton"
 import ListInfoButton from "./ListInfoButton"
 import QuickRecipeAdd from "./QuickRecipeAdd"
-import BackButton from "../../SharedComponents/BackButton"
+
+import EditableTitle from "../../SharedComponents/EditableTitle"
 
 import woodBackground from "../../../assets/wood-background.jpg"
 
@@ -48,17 +49,17 @@ const ListPage = (props) => {
 
   const [drawerOpen, setDrawerOpen] = useState(false)
 
-  const {listId} = useParams()
+  const {resourceId} = useParams()
   const classes = useStyles()
 
   const getListInfo = () => {
-    axios.get(`/lists/${listId}`)
+    axios.get(`/lists/${resourceId}`)
     .then(res=>setListName(res.data.name))
   }
 
   const getIngredients = () => {
     console.log("in getIngredients")
-    axios.get(`/ingredients?list=${listId}`)
+    axios.get(`/ingredients?list=${resourceId}`)
     .then(res=>{
       console.log("got response")
       console.log(res.data)
@@ -73,10 +74,7 @@ const ListPage = (props) => {
 
   return (
     <div className={classes.root}>
-      <TopSquiggle>
-        <BackButton />
-        {listName}
-      </TopSquiggle>
+      <EditableTitle type="list" />
       <Container>
         <ListModificationPanel />
         <ListPanel
@@ -92,7 +90,7 @@ const ListPage = (props) => {
       </Container>
       <QuickRecipeAdd
         open={drawerOpen}
-        listId={listId}
+        listId={resourceId}
         onClose={()=>setDrawerOpen(false)}
         getIngredients={getIngredients}
         />
