@@ -50,34 +50,40 @@ const RecipeLine = (props) => {
   // function which takes an array of ingredients with start and end tokens
   // and returns an array noting the annotation status of each word in the line
   const mapTextToIngredients = (arrayLength, ingredientArray) => {
-    console.log(ingredientArray)
-    const emptyArray = new Array(arrayLength)
-    if (ingredientArray.length == 0) {return emptyArray}
-    var curIngredientIndex = 0
-    for (var pos = 0; pos < arrayLength; pos++){
-      if(ingredientArray[curIngredientIndex] != null){
-        const [tokenStart, tokenEnd] = ingredientArray[curIngredientIndex].relevant_tokens
-        if (pos === tokenStart) {
-          if (pos === tokenEnd-1){
-            emptyArray[pos] = [curIngredientIndex, "single"]
-          } else {
-            emptyArray[pos] = [curIngredientIndex, "start"]
-          }
-        } else if (pos > tokenStart && pos < tokenEnd - 1){
-          emptyArray[pos] = [curIngredientIndex, "inside"]
-        } else if (pos === tokenEnd -  1){
-          emptyArray[pos] = [curIngredientIndex, "end"]
-        } else if (pos === tokenEnd){
-          curIngredientIndex ++
-        }
+    var mappedArray = new Array(arrayLength)
+    if (ingredientArray.length < 1){return mappedArray} // return if no ingredients
+
+    // iterate over ingredient array for first pass
+    for(var i = 0; i < ingredientArray.length; i++){
+      let cur_ingredient = ingredientArray[i]
+      let [start, end] = cur_ingredient.relevant_tokens
+      if (end - start == 1){ // single word ingredient
+        mappedArray[start] = [i, "single"]
+      } else {
+        mappedArray[start] = [i, "start"]
+        mappedArray[end-1] = [i, "end"]
       }
     }
-    console.log("returning")
-    console.log(emptyArray)
-    return emptyArray
+
+    // iterate over created array and fill in the blanks
+    var cur_ingredient = null
+    for (var i = 0; i < mappedArray.length; i++){
+      if (mappedArray[i] != null){ // see if we're going to start a new ingredient
+        switch(mappedArray[i][1]){
+          case "start":
+            cur_ingredient = mappedArray[i][0]
+            break
+          case "end":
+          case "single":
+            cur_ingredient = null
+        }
+      } else if (cur_ingredient != null){ // we are inside an ingredient
+        mappedArray[i] = [cur_ingredient, "inside"]
+      }
+    }
+
+    return mappedArray
   }
-
-
 
   const setNewIngredientTokens = (buttonId) => {
 
