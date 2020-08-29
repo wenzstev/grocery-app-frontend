@@ -17,7 +17,7 @@ const useStyles = makeStyles({
     fontSize: "inherit",
     fontFamily: "inherit",
     fontWeight: "inherit",
-    width: "100%"
+    width: "92%"
     }
 })
 
@@ -55,7 +55,7 @@ const EditableTitle = (props) => {
         value={title}
         onChange={(e)=>setTitle(e.target.value)}
         onBlur={postNewTitle}
-        onKeyPress={keyPressed}
+        onKeyPress={(e)=>{keyPressed(e)}}
         multiline/>
     </TopSquiggle>
   )

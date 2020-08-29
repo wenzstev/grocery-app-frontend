@@ -14,7 +14,8 @@ import {
 
 const useStyles = makeStyles({
   root: {
-    backgroundColor: "#B5E4E8E6"
+    backgroundColor: "#B5E4E8E6",
+    margin: "10px"
   },
   gridItem: {
     padding: "0px"
@@ -44,7 +45,7 @@ const ListPanel = (props) => {
 
   if (chunkedAr.length > 0){
     chunkedAr[chunkedAr.length-1].push(
-      <Box mx={1}>
+      <Box m={1}>
         <AddIngredientButton getIngredients={props.getIngredients}/>
       </Box>
     )

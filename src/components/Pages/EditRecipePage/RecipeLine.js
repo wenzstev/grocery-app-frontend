@@ -11,6 +11,8 @@ import {
 import IngredientButton from "./IngredientButton"
 import RemoveLineButton from "./RemoveLineButton"
 
+import axios from "../../../AxiosConfig"
+
 const useStyles = makeStyles({
   root: {
     color: "white",
@@ -57,11 +59,12 @@ const RecipeLine = (props) => {
     for(var i = 0; i < ingredientArray.length; i++){
       let cur_ingredient = ingredientArray[i]
       let [start, end] = cur_ingredient.relevant_tokens
+      let color_index = cur_ingredient.color_index
       if (end - start == 1){ // single word ingredient
-        mappedArray[start] = [i, "single"]
+        mappedArray[start] = [color_index, "single"]
       } else {
-        mappedArray[start] = [i, "start"]
-        mappedArray[end-1] = [i, "end"]
+        mappedArray[start] = [color_index, "start"]
+        mappedArray[end-1] = [color_index, "end"]
       }
     }
 
@@ -85,66 +88,70 @@ const RecipeLine = (props) => {
     return mappedArray
   }
 
+  // function which creates the new ingredient tokens after a button is clicked
   const setNewIngredientTokens = (buttonId) => {
-
-    if (ingredients[props.curColor] != null){
-      var ingredientToChange = ingredients[props.curColor]
-      var [start, end] = ingredientToChange.relevant_tokens
-      if (buttonId < start){
-        start = buttonId
-      } else if (buttonId >= end){
-        end = buttonId + 1 // add one because end is exclusive in spaCy
-      } else {
-        // inside ingredient
-        let disFromStart = buttonId - start
-        let disFromEnd = end - buttonId - 1 // subtract one because end is exclusive
-        if(disFromStart > disFromEnd){
-          end = buttonId
-        } else {
-          start = buttonId + 1
-        }
-      }
+    let [ingredientToModify] = ingredients.filter(element=>element.color_index == props.curColor)
+    if (ingredientToModify != undefined){
+      var [start, end] = modifyStartEndTokens(ingredientToModify, buttonId)
     } else {
       // creating new ingredinet
-        start = buttonId
-        end = buttonId + 1
+        var start = buttonId
+        var end = buttonId + 1
     }
       // get other ingredients in line
-      const lineWithoutChangedIng = [...ingredients]
-      lineWithoutChangedIng.splice(props.curColor, 1)
-      const oldTextToIngredientArray = mapTextToIngredients(text.length, lineWithoutChangedIng)
-      // overlay new ingredient on old array
-      console.log(lineWithoutChangedIng)
-      console.log(oldTextToIngredientArray)
-      const newTextToIngredientArray = [...oldTextToIngredientArray]
-      if(start != end){
-        for (var i = 0; i < newTextToIngredientArray.length; i++){
-          if(i >= start && i < end){
-            newTextToIngredientArray[i] = props.curColor
-          } else if (newTextToIngredientArray[i] !== undefined){
-            newTextToIngredientArray[i] = newTextToIngredientArray[i][0] // remove the list and make it just the values
-          }
-        }
-      }
-
-      const body = {
-        "new_ingredients": newTextToIngredientArray
-      }
-      console.log("sending " + JSON.stringify(body))
-      const headers = new Headers()
-      headers.append('Authorization', 'Basic ' + btoa(token + ":"))
-      headers.append('Content-Type', 'application/json')
-      fetch(`/lines/${props.line.id}/ingredients`,{
-        method:"PUT",
-        body: JSON.stringify(body),
-        headers: headers
+      const newTextToIngredientArray = spliceNewIngredient(start, end)
+      console.log(newTextToIngredientArray)
+      axios.put(`/lines/${props.line.id}/ingredients`, {
+        "new_ingredients":newTextToIngredientArray
       })
-      .then(response=>response.json())
-      .then(json=>{
-        props.changeLine(json)
-      })
+      .then(resp=>props.changeLine(resp.data))
   }
 
+  const modifyStartEndTokens = (ingredientToChange, buttonId) => {
+    let [start, end] = ingredientToChange.relevant_tokens
+    console.log("beginning tokens are " + start + ", " + end)
+    if (buttonId < start){
+      start = buttonId
+    } else if (buttonId >= end){
+      end = buttonId + 1 // add one because end is exclusive in spaCy
+    } else {
+      // inside ingredient
+      let disFromStart = buttonId - start
+      let disFromEnd = end - buttonId - 1 // subtract one because end is exclusive
+      if(disFromStart > disFromEnd){
+        end = buttonId
+      } else {
+        start = buttonId + 1
+      }
+    }
+
+    return [start, end]
+
+  }
+
+  const spliceNewIngredient = (start, end) => {
+
+    const lineWithoutChangedIng = ingredients.filter(element=>element.color_index != props.curColor)
+    console.log(lineWithoutChangedIng)
+    const oldTextToIngredientArray = mapTextToIngredients(text.length, lineWithoutChangedIng)
+
+    // overlay new ingredient on old array
+    const newTextToIngredientArray = oldTextToIngredientArray.map(element=>{
+      if (element !== undefined) {return element[0]}
+      else {return undefined}
+    })
+    console.log(start + " " + end)
+
+    if(start != end) {
+      for (var i = 0; i < newTextToIngredientArray.length; i++){
+        if(i >= start && i < end){
+          newTextToIngredientArray[i] = props.curColor
+        }
+      }
+    }
+
+    return newTextToIngredientArray
+  }
 
   const textToIngredientArray = mapTextToIngredients(text.length, ingredients)
 

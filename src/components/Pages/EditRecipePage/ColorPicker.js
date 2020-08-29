@@ -1,5 +1,8 @@
 import React, {useState} from "react"
 
+import {
+  Box
+} from "@material-ui/core"
 
 import ColorButton from "./ColorButton"
 import AddColorButton from "./AddColorButton"
@@ -13,19 +16,20 @@ const ColorPicker = (props) => {
     props.setNumButtons(state=>state + 1)
   }
 
-  for(var i = 0; i < props.numButtons; i++){
+  for(var i = 0; i < props.colors.length; i++){
     buttonPanel.push(
-      <ColorButton
-      key={i}
-      colorNum={i}
-      color={props.colors[i]}
-      selected={props.curColor === i ? true : false}
-      setCurColor = {props.setCurColor}
-      />
+      <Box m={.5} display="inline-block">
+        <ColorButton
+        key={i}
+        colorNum={i}
+        color={props.colors[i]}
+        selected={props.curColor === i ? true : false}
+        setCurColor = {props.setCurColor}
+        />
+      </Box>
     )
   }
 
-  buttonPanel.push(<AddColorButton incrementButtons={incrementButtons}/>)
 
   return (
     <div>

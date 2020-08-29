@@ -12,7 +12,6 @@ import ColorPicker from "./ColorPicker"
 
 const useStyles = makeStyles({
   root: {
-    top: "20vh",
     position: "relative",
   },
   mainPanel: {
@@ -57,8 +56,6 @@ const RecipePanel = (props) => {
   return (
     <Box className={classes.root}>
       <ColorPicker
-        numButtons={numButtons}
-        setNumButtons={setNumButtons}
         colors={colors}
         curColor={curColor}
         setCurColor={setCurColor}

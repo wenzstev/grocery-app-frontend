@@ -76,7 +76,6 @@ const ListPage = (props) => {
     <div className={classes.root}>
       <EditableTitle type="list" />
       <Container>
-        <ListModificationPanel />
         <ListPanel
           listItems={listItems.map(item=>item.name)}
           getIngredients={getIngredients}
