@@ -39,8 +39,6 @@ const QuickRecipeAdd = (props) => {
 
   const recipeIsAssociated = (recipe) => {
     for (var i = 0; i < associations.length; i++){
-      console.log(i)
-      console.log(associations[i])
       if (associations[i].recipe_id == recipe.id){
         return associations[i]
       }

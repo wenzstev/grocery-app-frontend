@@ -6,6 +6,7 @@ import ListModificationPanel from "./ListModificationPanel"
 import AddRecipeButton from "./AddRecipeButton"
 import ListInfoButton from "./ListInfoButton"
 import QuickRecipeAdd from "./QuickRecipeAdd"
+import RecipePanel from "./RecipePanel"
 
 import EditableTitle from "../../SharedComponents/EditableTitle"
 
@@ -16,6 +17,7 @@ import axios from "../../../AxiosConfig"
 import {
   Container,
   Box,
+  Grid,
   makeStyles
 } from "@material-ui/core"
 
@@ -76,10 +78,17 @@ const ListPage = (props) => {
     <div className={classes.root}>
       <EditableTitle type="list" />
       <Container>
-        <ListPanel
-          listItems={listItems.map(item=>item.name)}
-          getIngredients={getIngredients}
-          />
+        <Grid container>
+          <Grid item xs={12} md={6}>
+            <RecipePanel />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <ListPanel
+              listItems={listItems.map(item=>item.name)}
+              getIngredients={getIngredients}
+              />
+          </Grid>
+        </Grid>
         <Box my={3}>
           <AddRecipeButton clickHandler={()=>setDrawerOpen(true)}/>
           <Box display="inline-block" className={classes.rightFloat}>

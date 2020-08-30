@@ -69,7 +69,7 @@ const ListPanel = (props) => {
 
   return (
     <Paper variant="outlined" className={classes.root}>
-      {columns.length > 0 ? (
+      {props.listItems.length > 0 ? (
         <Grid container spacing={3}>
           {columns.length > 0 ? columns : emptyList}
         </Grid>
