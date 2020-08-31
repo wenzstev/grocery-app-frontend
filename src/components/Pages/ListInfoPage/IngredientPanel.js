@@ -69,7 +69,7 @@ const IngredientPanel = (props) => {
     <Paper variant="outlined" className={classes.root}>
       {props.listItems.length > 0 ? (
         props.listItems.map((element, index)=>{
-          return <IngredientButton key={index}>{element}</IngredientButton>
+          return <IngredientButton key={index} ingredient={element}/>
         })
       ) : emptyList}
 

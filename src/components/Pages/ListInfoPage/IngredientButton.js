@@ -3,8 +3,8 @@ import {useParams} from "react-router-dom"
 import clsx from "clsx"
 import EditIcon from "@material-ui/icons/Edit"
 
+import RecipeLineDisplay from "./RecipeLineDisplay"
 
-import editSymbol from "../../../assets/edit-symbol.svg"
 
 import axios from "../../../AxiosConfig"
 
@@ -44,25 +44,17 @@ const useStyles = makeStyles({
 
 const IngredientButton = (props) =>{
   const [hovering, setHovering] = useState(false)
+  const [displayLines, setDisplayLines] = useState(false)
   const classes = useStyles()
   const {resourceId} = useParams()
 
-  const getRecipeLines = () => {
-    axios.get(`/lines`,{
-      params: {
-        list: resourceId,
-        ingredient: props.children
-      }
-    })
-    .then(resp=>console.log(resp.data))
-  }
 
   const display = hovering ?
   <ButtonBase
     onMouseLeave={()=>setHovering(false)}
-    onClick = {getRecipeLines}
+    onClick = {()=>setDisplayLines(prev=>!prev)}
     className={clsx(classes.root, classes.hover)}>
-    {props.children}
+    {props.ingredient}
     <EditIcon />
   </ButtonBase>
   : null
@@ -74,9 +66,12 @@ const IngredientButton = (props) =>{
           component="span"
           className={classes.textBox}
           onMouseEnter={()=>setHovering(true)}>
-          {props.children}
+          {props.ingredient}
         </Box>
       {display}
+      {displayLines ?
+        <RecipeLineDisplay ingredient={props.ingredient}/>
+        : null}
     </Box>
   )
 }
