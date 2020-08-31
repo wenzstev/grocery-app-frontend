@@ -1,10 +1,12 @@
-import React from "react"
+import React, {useState} from "react"
+import {useParams} from "react-router-dom"
 import clsx from "clsx"
-import {useState} from "react"
 import EditIcon from "@material-ui/icons/Edit"
 
 
 import editSymbol from "../../../assets/edit-symbol.svg"
+
+import axios from "../../../AxiosConfig"
 
 import {
   ButtonBase,
@@ -42,12 +44,23 @@ const useStyles = makeStyles({
 
 const IngredientButton = (props) =>{
   const [hovering, setHovering] = useState(false)
-
   const classes = useStyles()
+  const {resourceId} = useParams()
+
+  const getRecipeLines = () => {
+    axios.get(`/lines`,{
+      params: {
+        list: resourceId,
+        ingredient: props.children
+      }
+    })
+    .then(resp=>console.log(resp.data))
+  }
 
   const display = hovering ?
   <ButtonBase
     onMouseLeave={()=>setHovering(false)}
+    onClick = {getRecipeLines}
     className={clsx(classes.root, classes.hover)}>
     {props.children}
     <EditIcon />

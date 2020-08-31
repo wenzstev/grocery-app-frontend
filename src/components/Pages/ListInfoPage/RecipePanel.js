@@ -11,15 +11,12 @@ import RecipeButton from "./RecipeButton"
 
 import axios from "../../../AxiosConfig"
 
-const RecipePanel = () => {
+const RecipePanel = (props) => {
   const [recipes, setRecipes] = useState([])
   const {resourceId} = useParams()
 
-  console.log("recipepanel rendered")
 
   const getRecipes = () => {
-    console.log("getting recipes")
-    console.log(recipes)
     axios.get(`/recipes?list=${resourceId}`)
     .then(resp=>setRecipes(resp.data))
   }
@@ -28,7 +25,17 @@ const RecipePanel = () => {
     getRecipes()
   }, []);
 
-  const mappedRecipes = recipes.map((element, index)=><RecipeButton recipe={element} key={index} />)
+  const refreshPanels = () => {
+    props.getIngredients()
+    getRecipes()
+  }
+
+  const mappedRecipes = recipes.map((element, index)=>(
+    <RecipeButton
+      recipe={element}
+      key={index}
+      refreshPanels={refreshPanels}/>)
+  )
 
   return (
     <Paper>

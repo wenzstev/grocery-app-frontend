@@ -22,9 +22,7 @@ const useStyles = makeStyles({
   }
 })
 
-const ListPanel = (props) => {
-  console.log('rendering list panel')
-  console.log(props.listItems)
+const IngredientPanel = (props) => {
 
   const {listItems} = props
 
@@ -70,13 +68,13 @@ const ListPanel = (props) => {
   return (
     <Paper variant="outlined" className={classes.root}>
       {props.listItems.length > 0 ? (
-        <Grid container spacing={3}>
-          {columns.length > 0 ? columns : emptyList}
-        </Grid>
+        props.listItems.map((element, index)=>{
+          return <IngredientButton key={index}>{element}</IngredientButton>
+        })
       ) : emptyList}
 
     </Paper>
   )
 }
 
-export default ListPanel
+export default IngredientPanel

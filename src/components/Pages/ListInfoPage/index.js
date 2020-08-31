@@ -1,7 +1,7 @@
 import React from "react"
 import {useState, useEffect} from "react"
 import {TopSquiggle} from "../../Backgrounds/Squiggles"
-import ListPanel from "./ListPanel"
+import IngredientPanel from "./IngredientPanel"
 import ListModificationPanel from "./ListModificationPanel"
 import AddRecipeButton from "./AddRecipeButton"
 import ListInfoButton from "./ListInfoButton"
@@ -80,10 +80,10 @@ const ListPage = (props) => {
       <Container>
         <Grid container>
           <Grid item xs={12} md={6}>
-            <RecipePanel />
+            <RecipePanel getIngredients={getIngredients}/>
           </Grid>
           <Grid item xs={12} md={6}>
-            <ListPanel
+            <IngredientPanel
               listItems={listItems.map(item=>item.name)}
               getIngredients={getIngredients}
               />
