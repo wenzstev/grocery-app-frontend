@@ -8,16 +8,24 @@ import {
   Typography,
   List,
   ListItem,
-  Button
+  ButtonBase,
+  makeStyles
 } from "@material-ui/core"
 
 import axios from "../../../AxiosConfig.js"
 
 
-
+const useStyles = makeStyles({
+  card: {
+      "&:hover":{
+        backgroundColor: "lightgray"
+      }
+    }
+})
 
 const RecipeSideSelector = (props) =>{
   const {recipe, listId, inList, updateList} = props
+  const classes = useStyles()
   // TODO: this would be good to refactor out and reuse
   const getFirstNumIngredients = (finalNum) => {
     var numIngredients = 0
@@ -59,7 +67,8 @@ const RecipeSideSelector = (props) =>{
   const ingredientsToDisplay = getFirstNumIngredients(5)
 
   return(
-    <Box mb={2} mx={1}>
+    <Box m = {1}>
+      <ButtonBase className={classes.card} onClick={addRecipeToList}>
       <Card variant="outlined">
         <Typography variant="h6">
           {recipe.name}
@@ -67,10 +76,8 @@ const RecipeSideSelector = (props) =>{
         <List>
           {ingredientsToDisplay.map((ingredient, index)=><ListItem key={index}>{ingredient.name}</ListItem>)}
         </List>
-        {inList ?
-          <Button onClick={removeRecipeFromList}>Remove</Button>
-        : <Button onClick={addRecipeToList}>Add</Button>}
       </Card>
+    </ButtonBase>
     </Box>
   )
 }

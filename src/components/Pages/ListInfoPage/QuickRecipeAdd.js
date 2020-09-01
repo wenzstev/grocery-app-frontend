@@ -16,28 +16,43 @@ const QuickRecipeAdd = (props) => {
   const [recipes, setRecipes] = useState([])
   const [associations, setAssociations] = useState([])
 
-  const getRecipes = () => {
-    axios.get(`/recipes?user=${user.id}`)
-    .then(res=>setRecipes(res.data))
-  }
+  useEffect(()=>{
+    getAssociationsAndRecipes()
+  }, [props.open])
 
-  const getAssociations = () => {
-    axios.get(`/list-recipe-associations?list=${props.listId}`)
-    .then(res=>setAssociations(res.data))
-  }
 
   const updateList = () => {
     props.getIngredients()
-    getAssociations()
+    getAssociationsAndRecipes()
+  }
+
+  const getAssociationsAndRecipes = async() => {
+    try {
+      var assocResponse = await axios.get(`/list-recipe-associations?list=${props.listId}`)
+      var recipeResponse = await axios.get(`/recipes?user=${user.id}`)
+    } catch (err) {
+      console.log(err)
+    }
+
+    let assoc = assocResponse.data
+    let allRecipes = recipeResponse.data
+
+    const associationSet = new Set(assoc.map(element=>element.recipe_id))
+
+    const filteredRecipes = allRecipes.filter((element)=>{
+      if (associationSet.has(element.id)){
+        return false
+      }
+      return true
+    })
+
+    setRecipes(filteredRecipes)
+    setAssociations(assoc)
   }
 
 
 
 
-  useEffect(()=>{
-    getRecipes()
-    getAssociations()
-  }, [props.open])
 
   const recipeIsAssociated = (recipe) => {
     for (var i = 0; i < associations.length; i++){
