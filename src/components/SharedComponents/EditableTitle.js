@@ -6,6 +6,7 @@ import BackButton from "./BackButton"
 
 import {
   InputBase,
+  Grid,
   makeStyles,
 } from "@material-ui/core"
 
@@ -17,7 +18,7 @@ const useStyles = makeStyles({
     fontSize: "inherit",
     fontFamily: "inherit",
     fontWeight: "inherit",
-    width: "92%"
+    width: "100%"
     }
 })
 
@@ -49,14 +50,20 @@ const EditableTitle = (props) => {
 
   return (
     <TopSquiggle>
-      <BackButton />
-      <InputBase
-        className={classes.title}
-        value={title}
-        onChange={(e)=>setTitle(e.target.value)}
-        onBlur={postNewTitle}
-        onKeyPress={(e)=>{keyPressed(e)}}
-        multiline/>
+      <Grid container>
+        <Grid item xs={"auto"}>
+          <BackButton />
+        </Grid>
+        <Grid item xs={10}>
+          <InputBase
+            className={classes.title}
+            value={title}
+            onChange={(e)=>setTitle(e.target.value)}
+            onBlur={postNewTitle}
+            onKeyPress={(e)=>{keyPressed(e)}}
+            multiline/>
+        </Grid>
+      </Grid>
     </TopSquiggle>
   )
 }

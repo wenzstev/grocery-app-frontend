@@ -5,11 +5,18 @@ import {
   List,
   ListItem,
   Paper,
+  makeStyles,
 } from "@material-ui/core"
 
 import RecipeButton from "./RecipeButton"
 
 import axios from "../../../AxiosConfig"
+
+const useStyles = makeStyles({
+  root: {
+    color: ""
+  }
+})
 
 const RecipePanel = (props) => {
   const [recipes, setRecipes] = useState([])

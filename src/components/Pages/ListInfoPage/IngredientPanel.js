@@ -30,31 +30,6 @@ const IngredientPanel = (props) => {
   const classes = useStyles()
 
 
-  const chunkedAr = []
-  for (let i = 0; i < listItems.length; i++){
-    const last = chunkedAr[chunkedAr.length-1]
-    if(!last || last.length === size){
-      chunkedAr.push([<IngredientButton key={i}>{listItems[i]}</IngredientButton>])
-    } else {
-      last.push(<IngredientButton key={i}>{listItems[i]}</IngredientButton>)
-    }
-  }
-
-
-  if (chunkedAr.length > 0){
-    chunkedAr[chunkedAr.length-1].push(
-      <Box m={1}>
-        <AddIngredientButton getIngredients={props.getIngredients}/>
-      </Box>
-    )
-  }
-
-
-  const columns = chunkedAr.map((ingredients, i)=>(
-    <Grid item key={i} className={classes.gridItem}>
-      {ingredients}
-    </Grid>)
-  )
 
   const emptyList = (
     <Box p={2}>

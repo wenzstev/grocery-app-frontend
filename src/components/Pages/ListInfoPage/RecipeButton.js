@@ -21,8 +21,6 @@ const INTERNAL_MARGIN = 3
 const BUTTON_BORDER_RADIUS = "100%"
 
 const useStyles = makeStyles({
-  root: {
-  },
   panel: {
     borderRadius: "30px",
     marginLeft: (props)=>props.recipe.name.length + "ch",
@@ -36,7 +34,8 @@ const useStyles = makeStyles({
     "& a": {
       padding: INTERNAL_PADDING,
       margin: INTERNAL_MARGIN,
-      borderRadius: BUTTON_BORDER_RADIUS
+      borderRadius: BUTTON_BORDER_RADIUS,
+      color: "black"
     }
   }
 })

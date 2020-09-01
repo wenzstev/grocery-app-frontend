@@ -32,6 +32,8 @@ const QuickRecipeAdd = (props) => {
   }
 
 
+
+
   useEffect(()=>{
     getRecipes()
     getAssociations()
@@ -42,8 +44,9 @@ const QuickRecipeAdd = (props) => {
       if (associations[i].recipe_id == recipe.id){
         return associations[i]
       }
-      return null
     }
+    return null
+
   }
 
   return (
@@ -54,7 +57,6 @@ const QuickRecipeAdd = (props) => {
             key={index}
             recipe={recipe}
             listId = {props.listId}
-            inList={recipeIsAssociated(recipe)}
             updateList={updateList}/>
       )}
     )}
