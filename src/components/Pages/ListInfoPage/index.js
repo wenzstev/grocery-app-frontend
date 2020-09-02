@@ -79,9 +79,9 @@ const ListPage = (props) => {
       <EditableTitle type="list" />
       <Container>
         <Grid container>
-          <Grid item xs={12} md={6}>
-            <RecipePanel getIngredients={getIngredients}/>
-          </Grid>
+            <RecipePanel
+              drawerOpen={drawerOpen}
+              getIngredients={getIngredients}/>
           <Grid item xs={12} md={6}>
             <IngredientPanel
               listItems={listItems.map(item=>item.name)}
@@ -91,9 +91,6 @@ const ListPage = (props) => {
         </Grid>
         <Box my={3}>
           <AddRecipeButton clickHandler={()=>setDrawerOpen(true)}/>
-          <Box display="inline-block" className={classes.rightFloat}>
-            <ListInfoButton/>
-          </Box>
         </Box>
       </Container>
       <QuickRecipeAdd

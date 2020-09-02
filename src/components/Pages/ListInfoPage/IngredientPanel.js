@@ -34,7 +34,8 @@ const IngredientPanel = (props) => {
   const emptyList = (
     <Box p={2}>
       <Typography variant = "h4">Looks like your list is empty!</Typography>
-      <Typography component="span">Add Ingredients: </Typography>
+      <Typography component="span">Add Ingredients below, or click on the "Quick Add"
+        button to add a recipe from your list: </Typography>
       <AddIngredientButton getIngredients={props.getIngredients}/>
     </Box>
   )

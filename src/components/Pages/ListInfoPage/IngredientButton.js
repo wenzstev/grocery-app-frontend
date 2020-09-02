@@ -16,7 +16,6 @@ import {
 const useStyles = makeStyles({
   root: {
     fontFamily: "Acari Sans, Verdana",
-    fontWeight: "bold",
     fontSize: "20px",
     color: "white",
     padding: "5px",

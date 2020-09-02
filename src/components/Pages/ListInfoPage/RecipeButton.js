@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   panel: {
     borderRadius: "30px",
     marginLeft: (props)=>props.recipe.name.length + "ch",
-    backgroundColor: "lightgray",
+    backgroundColor: "whitesmoke",
     position: "absolute",
     "& button": {
       padding: INTERNAL_PADDING,

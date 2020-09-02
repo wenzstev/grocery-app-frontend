@@ -3,7 +3,10 @@ import React, {useState, useEffect} from "react"
 import {useSelector} from "react-redux"
 
 import {
-  Drawer
+  Drawer,
+  Typography,
+  Divider,
+  Box
 } from "@material-ui/core"
 
 import RecipeSideSelector from "./RecipeSideSelector"
@@ -66,7 +69,11 @@ const QuickRecipeAdd = (props) => {
 
   return (
     <Drawer anchor="left" open={props.open} onClose={props.onClose}>
-      {recipes.map((recipe, index)=>{
+      <Typography variant="h5" align="center">Your Recipes</Typography>
+      <Box m={2}>
+        <Divider />
+      </Box>
+    {recipes.map((recipe, index)=>{
         return (
           <RecipeSideSelector
             key={index}

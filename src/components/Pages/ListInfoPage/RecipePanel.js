@@ -5,6 +5,8 @@ import {
   List,
   ListItem,
   Paper,
+  Box,
+  Grid,
   makeStyles,
 } from "@material-ui/core"
 
@@ -14,7 +16,7 @@ import axios from "../../../AxiosConfig"
 
 const useStyles = makeStyles({
   root: {
-    color: ""
+    backgroundColor: "lightgray"
   }
 })
 
@@ -22,6 +24,7 @@ const RecipePanel = (props) => {
   const [recipes, setRecipes] = useState([])
   const {resourceId} = useParams()
 
+  const classes = useStyles()
 
   const getRecipes = () => {
     axios.get(`/recipes?list=${resourceId}`)
@@ -30,26 +33,38 @@ const RecipePanel = (props) => {
 
   useEffect(()=>{
     getRecipes()
-  }, []);
+  }, [props.drawerOpen]);
 
   const refreshPanels = () => {
     props.getIngredients()
     getRecipes()
   }
 
-  const mappedRecipes = recipes.map((element, index)=>(
+  const mappedRecipes = recipes
+  .filter((element)=>element.name != "Additional Ingredients")
+  .map((element, index)=>(
     <RecipeButton
       recipe={element}
       key={index}
       refreshPanels={refreshPanels}/>)
   )
 
+  const component = (
+    <Grid item xs={12} md={6}>
+      <Box m={1}>
+        <Paper className={classes.root}>
+          <List>
+            {mappedRecipes}
+          </List>
+        </Paper>
+      </Box>
+    </Grid>
+  )
+
   return (
-    <Paper>
-      <List>
-        {mappedRecipes}
-      </List>
-    </Paper>
+    <>
+    {mappedRecipes.length > 0 ? component : null}
+    </>
   )
 }
 
