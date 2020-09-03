@@ -43,7 +43,7 @@ const QuickRecipeAdd = (props) => {
     const associationSet = new Set(assoc.map(element=>element.recipe_id))
 
     const filteredRecipes = allRecipes.filter((element)=>{
-      if (associationSet.has(element.id)){
+      if (associationSet.has(element.id) || element.name == "Additional Ingredients"){
         return false
       }
       return true

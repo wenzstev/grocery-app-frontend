@@ -17,10 +17,24 @@ import axios from "../../../AxiosConfig.js"
 
 const useStyles = makeStyles({
   card: {
-      "&:hover":{
-        backgroundColor: "lightgray"
-      }
+    "& h6":{
+      width: "20vw",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      whiteSpace: "nowrap",
+    },
+    "& li":{
+      width: "20vw",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      whiteSpace: "nowrap",
+      display: "block",
+
+    },
+    "&:hover":{
+      backgroundColor: "lightgray"
     }
+  }
 })
 
 const RecipeSideSelector = (props) =>{
@@ -69,15 +83,15 @@ const RecipeSideSelector = (props) =>{
   return(
     <Box m = {1}>
       <ButtonBase className={classes.card} onClick={addRecipeToList}>
-      <Card variant="outlined">
-        <Typography variant="h6">
-          {recipe.name}
-        </Typography>
-        <List>
-          {ingredientsToDisplay.map((ingredient, index)=><ListItem key={index}>{ingredient.name}</ListItem>)}
-        </List>
-      </Card>
-    </ButtonBase>
+        <Card variant="outlined">
+          <Typography variant="h6">
+            {recipe.name}
+          </Typography>
+          <List>
+            {ingredientsToDisplay.map((ingredient, index)=><ListItem key={index}>{ingredient.name}</ListItem>)}
+          </List>
+        </Card>
+      </ButtonBase>
     </Box>
   )
 }

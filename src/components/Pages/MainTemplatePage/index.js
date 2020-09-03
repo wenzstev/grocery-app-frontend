@@ -27,8 +27,8 @@ const useStyles = makeStyles((theme:Theme)=>createStyles({
     backgroundColor: "#a8d4ff",
     backgroundBlendMode: "multiply",
     backgroundAttachment: "fixed",
-    height: "100vh",
     width: "100vw",
+    minHeight: "100vh",
     position: "relative",
     top: "0",
     left: "0"

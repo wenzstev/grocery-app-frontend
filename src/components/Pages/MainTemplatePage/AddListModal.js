@@ -22,14 +22,12 @@ const AddListModal = (props) => {
 
   const submit = async(values, actions) => {
     try {
-      var newList = await axios.post(`/lists`,JSON.stringify(values))
+      var newList = await axios.post(`/lists`, values)
     }
     catch(e) {
       console.log(e)
       return
     }
-    console.log("created list")
-    console.log(newList.data)
     props.history.push(`/list/${newList.data.id}`)
 
   }

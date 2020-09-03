@@ -29,7 +29,8 @@ const useStyles = makeStyles((theme:Theme)=>createStyles({
     top: 0,
     left: 0,
     width: "100vw",
-    borderRadius: 15
+    borderRadius: 15,
+    zIndex: 10
   },
   searchbar: {
     backgroundColor: "lightgray",
