@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme:Theme)=>createStyles({
     height: "280px",
     "&:hover":{
       backgroundColor: "whitesmoke"
+    },
+    "& a":{
+      color: "black"
     }
   },
   title: {

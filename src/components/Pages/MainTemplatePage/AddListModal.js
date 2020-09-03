@@ -1,9 +1,13 @@
 import React from "react"
 
+import {withRouter} from "react-router-dom"
+
 import {Formik, Form} from "formik"
 import {FormikTextField} from "../../Templates/FormikComponents"
 
 import {useSelector} from "react-redux"
+
+import axios from "../../../AxiosConfig"
 
 import {
   Paper,
@@ -13,33 +17,29 @@ import {
 import ButtonTemplate  from "../../Templates/ButtonTemplate"
 
 
-const AddListModal = () => {
+const AddListModal = (props) => {
   const token = useSelector(store=>store.token)
+
+  const submit = async(values, actions) => {
+    try {
+      var newList = await axios.post(`/lists`,JSON.stringify(values))
+    }
+    catch(e) {
+      console.log(e)
+      return
+    }
+    console.log("created list")
+    console.log(newList.data)
+    props.history.push(`/list/${newList.data.id}`)
+
+  }
+
   return (
     <Formik
       initialValues={{
         name: ""
       }}
-      onSubmit={(values, actions)=>{
-        const headers = new Headers()
-        headers.append("Authorization", "Basic " + btoa(token + ":"))
-        headers.append("Content-Type", "application/json")
-        const body = JSON.stringify(values)
-        fetch("/lists",{
-          method: "POST",
-          headers: headers,
-          body: body
-        })
-        .then(response=>{
-          if(response.status===201){
-            return response.json()
-          } else {
-            throw new Error("Something went wrong!")
-          }
-        })
-        .then(json=>console.log(json))
-        .catch(err=>console.log(err))
-      }}
+      onSubmit={submit}
     >
       <Form>
         <FormikTextField label="List Name" name="name" />
@@ -49,4 +49,4 @@ const AddListModal = () => {
   )
 }
 
-export default AddListModal
+export default withRouter(AddListModal)

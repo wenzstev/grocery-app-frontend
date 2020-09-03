@@ -68,13 +68,6 @@ const NavMenu = (props) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
         >
-          <NestedMenuItem
-            label="New"
-            parentMenuOpen={!!anchorEl}>
-            <MenuItem onClick={()=>props.openModal(<AddRecipeModal />)}>Recipe</MenuItem>
-            <MenuItem onClick={()=>props.openModal(<AddListModal />)}>List</MenuItem>
-          </NestedMenuItem>
-          <Divider variant="middle" />
           <MenuItem>Settings</MenuItem>
           <MenuItem onClick={logout}>Log Out</MenuItem>
       </Menu>

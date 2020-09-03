@@ -58,24 +58,18 @@ const SearchBar = (props) => {
   return (
     <>
     <Paper className={classes.root}>
-      <TopSquiggle>Welcome Back!</TopSquiggle>
-      <Box className={classes.navbar} mt={1}>
-      <Box className={classes.searchbar} mx={1}>
-        <InputLabel>
-          <Grid container>
-            <Grid item>
-              <NavMenu buttonLabel={<DehazeIcon />} openModal={props.openModal}/>
-            </Grid>
-            <Grid item>
-              <SearchIcon className={classes.searchIcon}/>
-            </Grid>
-            <Grid item xs={8} md={10}>
-              <InputBase className={classes.searchInput} placeholder="Search..." />
-            </Grid>
+      <TopSquiggle>
+        <Grid container>
+          <Grid item>
+            <NavMenu buttonLabel={<DehazeIcon style={{color:"white"}}/>} openModal={props.openModal}/>
           </Grid>
-        </InputLabel>
-      </Box>
-      <NavBar openModal={props.openModal} />
+          <Grid item>
+            Welcome Back!
+          </Grid>
+        </Grid>
+      </TopSquiggle>
+      <Box className={classes.navbar}>
+        <NavBar openModal={props.openModal} />
       </Box>
     </Paper>
     <Box className={classes.placeholderBox}/>

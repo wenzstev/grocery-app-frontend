@@ -22,31 +22,27 @@ import axios from "./AxiosConfig"
 
 function App() {
   const [hasToken, setHasToken] = useState(false)
+  const [tokenPromise, setTokenPromise] = useState()
 
   const dispatch = useDispatch()
   const token = useSelector(state=>state.token)
 
-
-
-  const getToken = () => {
-    fetch('/users/token')
-    .then(response=>{
-      if (response.status === 200){
-        return response.json()
-      } else if (response.status === 404){
-        throw new Error('No refresh token.')
-      } else {
-        throw new Error(response.status)
-      }
-    })
-    .then(json=>{
-      dispatch(setUser(json['user']))
-      dispatch(setToken(json['token']))
-      setHasToken(true)
-      axios.defaults.headers['Authorization'] = 'Basic ' + btoa(json['token']+':')
-    })
-    .catch(error=>console.log(error))
+  const getToken = async() => {
+    try {
+      var tokenResponse = await axios.get(`/users/token`)
+    }
+    catch(e) {
+      // TODO: inform the user of the error
+      console.log(e)
+      return
+    }
+    const {data} = tokenResponse
+    dispatch(setUser(data['user']))
+    dispatch(setToken(data['token']))
+    setHasToken(true)
+    axios.defaults.headers['Authorization'] = 'Basic ' + btoa(data['token']+':')
   }
+
 
 
   useEffect(()=>{
