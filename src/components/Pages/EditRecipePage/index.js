@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react"
 
 import {useSelector} from "react-redux"
 
-import {useParams} from "react-router-dom"
+import {Redirect, useParams} from "react-router-dom"
 
 import MainTemplatePage from "../MainTemplatePage"
 
@@ -17,20 +17,30 @@ import {
 
 import RecipePanel from "./RecipePanel"
 import BackButton from "../../SharedComponents/BackButton"
+import axios from "../../../AxiosConfig"
 
 const EditRecipePage = () => {
   const [recipe, setRecipe] = useState({})
+  const [recipeExists, setRecipeExists] = useState(true)
   const token = useSelector(store=>store.token)
   const {resourceId} = useParams()
 
-  const getRecipeFromBackend = () => {
-    fetch(`/recipes/${resourceId}`)
-    .then(response=>response.json())
-    .then(json=>setRecipe(json))
+  const getRecipe = async() => {
+    try {
+      var recipe = await axios.get(`/recipes/${resourceId}`)
+    } catch (e) {
+      if (e.response.status == 404){
+        setRecipeExists(false)
+        return
+      } else {
+        console.log(e)
+      }
+    }
+    setRecipe(recipe.data)
   }
 
   useEffect(()=>{
-    getRecipeFromBackend()
+    getRecipe()
   }, [])
 
   const changeRecipeLine = (lineId, newLineJSON) => {
@@ -48,11 +58,16 @@ const EditRecipePage = () => {
 
   return (
     <MainTemplatePage noSearchbar>
-        <EditableTitle type="recipe" hasBackArrow />
-        <RecipePanel
-          lines={recipe.recipe_lines}
-          removeLineFromDOM={removeLineFromDOM}
-          changeLine={changeRecipeLine}/>
+      {recipeExists ? (
+        <>
+          <EditableTitle type="recipe" hasBackArrow />
+          <RecipePanel
+            lines={recipe.recipe_lines}
+            removeLineFromDOM={removeLineFromDOM}
+            changeLine={changeRecipeLine}/>
+        </>
+    ) : <Redirect to="/pagenotfound" />}
+
     </MainTemplatePage>
   )
 }

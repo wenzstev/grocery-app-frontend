@@ -13,6 +13,8 @@ import {
 
 import {Link} from "react-router-dom"
 
+import axios from "../../AxiosConfig"
+
 const useStyles = makeStyles((theme:Theme)=>createStyles({
   root: {
     borderRadius: 10,
@@ -38,13 +40,24 @@ const useStyles = makeStyles((theme:Theme)=>createStyles({
 const SHOWNINGREDIENTS = 5
 
 export const BaseCard = (props) => {
+  const [ingredients, setIngredients] = useState([])
   const classes = useStyles()
-  const ingredients = props.ingredients.map((ing, index)=>{
+
+  const getIngredients = async() => {
+    var ingredientResponse = await axios.get(`/ingredients?${props.type}=${props.id}`)
+    setIngredients(ingredientResponse.data.map((ingredient)=>ingredient['name']).sort())
+  }
+
+  useEffect(()=>{
+    getIngredients()
+  }, [])
+
+  const mappedIngredients = ingredients.map((ing, index)=>{
     if (index < SHOWNINGREDIENTS){
       return (
         <ListItem key={index}>{ing}</ListItem>
       )}
-      else if (index === props.ingredients.length - 1){
+      else if (index === ingredients.length - 1){
         return(
           <ListItem style={{fontStyle:"italic"}} key={SHOWNINGREDIENTS}>...and {index-SHOWNINGREDIENTS} more.</ListItem>
         )
@@ -58,7 +71,7 @@ export const BaseCard = (props) => {
           <Link to={props.route} style={{textDecoration: "none"}}>
           <Typography variant="h6" className={classes.title}>{props.name}</Typography>
           <List>
-            {ingredients}
+            {mappedIngredients}
           </List>
         </Link>
         </Paper>
@@ -67,37 +80,24 @@ export const BaseCard = (props) => {
   )
 }
 
+
 export const RecipeCard = (props) => {
-  const [ingredients, setIngredients] = useState([])
-
-  useEffect(()=>{
-    fetch(`/ingredients?recipe=${props.recipe.id}`)
-    .then(response=>response.json())
-    .then(json=>setIngredients(json.map((ing)=>ing['name'])))
-  },[])
-
   return(
     <BaseCard
+      type="recipe"
       name={props.recipe.name}
-      ingredients={ingredients.sort()}
+      id={props.recipe.id}
       route={`/recipe/${props.recipe.id}`}
       />
   )
 }
 
 export const ListCard = (props) => {
-  const [ingredients, setIngredients] = useState([])
-
-  useEffect(()=>{
-    fetch(`/ingredients?list=${props.list.id}`)
-    .then(response=>response.json())
-    .then(json=>setIngredients(json.map((ing)=>ing['name'])))
-  }, [])
-
   return (
       <BaseCard
+        type="list"
         name={props.list.name}
-        ingredients={ingredients.sort()}
+        id={props.list.id}
         route={`/list/${props.list.id}`}
       />
   )
