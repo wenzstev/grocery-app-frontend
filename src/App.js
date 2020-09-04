@@ -16,13 +16,14 @@ import {setToken, setUser} from "./actions/"
 
 import AuthenticatedApp from "./components/AppVersions/AuthenticatedApp"
 import UnauthenticatedApp from "./components/AppVersions/UnauthenticatedApp"
+import LandingPage from "./components/Pages/MiscPages/LandingPage"
 
 import axios from "./AxiosConfig"
 
 
 function App() {
   const [hasToken, setHasToken] = useState(false)
-  const [tokenPromise, setTokenPromise] = useState()
+  const [wait, setWait] = useState(true)
 
   const dispatch = useDispatch()
   const token = useSelector(state=>state.token)
@@ -34,12 +35,14 @@ function App() {
     catch(e) {
       // TODO: inform the user of the error
       console.log(e)
+      setWait(false)
       return
     }
     const {data} = tokenResponse
     dispatch(setUser(data['user']))
     dispatch(setToken(data['token']))
     setHasToken(true)
+    setWait(false)
     axios.defaults.headers['Authorization'] = 'Basic ' + btoa(data['token']+':')
   }
 
@@ -61,7 +64,8 @@ function App() {
   return (
     <Router>
       <div className="App">
-        {token ? <AuthenticatedApp/> : <UnauthenticatedApp setHasToken={setHasToken}/>}
+        {wait ? <LandingPage />
+        : token ? <AuthenticatedApp /> : <UnauthenticatedApp />}
       </div>
     </Router>
 

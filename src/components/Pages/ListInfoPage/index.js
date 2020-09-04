@@ -34,7 +34,8 @@ const useStyles = makeStyles({
     backgroundSize: 'cover',
     backgroundColor: "#a8d4ff",
     backgroundBlendMode: "multiply",
-    height: "100vh",
+    backgroundAttachment: "fixed",
+    minHeight: "100vh",
     width: "100vw",
   },
   rightFloat: {

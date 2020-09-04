@@ -9,6 +9,8 @@ import {
   makeStyles
 } from "@material-ui/core"
 
+import {Link} from "react-router-dom"
+
 import NestedMenuItem from "material-ui-nested-menu-item"
 
 import {useCookies} from "react-cookie"
@@ -24,6 +26,10 @@ import BaseModal from "./BaseModal"
 const useStyles = makeStyles({
   root: {
     borderRadius: "15px"
+  },
+  link: {
+    textDecoration:"inherit",
+    color: "inherit",
   }
 })
 
@@ -68,7 +74,7 @@ const NavMenu = (props) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
         >
-          <MenuItem>Settings</MenuItem>
+          <Link className={classes.link} to="/settings"><MenuItem>Settings</MenuItem></Link>
           <MenuItem onClick={logout}>Log Out</MenuItem>
       </Menu>
     </div>

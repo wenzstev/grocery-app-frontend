@@ -7,7 +7,9 @@ import {
 
 import {useSelector} from "react-redux"
 
-import {Redirect} from "react-router-dom"
+import {withRouter} from "react-router-dom"
+
+import axios from "../../../AxiosConfig"
 
 import {Formik, Form} from "formik"
 import * as Yup from "yup"
@@ -15,39 +17,31 @@ import {FormikTextField} from "../../Templates/FormikComponents"
 import ButtonTemplate from "../../Templates/ButtonTemplate"
 
 
-const AddRecipeModal = () => {
+const AddRecipeModal = (props) => {
   const token = useSelector(store=>store.token)
   const [redirect, setRedirect] = useState()
+
+  const submit = async(values, actions) => {
+    try {
+      var newRecipe = await axios.post(`/recipes`, {
+        "create_from_url": values.url
+      })
+    }
+    catch(e) {
+      console.log(e)
+      return
+    }
+    props.history.push(`/recipe/${newRecipe.data.id}`)
+
+  }
+
   return (
     <>
         <Formik
           initialValues = {{
             url: ''
           }}
-          onSubmit={(values, actions)=>{
-            const headers = new Headers()
-            headers.append('Authorization', 'Basic ' + btoa(token + ":"))
-            headers.append('Content-Type', 'application/json')
-            const body = JSON.stringify({"create_from_url":values.url})
-            console.log(body)
-            fetch("/recipes",{
-              method: "POST",
-              headers: headers,
-              body: body
-            })
-            .then(response=>{
-              if(response.status===200){
-                return response.json()
-              } else {
-                throw new Error("Something went wrong!")
-              }
-            })
-            .then(json=>{
-              console.log(json)
-              setRedirect(<Redirect to={`/recipe/${json.recipe.id}`} />)
-            })
-            .catch(err=>console.log(err))
-          }}
+          onSubmit={submit}
         >
           <Form>
             <FormikTextField label="URL" name="url"/>
@@ -59,4 +53,4 @@ const AddRecipeModal = () => {
   )
 }
 
-export default AddRecipeModal
+export default withRouter(AddRecipeModal)
