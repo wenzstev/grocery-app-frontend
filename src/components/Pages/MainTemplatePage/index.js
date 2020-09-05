@@ -15,6 +15,7 @@ import {withRouter, Redirect} from "react-router-dom"
 import woodBackground from "../../../assets/wood-background.jpg"
 
 import SearchBar from "./SearchBar"
+import {LoginSquiggle} from "../../Backgrounds/Squiggles"
 import AddListModal from "./AddListModal"
 import AddRecipeModal from "./AddRecipeModal"
 import BaseModal from "../../SharedComponents/BaseModal"
@@ -32,6 +33,9 @@ const useStyles = makeStyles((theme:Theme)=>createStyles({
     position: "relative",
     top: "0",
     left: "0"
+  },
+  content: {
+    zIndex: 10
   }
 }))
 
@@ -62,7 +66,7 @@ const MainTemplatePage = (props) => {
   return (
     <div className={classes.root}>
       {props.noSearchbar ? null : <SearchBar openModal={openModal}/>}
-      <Container>
+      <Container className={classes.content}>
           {childrenWithProps}
       </Container>
       <BaseModal className={classes.modal} open={modalOpen} handleClose={closeModal}>

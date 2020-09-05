@@ -8,7 +8,7 @@ import {
 } from "react-router-dom"
 
 import LoginPage from "../Pages/LoginPage/"
-import VerifyPage from "../Pages/VerifyPage/"
+import VerifyPage from "../Pages/MiscPages/VerifyPage"
 
 const UnauthenticatedApp = (props) => {
   return (

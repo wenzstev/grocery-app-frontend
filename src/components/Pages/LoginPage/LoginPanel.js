@@ -25,11 +25,12 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     margin: "auto",
     width: "100%",
     color: "white",
-    textAlign: "center"
+    textAlign: "center",
   },
   header: {
     margin: 14,
-    textAlign: "center"
+    textAlign: "center",
+    color: "white"
   },
 }))
 

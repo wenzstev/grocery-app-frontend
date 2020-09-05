@@ -17,12 +17,15 @@ import {
 
 import RecipePanel from "./RecipePanel"
 import BackButton from "../../SharedComponents/BackButton"
+import NotYourResource from "../MiscPages/NotYourResource"
 import axios from "../../../AxiosConfig"
 
 const EditRecipePage = () => {
   const [recipe, setRecipe] = useState({})
   const [recipeExists, setRecipeExists] = useState(true)
+  const [hasPermission, setHasPermission] = useState(true)
   const token = useSelector(store=>store.token)
+  const user = useSelector(store=>store.user)
   const {resourceId} = useParams()
 
   const getRecipe = async() => {
@@ -36,7 +39,11 @@ const EditRecipePage = () => {
         console.log(e)
       }
     }
-    setRecipe(recipe.data)
+    if (recipe.data.creator_id == user.id){
+      setRecipe(recipe.data)
+    } else {
+      setHasPermission(false)
+    }
   }
 
   useEffect(()=>{
@@ -57,18 +64,21 @@ const EditRecipePage = () => {
 
 
   return (
-    <MainTemplatePage noSearchbar>
-      {recipeExists ? (
-        <>
-          <EditableTitle type="recipe" hasBackArrow />
-          <RecipePanel
-            lines={recipe.recipe_lines}
-            removeLineFromDOM={removeLineFromDOM}
-            changeLine={changeRecipeLine}/>
-        </>
-    ) : <Redirect to="/pagenotfound" />}
-
-    </MainTemplatePage>
+    <>
+      {recipeExists ?
+        hasPermission ?
+          (
+          <MainTemplatePage noSearchbar>
+            <EditableTitle type="recipe" hasBackArrow />
+            <RecipePanel
+              lines={recipe.recipe_lines}
+              removeLineFromDOM={removeLineFromDOM}
+              changeLine={changeRecipeLine}/>
+          </MainTemplatePage>
+      ) : <NotYourResource resource="recipe" />
+        : <Redirect to="/pagenotfound" />
+    }
+    </>
   )
 }
 

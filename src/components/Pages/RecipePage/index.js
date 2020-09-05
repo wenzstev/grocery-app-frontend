@@ -22,6 +22,7 @@ const HomePage = (props) => {
   const [recipes, setRecipes] = useState(null)
 
   const getRecipes = () => {
+    console.log(user)
     fetch(`/recipes?user=${user.id}`)
     .then(response=>response.json())
     .then(json=>{

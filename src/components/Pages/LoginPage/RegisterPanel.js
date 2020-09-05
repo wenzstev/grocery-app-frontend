@@ -25,7 +25,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
   header: {
     margin: 14,
-    textAlign: "center"
+    textAlign: "center",
+    color: "white"
   },
   submitButton: {
     borderRadius: "15px",

@@ -13,6 +13,7 @@ import woodBackground from "../../../assets/wood-background.jpg"
 import RegisterPanel from "./RegisterPanel"
 import LoginPanel from "./LoginPanel"
 import RegisteredPanel from "./RegisteredPanel"
+import MainTemplatePage from "../MainTemplatePage"
 
 const useStyles = makeStyles({
   root: {
@@ -39,12 +40,11 @@ const LoginPage = (props) => {
 
 
   return (
-    <div className={classes.root}>
-      <LoginSquiggle />
-      <Container className={classes.panel}>
-        {hasRegistered ? <RegisteredPanel email={email} password={password}/>
-          :
-        (<Grid container>
+    <>
+    {hasRegistered ? <RegisteredPanel email={email} password={password}/>
+  : (
+    <MainTemplatePage login noSearchbar>
+        <Grid container>
             <Grid item xs={12} md={6}>
               <Box mx={5}>
                 <LoginPanel setToken={props.setToken} setHasToken={props.setHasToken}/>
@@ -59,10 +59,9 @@ const LoginPage = (props) => {
               </Box>
             </Grid>
           </Grid>
-          )
-        }
-      </Container>
-    </div>
+    </MainTemplatePage>
+  )}
+    </>
 
   )
 }

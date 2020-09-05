@@ -1,26 +1,42 @@
-import React from "react"
+import React, {useState, useEffect} from "react"
+
+import {Typography} from "@material-ui/core"
+
+import axios from "../../../AxiosConfig"
+
+import BasicInfoPage from "../MiscPages/BasicInfoPage"
 
 const RegisteredPanel = (props) => {
-  const sendVerificationEmail = () => {
-    let headers = new Headers()
-    headers.append('Authorization', 'Basic ' + btoa(props.email + ":" + props.password))
+  const [pending, setPending] = useState(true)
+  const [sent, setSent] = useState(false)
 
-    fetch("/users/verification?url=http://localhost:3000/verify",{
-      method: 'GET',
-      headers: headers,
-    })
-    .then(request=>console.log(request))
+  const sendVerificationEmail = async() => {
+    try {
+      var verification = await axios.get(`/users/verification`,{
+        params: {
+          url: "http://localhost:3000/verify"
+        }
+      })
+    } catch (e) {
+      setSent(false)
+      setPending(false)
+    }
+    setPending(false)
+    setSent(true)
   }
-  sendVerificationEmail()
+
+  useEffect(()=> {
+    sendVerificationEmail()
+
+  }, [])
   return (
-    <div>
-      <p>
-      Success! your account has been created. Please go to your email and click the verification link to validate your account.
-      </p>
-      <p>
-      Click <button onClick={sendVerificationEmail}>here</button> to resend the email.
-      </p>
-    </div>
+    <BasicInfoPage>
+      {
+        pending ? <Typography>Please Wait...</Typography>
+      : sent ? <Typography>Success! Please check your email for instructions on how to validate your account.</Typography>
+    : <Typography>Hmm, something went wrong. Please check your email and try again. </Typography>
+      }
+    </BasicInfoPage>
   )
 }
 

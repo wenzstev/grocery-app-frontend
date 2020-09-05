@@ -1,6 +1,12 @@
 import React from "react"
 import {useState, useEffect} from "react"
-import {Redirect} from "react-router-dom"
+import {useSelector} from "react-redux"
+import {
+  Redirect,
+  Router,
+  useRouteMatch,
+  useParams
+} from "react-router-dom"
 
 import {TopSquiggle} from "../../Backgrounds/Squiggles"
 import IngredientPanel from "./IngredientPanel"
@@ -10,6 +16,7 @@ import ListInfoButton from "./ListInfoButton"
 import QuickRecipeAdd from "./QuickRecipeAdd"
 import RecipePanel from "./RecipePanel"
 import MainTemplatePage from "../MainTemplatePage"
+import NotYourResource from "../MiscPages/NotYourResource"
 
 import EditableTitle from "../../SharedComponents/EditableTitle"
 
@@ -24,34 +31,23 @@ import {
   makeStyles
 } from "@material-ui/core"
 
-import {
-  Router,
-  useRouteMatch,
-  useParams
-} from "react-router-dom"
-
 
 
 const ListPage = (props) => {
   const [listItems, setListItems] = useState([])
-  const [listName, setListName] = useState("")
   const [listExists, setListExists] = useState(true)
+  const [hasPermission, setHasPermission] = useState(true)
   const [associations, setAssociations] = useState([])
 
   const [drawerOpen, setDrawerOpen] = useState(false)
 
   const {resourceId} = useParams()
+  const user = useSelector(store=>store.user)
 
-  const old_getListInfo = () => {
-    axios.get(`/lists/${resourceId}`)
-    .then(res=>setListName(res.data.name))
-  }
 
-  const getIngredients = () => {
-    axios.get(`/ingredients?list=${resourceId}`)
-    .then(res=>{
-      setListItems(res.data)
-    })
+  const getIngredients = async() => {
+    var ingredientResponse = await axios.get(`/ingredients?list=${resourceId}`)
+    setListItems(ingredientResponse.data)
   }
 
   const getListInfo = async() => {
@@ -66,6 +62,9 @@ const ListPage = (props) => {
         console.log(e)
       }
     }
+    if (listInfo.data.creator_id != user.id){
+      setHasPermission(false)
+    }
   }
 
   useEffect(()=>{
@@ -74,9 +73,11 @@ const ListPage = (props) => {
   },[])
 
   return (
-    <MainTemplatePage noSearchbar>
-      {listExists ? (
-        <>
+    <>
+      {listExists ?
+        hasPermission ?
+        (
+        <MainTemplatePage noSearchbar>
         <EditableTitle type="list" />
         <Container>
           <Grid container>
@@ -100,9 +101,11 @@ const ListPage = (props) => {
           onClose={()=>setDrawerOpen(false)}
           getIngredients={getIngredients}
           />
-        </>
-    ) : <Redirect to="/pagenotfound" />}
-  </MainTemplatePage>
+        </MainTemplatePage>
+    ) : <NotYourResource resource="list" />
+      : <Redirect to="/pagenotfound" />
+  }
+  </>
   )
 }
 
