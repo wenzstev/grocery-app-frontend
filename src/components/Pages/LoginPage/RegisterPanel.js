@@ -13,6 +13,7 @@ import {
 } from "@material-ui/core"
 import ButtonTemplate from "../../Templates/ButtonTemplate"
 
+import axios from "../../../AxiosConfig"
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -36,6 +37,25 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 const RegisterPanel = (props) => {
   const classes = useStyles()
+
+  const submit = async(values, actions)=>{
+    try {
+      var newUserResponse = await axios.post(`/users`, {
+          email:values.email,
+          password:values.password
+        })
+    } catch(e) {
+      if (e.response.data.payload == "IntegrityError"){
+        props.displayAlert("This email address is already in use.")
+      }
+      return
+    }
+    props.setEmail(values.email)
+    props.setPassword(values.password)
+    props.setHasRegistered(true)
+  }
+
+
   return (
     <Box>
       <Typography variant="h5" className={classes.header}> Register </Typography>
@@ -59,27 +79,7 @@ const RegisterPanel = (props) => {
             .oneOf([Yup.ref('password'), null], 'Passwords must match')
             .required('Required')
         })}
-        onSubmit={(values, actions) => {
-          let url = "/users"
-          let body = {
-              email: values.email,
-              password: values.password,
-          }
-
-          fetch(url , {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(body)
-          }).then(response=>response.json())
-            .then(json=>{
-              console.log(json)
-              props.setEmail(values.email)
-              props.setPassword(values.password)
-              props.setHasRegistered(true)
-            })
-        }}
+        onSubmit={submit}
       >
         <Form>
 

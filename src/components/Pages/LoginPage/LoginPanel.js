@@ -12,11 +12,14 @@ import {
   createStyles
 } from "@material-ui/core"
 
+
 import {FormikTextField} from "../../Templates/FormikComponents"
 import ButtonTemplate from "../../Templates/ButtonTemplate"
 
 import {useDispatch} from 'react-redux'
 import {setToken, setUser} from '../../../actions/'
+
+import axios from "../../../AxiosConfig"
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -35,53 +38,41 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }))
 
 
-
 const LoginPanel = (props) => {
   const classes = useStyles()
   const dispatch = useDispatch()
-  const [open, setOpen] = useState(false)
-  const [errorMessage, setErrorMessage] = useState("")
 
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+
+  const login = async(values, actions) => {
+    try {
+      var loginResponse = await axios.get(`/users/refresh-token`,{
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest', // attempt to disable default authorization prompt, not working
+          'Authorization': 'Basic ' + btoa(values.email + ":" + values.password)
+        }
+      })
+    } catch(e) {
+      if (e.response.status == 500) {
+        props.displayAlert("There appears to be a problem with the server. Please check back later.")
+      }
+      if(e.response.status==401){
+        props.displayAlert("Invalid Username or Password.")
+      }
       return
     }
-    setOpen(false)
-  }
-
-  const snackBar = (
-    <Snackbar
-      anchorOrigin={{
-        vertical: 'bottom',
-        horizontal: 'left'
-      }}
-      open={open}
-      autoHideDuration={6000}
-      message={errorMessage}
-      onClose={handleClose}/>
-  )
-
-  const login = (values, actions) => {
-    let headers = new Headers()
-    headers.append('Authorization', 'Basic ' + btoa(values.email + ":" + values.password))
-
-    fetch("/users/refresh-token",{
-      method: 'GET',
-      headers: headers,
-      credentials: 'same-origin',
-    })
-    .then(response=>{
-      if (response.status===204){  // we got the refresh token
-        return fetch('/users/token')
-      }
-    })
-    .then(response=>response.json())
-    .then(json=>{
-      dispatch(setUser(json['user']))
-      dispatch(setToken(json['token']))
-      props.setHasToken(true)
-    })
-    .catch(err=>console.log(err))
+    if (loginResponse.status != 204){
+      console.log("error: request returned response of " + loginResponse.status)
+      return
+    }
+    try {
+      var tokenResponse = await axios.get(`/users/token`)
+    } catch(e) {
+      console.log(e)
+      return
+    }
+    dispatch(setToken(tokenResponse.data['token']))
+    dispatch(setUser(tokenResponse.data['user']))
+    props.setHasToken(true)
   }
 
 
@@ -115,7 +106,6 @@ const LoginPanel = (props) => {
         </Box>
       </Form>
       </Formik>
-      {snackBar}
     </Box>
   )
 }
