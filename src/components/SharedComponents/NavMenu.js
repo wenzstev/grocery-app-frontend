@@ -74,7 +74,6 @@ const NavMenu = (props) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
         >
-          <Link className={classes.link} to="/settings"><MenuItem>Settings</MenuItem></Link>
           <MenuItem onClick={logout}>Log Out</MenuItem>
       </Menu>
     </div>

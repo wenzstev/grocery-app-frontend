@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "15px",
     padding: "10px 15px",
     fontFamily: "Verdana",
-    textTransform: "capitalize"
+    textTransform: "capitalize",
   }
 }))
 
@@ -27,7 +27,7 @@ const ButtonTemplate = (props) => {
       type={props.type}
       className={classes.root}
       onClick={props.onClick}
-      {...props.fullWidth}>
+      fullWidth={props.fullWidth}>
       {props.children}
     </Button>
   )

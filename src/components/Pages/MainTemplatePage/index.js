@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme:Theme)=>createStyles({
     backgroundColor: "#a8d4ff",
     backgroundBlendMode: "multiply",
     backgroundAttachment: "fixed",
-    width: "100vw",
+    width: "100%",
     minHeight: "100vh",
     position: "relative",
     top: "0",
@@ -36,6 +36,10 @@ const useStyles = makeStyles((theme:Theme)=>createStyles({
   },
   content: {
     zIndex: 10
+  },
+  spacer: {
+    height: "10vh",
+    overflowX: "hidden"
   }
 }))
 
@@ -72,6 +76,7 @@ const MainTemplatePage = (props) => {
       <BaseModal className={classes.modal} open={modalOpen} handleClose={closeModal}>
         {modal}
       </BaseModal>
+      <div className={classes.spacer} />
     </div>
   )
 }

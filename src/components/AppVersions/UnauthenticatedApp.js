@@ -9,6 +9,10 @@ import {
 
 import LoginPage from "../Pages/LoginPage/"
 import VerifyPage from "../Pages/MiscPages/VerifyPage"
+import IntroPage from "../Pages/UnauthenticatedPages/IntroPage"
+import AboutPage from "../Pages/UnauthenticatedPages/AboutPage"
+import LearnMorePage from "../Pages/UnauthenticatedPages/LearnMorePage"
+import NotFoundPage from "../Pages/MiscPages/NotFoundPage"
 
 const UnauthenticatedApp = (props) => {
   return (
@@ -17,7 +21,10 @@ const UnauthenticatedApp = (props) => {
           <LoginPage setHasToken={props.setHasToken} />
         </Route>
         <Route path="/verify" component={VerifyPage} />
-        <Redirect to="/login"/>
+        <Route path="/about" component={AboutPage} />
+        <Route path="/learnmore" component={LearnMorePage} />
+        <Route path="/" exact component={IntroPage} />
+        <Route component={NotFoundPage} />
       </Switch>
   )
 }

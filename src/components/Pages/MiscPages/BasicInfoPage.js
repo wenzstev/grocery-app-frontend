@@ -1,34 +1,16 @@
 import React from "react"
 
-import {
-  Box,
-  Paper,
-  Typography,
-  Divider,
-  Grid,
-  makeStyles
-} from "@material-ui/core"
 
 import MainTemplatePage from "../MainTemplatePage"
+import BasicInfoPanel from "../../SharedComponents/BasicInfoPanel"
 
-const useStyles = makeStyles({
-  root: {
-    borderRadius: "15px",
-    position: "relative",
-    top: "10vh",
-    padding: "20px"
-  }
-})
 
-const BasicInfoPage = (props) => {
-  const classes = useStyles()
-  return (
+const BasicInfoPage = (props) => (
     <MainTemplatePage noSearchbar>
-      <Paper className={classes.root}>
+      <BasicInfoPanel>
         {props.children}
-      </Paper>
+      </BasicInfoPanel>
     </MainTemplatePage>
   )
-}
 
 export default BasicInfoPage

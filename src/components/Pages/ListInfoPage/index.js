@@ -80,6 +80,9 @@ const ListPage = (props) => {
         <MainTemplatePage noSearchbar>
         <EditableTitle type="list" />
         <Container>
+          <Box my={2}>
+            <AddRecipeButton clickHandler={()=>setDrawerOpen(true)}/>
+          </Box>
           <Grid container>
               <RecipePanel
                 drawerOpen={drawerOpen}
@@ -91,9 +94,7 @@ const ListPage = (props) => {
                 />
             </Grid>
           </Grid>
-          <Box my={3}>
-            <AddRecipeButton clickHandler={()=>setDrawerOpen(true)}/>
-          </Box>
+
         </Container>
         <QuickRecipeAdd
           open={drawerOpen}

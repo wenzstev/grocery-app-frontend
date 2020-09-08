@@ -10,7 +10,7 @@ const theme = createMuiTheme({
     secondary: {
       main: brown[100]
     },
-  }
+  },
 })
 
 export default theme

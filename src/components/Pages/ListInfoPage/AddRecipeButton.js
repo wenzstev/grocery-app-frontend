@@ -9,7 +9,7 @@ const AddRecipeButton = (props) => {
   return (
     <ButtonTemplate color="primary" onClick={props.clickHandler}>
       <ArrowBackIcon style={{paddingRight: "10px"}}/>
-      Quick Add
+      Add Recipe
     </ButtonTemplate>
   )
 }

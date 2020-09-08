@@ -18,6 +18,8 @@ import LoginPanel from "./LoginPanel"
 import RegisteredPanel from "./RegisteredPanel"
 import MainTemplatePage from "../MainTemplatePage"
 
+import AddListModal from "../MainTemplatePage/AddListModal"
+
 const useStyles = makeStyles({
   root: {
     background: "url(" + woodBackground + ")",
@@ -37,6 +39,7 @@ const useStyles = makeStyles({
 
 const Alert = (props) => <MuiAlert elevation={6} variant="filled" {...props} />
 
+const seenModal = false
 
 const LoginPage = (props) => {
   const classes = useStyles()
@@ -73,11 +76,13 @@ const LoginPage = (props) => {
   }
 
 
+
+
   return (
     <>
     {hasRegistered ? <RegisteredPanel email={email} password={password}/>
   : (
-    <MainTemplatePage login noSearchbar>
+    <MainTemplatePage noSearchbar>
         <Grid container>
             <Grid item xs={12} md={6}>
               <Box mx={5}>

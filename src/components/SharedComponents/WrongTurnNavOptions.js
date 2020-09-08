@@ -19,14 +19,20 @@ const WrongTurnNavOptions = (props) => {
       </Box>
       <Grid container justifyContent="center" alignItems="center">
         <Grid item xs={6}>
-          <ButtonTemplate
-            color="primary"
-            onClick={()=>history.goBack()}>Go Back</ButtonTemplate>
+          <Box mx={1}>
+            <ButtonTemplate
+              color="primary"
+              fullWidth
+              onClick={()=>history.goBack()}>Go Back</ButtonTemplate>
+          </Box>
         </Grid>
         <Grid item xs={6}>
-          <ButtonTemplate color="secondary"
-            onClick={()=>props.history.push("/")}
-            >Go to Homepage</ButtonTemplate>
+          <Box mx={1}>
+            <ButtonTemplate color="secondary"
+              fullWidth
+              onClick={()=>props.history.push("/")}
+              >Go to Homepage</ButtonTemplate>
+          </Box>
         </Grid>
       </Grid>
     </>
