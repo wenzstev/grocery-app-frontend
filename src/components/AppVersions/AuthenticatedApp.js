@@ -15,6 +15,7 @@ import EditRecipePage from "../Pages/EditRecipePage/"
 import MainTemplatePage from "../Pages/MainTemplatePage"
 import NotFoundPage from "../Pages/MiscPages/NotFoundPage"
 import SettingsPage from "../Pages/MiscPages/SettingsPage"
+import LearnMorePage from "../Pages/UnauthenticatedPages/LearnMorePage"
 
 const PageRoute = (props) => {
   console.log("in page route")
@@ -47,6 +48,9 @@ const AuthenticatedApp = (props) => {
         </Route>
         <Route path="/login">
           <Redirect to="/recipes" />
+        </Route>
+        <Route path="/about">
+          <LearnMorePage />
         </Route>
         <Route path="/" exact>
           <Redirect to="/recipes" />

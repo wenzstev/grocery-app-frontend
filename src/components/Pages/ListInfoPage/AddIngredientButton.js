@@ -45,23 +45,24 @@ const ClosedAddIngredient = (props) => {
 
 const OpenAddIngredient = (props) => {
   const [additionalIngredients, setAdditionalIngredients] = useState()
-  const {listId} = useParams()
+  const {resourceId} = useParams()
 
   useEffect(()=>{
-    axios.get(`/lists/${listId}/additionalingredients`)
+    axios.get(`/lists/${resourceId}/additionalingredients`)
     .then(resp=>{
       setAdditionalIngredients(resp.data)
     })
-  },[])
+  }, [])
 
-  const addAdditionalIngredient = (ing) => {
-    axios.post(`/lines`,{
+
+  const addAdditionalIngredient = async(ing) => {
+    var newIng = await axios.post(`/lines`,{
       text: ing,
       recipe_id: additionalIngredients['id'],
       additional_ingredient: true
     })
-    .then(()=>{props.getIngredients()})
-    .catch(err=>console.log(err))
+    props.getIngredients()
+    props.setNewIngredient("")
   }
 
   return (

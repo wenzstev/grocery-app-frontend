@@ -72,6 +72,7 @@ const NavMenu = (props) => {
         onClose={handleClose}
         >
           <MenuItem onClick={logout}>Log Out</MenuItem>
+          <MenuItem onClick={()=>props.history.push("/about")}>About</MenuItem>
       </Menu>
     </div>
   )
