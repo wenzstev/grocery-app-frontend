@@ -51,7 +51,7 @@ const CreateNewCard = (props) => {
           className={classes.root}>
           <Box className={classes.titleBox}>
             <AddIcon fontSize="large" />
-            <Typography textAlign="center" className={classes.title}>
+            <Typography className={classes.title}>
               Create New {props.type}
             </Typography>
           </Box>

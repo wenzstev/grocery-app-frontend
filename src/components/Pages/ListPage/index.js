@@ -12,19 +12,26 @@ import {ListCard} from "../../SharedComponents/BaseCard"
 import CreateNewCard from "../../SharedComponents/CreateNewCard"
 import AddListModal from "../MainTemplatePage/AddListModal"
 
+import axios from "../../../AxiosConfig"
+
 const ListPage = (props) => {
   const [lists, setLists] = useState([])
 
   const user = useSelector(store=>store.user)
 
-  const getLists = () => {
+  const old_getLists = () => {
     fetch(`/lists?user=${user.id}`)
     .then(response=>response.json())
     .then(json=>setLists(json))
   }
 
-
-  useEffect(()=>getLists(), [])
+  useEffect(()=>{
+    const getLists = async() => {
+      var listResponse = await axios.get(`/lists?user=${user.id}`)
+      setLists(listResponse.data)
+    }
+    getLists()
+  }, [])
 
 
   return (

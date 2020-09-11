@@ -28,6 +28,7 @@ const AddListModal = (props) => {
       console.log(e)
       return
     }
+    console.log(newList.data)
     props.history.push(`/list/${newList.data.id}`)
 
   }
