@@ -1,7 +1,7 @@
 import Axios from 'axios'
 
 const instance = Axios.create({
-  baseURL: 'https://162.243.165.107/api',
+  baseURL: 'https://souschef.stevenwenzel.com/api',
   timeout: 10000,
   params: {}
 })
