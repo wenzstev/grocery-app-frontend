@@ -13,8 +13,11 @@ const RegisteredPanel = (props) => {
   const sendVerificationEmail = async() => {
     try {
       var verification = await axios.get(`/users/verification`,{
+        headers:{
+          "Authorization": 'Basic ' + btoa(props.email + ':' + props.password)
+        },
         params: {
-          url: "http://localhost:3000/verify"
+          url: "http://www.souschef.stevenwenzel.com/verify"
         }
       })
     } catch (e) {
