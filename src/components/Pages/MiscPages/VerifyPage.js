@@ -13,15 +13,11 @@ var qs = require('qs')
 const VerifyPage = (props) => {
   const [verified, setVerified] = useState(false)
   const [error, setError] = useState(false)
-  const token = qs.parse(props.location.search,{ignoreQueryPrefix:true})
+  const {token} = qs.parse(props.location.search,{ignoreQueryPrefix:true})
 
   const verify = async() => {
     try {
-      var verifyResponse = await axios.put(`/users/verification`,{
-        params: {
-          token: token
-        }
-      })
+      var verifyResponse = await axios.put(`/users/verification?token=${token}`)
     } catch (e) {
       setError(true)
       return
@@ -32,6 +28,7 @@ const VerifyPage = (props) => {
   }
 
   useEffect(()=>{
+    console.log("token" + JSON.stringify(token))
     verify()
   },[])
 
