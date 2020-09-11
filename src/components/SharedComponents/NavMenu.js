@@ -9,7 +9,7 @@ import {
   makeStyles
 } from "@material-ui/core"
 
-import {Link} from "react-router-dom"
+import {Link, withRouter} from "react-router-dom"
 
 import NestedMenuItem from "material-ui-nested-menu-item"
 
@@ -22,6 +22,7 @@ import AddRecipeModal from "../Pages/MainTemplatePage/AddRecipeModal"
 import AddListModal from "../Pages/MainTemplatePage/AddListModal"
 import BaseModal from "./BaseModal"
 
+import axios from "../../AxiosConfig"
 
 const useStyles = makeStyles({
   root: {
@@ -46,15 +47,11 @@ const NavMenu = (props) => {
     setAnchorEl(null)
   }
 
-  const logout = () => {
-    fetch('/users/logout')
-    .then(response=>{
-      if (response.status === 204){
-        dispatch(setToken(null))
-        dispatch(setUser(null))
-      }
-    })
-    .catch(err=>console.log(err))
+  const logout = async() => {
+    var logoutResponse = await axios.get(`/users/logout`)
+    dispatch(setToken(null))
+    dispatch(setUser(null))
+    props.history.push("/")
   }
 
 
@@ -80,4 +77,4 @@ const NavMenu = (props) => {
   )
 }
 
-export default NavMenu
+export default withRouter(NavMenu)
