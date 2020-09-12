@@ -6,6 +6,7 @@ import {
   Box,
   Paper,
   Modal,
+  Fade,
   makeStyles,
   createStyles
 } from "@material-ui/core"
@@ -46,6 +47,7 @@ const useStyles = makeStyles((theme:Theme)=>createStyles({
 const MainTemplatePage = (props) => {
   const classes = useStyles()
   const [modal, setModal] = useState(null)
+  const [loaded, setLoaded] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
 
 
@@ -68,16 +70,21 @@ const MainTemplatePage = (props) => {
   })
 
   return (
-    <div className={classes.root}>
-      {props.noSearchbar ? null : <SearchBar openModal={openModal}/>}
-      <Container className={classes.content}>
-          {childrenWithProps}
-      </Container>
-      <BaseModal className={classes.modal} open={modalOpen} handleClose={closeModal}>
-        {modal}
-      </BaseModal>
-      <div className={classes.spacer} />
-    </div>
+    <>
+    {loaded ? (
+      <div className={classes.root}>
+        {props.noSearchbar ? null : <SearchBar openModal={openModal}/>}
+        <Container className={classes.content}>
+            {childrenWithProps}
+        </Container>
+        <BaseModal className={classes.modal} open={modalOpen} handleClose={closeModal}>
+          {modal}
+        </BaseModal>
+        <div className={classes.spacer} />
+      </div>
+    ) : <img src={woodBackground} onLoad={()=>setLoaded(true)} />
+  }
+  </>
   )
 }
 

@@ -9,7 +9,7 @@ const useStyles = makeStyles({
   root: {
     borderRadius: "15px",
     position: "relative",
-    padding: "20px"
+    padding: "20px",
   },
   spacer: {
     height: "10vh"

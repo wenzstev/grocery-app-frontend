@@ -44,7 +44,6 @@ const RecipePanel = (props) => {
         maxNum = numIngredients
       }
     }
-    console.log("max num is " + maxNum)
     setNumButtons(maxNum)
   }
 

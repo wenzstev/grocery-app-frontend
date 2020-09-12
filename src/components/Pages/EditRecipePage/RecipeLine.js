@@ -24,29 +24,23 @@ const useStyles = makeStyles({
 })
 
 const RecipeLine = (props) => {
-  //console.log(props.line)
   const classes = useStyles()
   const token = useSelector(store=>store.token)
   const {ingredients, text} = props.line
 
   const [hovering, setHovering] = useState(false)
 
-  const deleteLine = () => {
-    const headers = new Headers()
-    headers.append('Authorization', 'Basic ' + btoa(token + ":"))
-
-    fetch(`/lines/${props.line.id}`,{
-      method: 'DELETE',
-      headers: headers
-    })
-    .then(response=>{
-      if(response.status === 204){
-        props.removeLineFromDOM(props.line.id)
-        console.log("line deleted")
-      }
-    })
-    .catch(err=>console.log(err))
+  const deleteLine = async() => {
+    try {
+      var deleteResponse = await axios.delete(`/lines/${props.line.id}`)
+    } catch(e) {
+      console.log(e)
+    }
+    if (deleteResponse.status === 204){
+      props.removeLineFromDOM(props.line.id)
+    }
   }
+
 
 
   // function which takes an array of ingredients with start and end tokens
@@ -100,7 +94,6 @@ const RecipeLine = (props) => {
     }
       // get other ingredients in line
       const newTextToIngredientArray = spliceNewIngredient(start, end)
-      console.log(newTextToIngredientArray)
       axios.put(`/lines/${props.line.id}/ingredients`, {
         "new_ingredients":newTextToIngredientArray
       })
@@ -109,7 +102,6 @@ const RecipeLine = (props) => {
 
   const modifyStartEndTokens = (ingredientToChange, buttonId) => {
     let [start, end] = ingredientToChange.relevant_tokens
-    console.log("beginning tokens are " + start + ", " + end)
     if (buttonId < start){
       start = buttonId
     } else if (buttonId >= end){
@@ -132,7 +124,6 @@ const RecipeLine = (props) => {
   const spliceNewIngredient = (start, end) => {
 
     const lineWithoutChangedIng = ingredients.filter(element=>element.color_index != props.curColor)
-    console.log(lineWithoutChangedIng)
     const oldTextToIngredientArray = mapTextToIngredients(text.length, lineWithoutChangedIng)
 
     // overlay new ingredient on old array
@@ -140,7 +131,6 @@ const RecipeLine = (props) => {
       if (element !== undefined) {return element[0]}
       else {return undefined}
     })
-    console.log(start + " " + end)
 
     if(start != end) {
       for (var i = 0; i < newTextToIngredientArray.length; i++){

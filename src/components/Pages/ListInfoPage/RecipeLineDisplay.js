@@ -48,7 +48,6 @@ const RecipeLineDisplayPanel = (props) => {
       }
     })
     .then(resp=>{
-      console.log(resp)
       setLines(resp.data)
     })
   }
@@ -56,8 +55,6 @@ const RecipeLineDisplayPanel = (props) => {
   useEffect(()=>{
     getLines()
   },[])
-
-  console.log(lines)
 
   return (
     <Paper className={classes.root}>
