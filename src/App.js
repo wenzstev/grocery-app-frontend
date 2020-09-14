@@ -48,6 +48,7 @@ function App() {
 
 
   useEffect(()=>{
+    console.log("getting token")
     getToken()
     if(hasToken === true){
       setInterval(()=>{
@@ -62,7 +63,7 @@ function App() {
     <Router>
       <div className="App">
         {wait ? <LandingPage />
-        : token ? <AuthenticatedApp /> : <UnauthenticatedApp />}
+        : token ? <AuthenticatedApp /> : <UnauthenticatedApp setHasToken={setHasToken}/>}
       </div>
     </Router>
 
