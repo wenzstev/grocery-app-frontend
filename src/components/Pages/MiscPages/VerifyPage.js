@@ -28,7 +28,6 @@ const VerifyPage = (props) => {
   }
 
   useEffect(()=>{
-    console.log("token" + JSON.stringify(token))
     verify()
   },[])
 

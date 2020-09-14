@@ -34,7 +34,6 @@ function App() {
     }
     catch(e) {
       // TODO: inform the user of the error
-      console.log(e)
       setWait(false)
       return
     }
@@ -51,9 +50,7 @@ function App() {
   useEffect(()=>{
     getToken()
     if(hasToken === true){
-      console.log('setting interval')
       setInterval(()=>{
-        console.log('getting new token')
         getToken()
       }, 240000)
     }
