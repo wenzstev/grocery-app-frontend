@@ -23,8 +23,8 @@ const AddRecipeModal = (props) => {
 
   const submit = async(values, actions) => {
     try {
-      var newRecipe = await axios.post(`/recipes`, {
-        "create_from_url": values.url
+      var newRecipe = await axios.post(`/recipes${props.isSample ? `/nologin`:null}`, {
+        "create_from_url": values.url,
       })
     }
     catch(e) {
@@ -49,7 +49,7 @@ const AddRecipeModal = (props) => {
           </Form>
         </Formik>
         {redirect}
-        </>
+      </>
   )
 }
 

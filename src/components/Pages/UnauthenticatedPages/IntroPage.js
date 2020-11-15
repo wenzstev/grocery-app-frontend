@@ -42,7 +42,7 @@ const IntroPage =  () => {
       </Typography>
       <Box m={3} />
       <Grid container>
-        <ButtonLayout to="login" color="primary" text="Get Started"/>
+        <ButtonLayout to="sample" color="primary" text="Try It Out"/>
         <ButtonLayout to="about" color="secondary" text="Learn More" />
       </Grid>
     </UnauthLayout>

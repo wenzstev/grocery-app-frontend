@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react"
 
 import {useSelector} from "react-redux"
 
-import {Redirect, useParams} from "react-router-dom"
+import {Link, Redirect, useParams} from "react-router-dom"
 
 import MainTemplatePage from "../MainTemplatePage"
 
@@ -12,6 +12,7 @@ import {
   Paper,
   Box,
   Grid,
+  Typography,
   makeStyles
 } from "@material-ui/core"
 
@@ -19,6 +20,29 @@ import RecipePanel from "./RecipePanel"
 import BackButton from "../../SharedComponents/BackButton"
 import NotYourResource from "../MiscPages/NotYourResource"
 import axios from "../../../AxiosConfig"
+import ButtonTemplate from "../../Templates/ButtonTemplate"
+
+const useStyles = makeStyles({
+  root: {
+    borderRadius: 15,
+    padding: '1rem',
+    marginTop: '1rem'
+  }
+})
+
+const LoggedOutPanel = () => {
+  const classes = useStyles()
+  return (
+    <Paper className={classes.root}>
+      <Typography>
+        You are currently logged out. Log in to save this recipe as part of a grocery list!
+      </Typography>
+      <Link style={{textDecoration:'none'}} to="/login">
+        <ButtonTemplate>Login</ButtonTemplate>
+      </Link>
+    </Paper>
+  )
+}
 
 const EditRecipePage = () => {
   const [recipe, setRecipe] = useState({})
@@ -39,10 +63,15 @@ const EditRecipePage = () => {
         console.log(e)
       }
     }
-    if (recipe.data.creator_id == user.id){
-      setRecipe(recipe.data)
+    if (recipe.data.creator_id != null){
+      console.log(recipe.data.creator_id)
+      if(user != null && recipe.data.creator_id == user.id){
+        setRecipe(recipe.data)
+      } else {
+        setHasPermission(false)
+      }
     } else {
-      setHasPermission(false)
+      setRecipe(recipe.data)
     }
   }
 
@@ -74,6 +103,7 @@ const EditRecipePage = () => {
               lines={recipe.recipe_lines}
               removeLineFromDOM={removeLineFromDOM}
               changeLine={changeRecipeLine}/>
+            {user ? null: <LoggedOutPanel />}
           </MainTemplatePage>
       ) : <NotYourResource resource="recipe" />
         : <Redirect to="/pagenotfound" />
