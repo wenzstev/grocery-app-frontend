@@ -27,8 +27,7 @@ const ButtonTemplate = (props) => {
       type={props.type}
       className={classes.root}
       onClick={props.onClick}
-      fullWidth={props.fullWidth}
-      {...props.component}>
+      fullWidth={props.fullWidth}>
       {props.children}
     </Button>
   )

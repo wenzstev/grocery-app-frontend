@@ -23,7 +23,7 @@ const AddRecipeModal = (props) => {
 
   const submit = async(values, actions) => {
     try {
-      var newRecipe = await axios.post(`/recipes${props.isSample ? `/nologin`:null}`, {
+      var newRecipe = await axios.post(`/recipes${props.isSample ? `/nologin`:''}`, {
         "create_from_url": values.url,
       })
     }
