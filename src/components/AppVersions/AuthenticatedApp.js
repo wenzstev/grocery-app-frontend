@@ -16,6 +16,8 @@ import MainTemplatePage from "../Pages/MainTemplatePage"
 import NotFoundPage from "../Pages/MiscPages/NotFoundPage"
 import SettingsPage from "../Pages/MiscPages/SettingsPage"
 import LearnMorePage from "../Pages/UnauthenticatedPages/LearnMorePage"
+import SitesSupportedPage from "../Pages/MiscPages/SitesSupportedPage"
+
 
 const PageRoute = (props) => {
   console.log("in page route")
@@ -52,6 +54,7 @@ const AuthenticatedApp = (props) => {
         <Route path="/about">
           <LearnMorePage />
         </Route>
+        <Route path="/sites-supported" component={SitesSupportedPage} />
         <Route path="/" exact>
           <Redirect to="/recipes" />
         </Route>

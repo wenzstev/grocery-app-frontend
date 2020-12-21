@@ -15,6 +15,7 @@ import LearnMorePage from "../Pages/UnauthenticatedPages/LearnMorePage"
 import NotFoundPage from "../Pages/MiscPages/NotFoundPage"
 import SampleRecipe from "../Pages/UnauthenticatedPages/SampleRecipe"
 import EditRecipePage from "../Pages/EditRecipePage"
+import SitesSupportedPage from "../Pages/MiscPages/SitesSupportedPage"
 
 const UnauthenticatedApp = (props) => {
   return (
@@ -27,6 +28,7 @@ const UnauthenticatedApp = (props) => {
         <Route path="/about" component={AboutPage} />
         <Route path="/learnmore" component={LearnMorePage} />
         <Route path="/sample" component={SampleRecipe} />
+        <Route path="/sites-supported" component={SitesSupportedPage} />
         <Route path="/" exact component={IntroPage} />
         <Route component={NotFoundPage} />
       </Switch>
