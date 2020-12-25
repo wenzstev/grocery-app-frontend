@@ -5,22 +5,14 @@ import {
   Button,
   Menu,
   MenuItem,
-  Divider,
   makeStyles
 } from "@material-ui/core"
 
-import {Link, withRouter} from "react-router-dom"
+import { withRouter} from "react-router-dom"
 
-import NestedMenuItem from "material-ui-nested-menu-item"
-
-import {useCookies} from "react-cookie"
 
 import {useDispatch} from 'react-redux'
 import {setToken, setUser} from '../../actions/'
-
-import AddRecipeModal from "../Pages/MainTemplatePage/AddRecipeModal"
-import AddListModal from "../Pages/MainTemplatePage/AddListModal"
-import BaseModal from "./BaseModal"
 
 import axios from "../../AxiosConfig"
 

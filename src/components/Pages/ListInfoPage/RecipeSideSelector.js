@@ -48,9 +48,9 @@ const RecipeSideSelector = (props) =>{
     const ingredientsToReturn = new Array(finalNum)
     while (numIngredients < finalNum){
       let curLine = recipe.recipe_lines[curLineNum]
-      if (curLine != undefined){
+      if (curLine !== undefined){
         let curIngredient = curLine.ingredients[curIngredientInLine]
-        if (curIngredient != undefined){
+        if (curIngredient !== undefined){
           ingredientsToReturn[numIngredients] = curIngredient.ingredient
           curIngredientInLine ++
           numIngredients ++

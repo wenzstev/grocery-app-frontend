@@ -4,7 +4,6 @@ import {
   Typography,
   Divider,
   Box,
-  Grid,
   Button
 } from "@material-ui/core"
 

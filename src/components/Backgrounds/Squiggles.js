@@ -6,8 +6,8 @@ import loginSquiggle from "../../assets/login-squiggle.png"
 
 import {
   makeStyles,
-  Typography,
-  Paper} from "@material-ui/core"
+  Typography
+} from "@material-ui/core"
 
 const useStyles = makeStyles({
   root: {
@@ -43,7 +43,7 @@ export const TopSquiggle = (props) => {
   return(
     <>
     <div className={classes.root}>
-      <img src={topSquiggle} className={clsx(classes.top, classes.squiggle)}/>
+      <img src={topSquiggle} alt="Styled squiggle for top"className={clsx(classes.top, classes.squiggle)}/>
       <Typography variant="h4" className = {classes.title}>
         {props.children}
       </Typography>
@@ -56,12 +56,6 @@ export const TopSquiggle = (props) => {
 export const LoginSquiggle = () => {
   const classes = useStyles()
   return (
-    <img src={loginSquiggle} className={clsx(classes.login, classes.squiggle)}/>
-  )
-}
-
-export const BottomSquiggle = () => {
-  return (
-    <img src={bottomSquiggle} />
+    <img src={loginSquiggle} alt="Squiggle for login page" className={clsx(classes.login, classes.squiggle)}/>
   )
 }

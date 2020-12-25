@@ -3,16 +3,11 @@ import {useState, useEffect} from "react"
 import {useSelector} from "react-redux"
 import {
   Redirect,
-  Router,
-  useRouteMatch,
   useParams
 } from "react-router-dom"
 
-import {TopSquiggle} from "../../Backgrounds/Squiggles"
 import IngredientPanel from "./IngredientPanel"
-import ListModificationPanel from "./ListModificationPanel"
 import AddRecipeButton from "./AddRecipeButton"
-import ListInfoButton from "./ListInfoButton"
 import QuickRecipeAdd from "./QuickRecipeAdd"
 import RecipePanel from "./RecipePanel"
 import MainTemplatePage from "../MainTemplatePage"
@@ -20,7 +15,6 @@ import NotYourResource from "../MiscPages/NotYourResource"
 
 import EditableTitle from "../../SharedComponents/EditableTitle"
 
-import woodBackground from "../../../assets/wood-background.jpg"
 
 import axios from "../../../AxiosConfig"
 
@@ -28,7 +22,6 @@ import {
   Container,
   Box,
   Grid,
-  makeStyles
 } from "@material-ui/core"
 
 
@@ -37,7 +30,6 @@ const ListPage = (props) => {
   const [listItems, setListItems] = useState([])
   const [listExists, setListExists] = useState(true)
   const [hasPermission, setHasPermission] = useState(true)
-  const [associations, setAssociations] = useState([])
 
   const [drawerOpen, setDrawerOpen] = useState(false)
 

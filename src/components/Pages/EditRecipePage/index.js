@@ -10,14 +10,11 @@ import EditableTitle from "../../SharedComponents/EditableTitle"
 
 import {
   Paper,
-  Box,
-  Grid,
   Typography,
   makeStyles
 } from "@material-ui/core"
 
 import RecipePanel from "./RecipePanel"
-import BackButton from "../../SharedComponents/BackButton"
 import NotYourResource from "../MiscPages/NotYourResource"
 import axios from "../../../AxiosConfig"
 import ButtonTemplate from "../../Templates/ButtonTemplate"
@@ -48,7 +45,6 @@ const EditRecipePage = () => {
   const [recipe, setRecipe] = useState({})
   const [recipeExists, setRecipeExists] = useState(true)
   const [hasPermission, setHasPermission] = useState(true)
-  const token = useSelector(store=>store.token)
   const user = useSelector(store=>store.user)
   const {resourceId} = useParams()
 
@@ -56,7 +52,7 @@ const EditRecipePage = () => {
     try {
       var recipe = await axios.get(`/recipes/${resourceId}`)
     } catch (e) {
-      if (e.response.status == 404){
+      if (e.response.status === 404){
         setRecipeExists(false)
         return
       } else {
@@ -65,7 +61,7 @@ const EditRecipePage = () => {
     }
     if (recipe.data.creator_id != null){
       console.log(recipe.data.creator_id)
-      if(user != null && recipe.data.creator_id == user.id){
+      if(user != null && recipe.data.creator_id === user.id){
         setRecipe(recipe.data)
       } else {
         setHasPermission(false)

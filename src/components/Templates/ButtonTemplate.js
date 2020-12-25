@@ -1,12 +1,10 @@
 import React from "react"
 
 import {
-  ButtonBase,
   Button,
   makeStyles
 } from "@material-ui/core"
 
-import {useTheme} from "@material-ui/core/styles"
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -4,10 +4,8 @@ import {Formik, Form} from "formik"
 import * as Yup from "yup"
 import {
   Paper,
-  Button,
   Box,
   Typography,
-  Snackbar,
   makeStyles,
   createStyles
 } from "@material-ui/core"
@@ -45,7 +43,7 @@ const RegisterPanel = (props) => {
           password:values.password
         })
     } catch(e) {
-      if (e.response.data.payload == "IntegrityError"){
+      if (e.response.data.payload === "IntegrityError"){
         props.displayAlert("This email address is already in use.")
       }
       return

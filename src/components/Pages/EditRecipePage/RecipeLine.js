@@ -4,7 +4,6 @@ import {useSelector} from "react-redux"
 
 import {
   ListItem,
-  Grid,
   makeStyles
 } from "@material-ui/core"
 
@@ -25,7 +24,6 @@ const useStyles = makeStyles({
 
 const RecipeLine = (props) => {
   const classes = useStyles()
-  const token = useSelector(store=>store.token)
   const {ingredients, text} = props.line
 
   const [hovering, setHovering] = useState(false)
@@ -50,11 +48,11 @@ const RecipeLine = (props) => {
     if (ingredientArray.length < 1){return mappedArray} // return if no ingredients
 
     // iterate over ingredient array for first pass
-    for(var i = 0; i < ingredientArray.length; i++){
+    for(let i = 0; i < ingredientArray.length; i++){
       let cur_ingredient = ingredientArray[i]
       let [start, end] = cur_ingredient.relevant_tokens
       let color_index = cur_ingredient.color_index
-      if (end - start == 1){ // single word ingredient
+      if (end - start === 1){ // single word ingredient
         mappedArray[start] = [color_index, "single"]
       } else {
         mappedArray[start] = [color_index, "start"]
@@ -64,7 +62,7 @@ const RecipeLine = (props) => {
 
     // iterate over created array and fill in the blanks
     var cur_ingredient = null
-    for (var i = 0; i < mappedArray.length; i++){
+    for (let i = 0; i < mappedArray.length; i++){
       if (mappedArray[i] != null){ // see if we're going to start a new ingredient
         switch(mappedArray[i][1]){
           case "start":

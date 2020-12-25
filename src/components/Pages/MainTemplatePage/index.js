@@ -2,23 +2,16 @@ import React, {useState} from "react"
 
 import {
   Container,
-  Grid,
-  Box,
-  Paper,
-  Modal,
-  Fade,
+
   makeStyles,
   createStyles
 } from "@material-ui/core"
 
-import {withRouter, Redirect} from "react-router-dom"
 
 import woodBackground from "../../../assets/wood-background.jpg"
 
 import SearchBar from "./SearchBar"
-import {LoginSquiggle} from "../../Backgrounds/Squiggles"
-import AddListModal from "./AddListModal"
-import AddRecipeModal from "./AddRecipeModal"
+
 import BaseModal from "../../SharedComponents/BaseModal"
 
 const useStyles = makeStyles((theme:Theme)=>createStyles({

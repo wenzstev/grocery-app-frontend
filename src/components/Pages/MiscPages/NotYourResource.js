@@ -1,9 +1,7 @@
 import React from "react"
 
 import {
-  Paper,
-  Typography,
-  makeStyles
+  Typography
 } from "@material-ui/core"
 
 import WrongTurnPage from "./WrongTurnPage"
