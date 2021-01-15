@@ -16,7 +16,7 @@ import reactLogo from "../../../assets/react.png"
 import pythonLogo from "../../../assets/python.png"
 import flaskLogo from "../../../assets/flask-preview-400.jpg"
 import portrait from "../../../assets/portrait.jpg"
-import resume from "../../../assets/wenzel_resume_2020.pdf"
+import resume from "../../../assets/wenzel_resume_2020_technical.pdf"
 import spices from "../../../assets/kitchen-spices.jpg"
 
 const useStyles = makeStyles({
@@ -106,14 +106,14 @@ const LearnMorePage = () => {
           The database is built using SQLite, with SQLAlchemy as the ORM. It is designed to allow the relationships
           between Ingredients and Recipes to do most of the organizational work, allowing fast and easy lookup of
           Recipes and implicit ingredient consolidation. You can read more about how I designed the
-          database <a href="https://wenzstev.github.io/2020/05/Designing-A-New-Database.html" target="_blank" rel="noopener noreferrer">here.</a>
+          database <a href="https://wenzstev.github.io/2020/05/02/Designing-A-New-Database.html" target="_blank" rel="noopener noreferrer">here.</a>
         </ParagraphSpacers>
         <ParagraphSpacers>
           Security is provided by Signed Web Tokens, utilizing a two-token system as laid out
           in <a href="https://hasura.io/blog/best-practices-of-using-jwt-with-graphql/#silent_refresh" target="_blank" rel="noopener noreferrer">this</a> blog post.
           It makes use of a short-lived access token for requests, and a longer-lived refresh token to secure more sensitive information. You
           can read about my specific implementation
-          in <a href="https://wenzstev.github.io/2020/08/Authentication-Part-1.html" target="_blank" rel="noopener noreferrer">Part 1</a> and <a href="https://wenzstev.github.io/2020/08/Authentication-Part-2.html" target="_blank" rel="noopener noreferrer">Part 2</a> of
+          in <a href="https://wenzstev.github.io/2020/08/02/Authentication-Part-1.html" target="_blank" rel="noopener noreferrer">Part 1</a> and <a href="https://wenzstev.github.io/2020/08/03/Authentication-Part-2.html" target="_blank" rel="noopener noreferrer">Part 2</a> of
           my blog post on the matter.
         </ParagraphSpacers>
         <ParagraphSpacers>
@@ -130,7 +130,7 @@ const LearnMorePage = () => {
           I'm an avid cook and baker, and I tend to pick up new hobbies like a lint roller.
         </ParagraphSpacers>
         <ParagraphSpacers>
-          I'm proficient in Python and JavaScript, and I have experience with SQL, C#, and Java. I built this project as part of my ongoing search for a job; if you're interested,
+          I'm proficient in Python and JavaScript. I built this project as part of my ongoing search for a job; if you're interested,
           you can check out my resume <a href={resume} target="_blank" rel="noopener noreferrer">here,</a> or contact me in general at <a href="mailto: wenzelstev@gmail.com" target="_blank">wenzelstev@gmail.com</a>.
         </ParagraphSpacers>
     </UnauthLayout>

@@ -17,7 +17,7 @@ const RegisteredPanel = (props) => {
           "Authorization": 'Basic ' + btoa(props.email + ':' + props.password)
         },
         params: {
-          url: "http://www.souschef.stevenwenzel.com/verify"
+          url: "http://localhost:3000/verify"
         }
       })
     } catch (e) {
