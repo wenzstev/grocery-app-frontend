@@ -20,6 +20,20 @@ import LandingPage from "./components/Pages/MiscPages/LandingPage"
 
 import axios from "./AxiosConfig"
 
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.init({
+    applicationId: '0ca40d4d-b690-415a-8eab-1faf08f07429',
+    clientToken: 'pub5d0d6e04db0c3e58d612f7a6b5cfb158',
+    site: 'datadoghq.com',
+    service:'souschef',
+    env:'prod',
+    // Specify a version number to identify the deployed version of your application in Datadog 
+    version: '1.0.0',
+    sampleRate: 100,
+    trackInteractions: true
+});
+
 
 function App() {
   const [hasToken, setHasToken] = useState(false)
